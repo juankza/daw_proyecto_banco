@@ -1,0 +1,42 @@
+<form ng-controller="UsuarioInsertController">
+
+    <div class="row">
+        <div class="col-md-3"><strong>Name: </strong></div>
+        <div class="col-md-5"><input type="text" name="name" ng-model="usuario.nombre" class="form-control"/></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"><strong>Surname: </strong></div>
+        <div class="col-md-5"><input type="text" name="bankCode" ng-model="usuario.apellidos" class="form-control"/></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"><strong>Password: </strong></div>
+        <div class="col-md-5"><input type="password" name="creationDate" ng-model="usuario.contrasena" class="form-control"/></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"><strong>Nickname: </strong></div>
+        <div class="col-md-5"><input type="password" name="creationDate" ng-model="usuario.nickname" class="form-control"/></div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-3"><strong>Email: </strong></div>
+        <div class="col-md-5"><input type="text" name="address" ng-model="usuario.email" class="form-control"/></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"><strong>Role: </strong></div>
+        <div class="col-md-5"><input type="text" name="ctc" ng-model="usuario.rol" class="form-control"/></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <input  ng-click="insert()" type="submit" value="Insertar" class="btn btn-info"/><br>
+        </div>
+    </div>
+    <div>
+        <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
+    </div>
+
+</form>

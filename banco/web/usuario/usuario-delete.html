@@ -1,0 +1,31 @@
+<div ng-controller="UsuarioDeleteController">
+    <h1>Usuario</h1>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td><strong>Usuario ID</strong></td> 
+                    <td><strong>Name</strong></td>
+                    <td><strong>Surname</strong></td>
+                    <td><strong>Email</strong></td>
+                    <td><strong>Nickname</strong></td>
+                    <td><strong>Role</strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{usuario.idUsuario}}</td>
+                    <td>{{usuario.name}}</td>
+                    <td>{{usuario.apellidos}}</td>
+                    <td>{{usuario.email}}</td>
+                    <td>{{usuario.nickname}}</td>
+                    <td>{{usuario.rol}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div><!-- Tabla -->
+    <p> Are you sure to delete {{usuario.nombre}} Usuario? </p>
+    <a class="btn btn-danger" href="" ng-click="delete()">Yes</a>
+    <a class="btn btn-info" href="#/usuario/list">No</a>
+
+</div>
