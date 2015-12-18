@@ -1,13 +1,36 @@
 
 package com.fpmislata.daw2.business.domain;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Usuario {
+    
     private int idUsuario;
+    
+    @NotBlank
+    @Size(min = 2, max = 255)
     private String nombre;
+    
+    @NotBlank
+    @Size(min = 2, max = 255)
     private String apellidos;
+    
+    @Email
+    @Size(min = 5, max = 255)
     private String email;
+    
+    @NotBlank
+    @Size(min = 3, max = 255)
     private String nickname;
+    
+    @NotBlank
+    @Size(min = 5, max = 255)
     private String contrasena;
+    
+    @NotNull
     private Rol rol;
 
     public Usuario() { }
