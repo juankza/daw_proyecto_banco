@@ -1,0 +1,31 @@
+<div ng-controller="EntidadBancariaDeleteController">
+        <h1>Bank Entity</h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <td><strong>Bank Entity ID</strong></td> 
+                    <td><strong>Name</strong></td>
+                    <td><strong>Bank Code</strong></td>
+                    <td><strong>Creation Date</strong></td>
+                    <td><strong>Address</strong></td>
+                    <td><strong>CTC</strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{entidadBancaria.idEntidadBancaria}}</td>
+                    <td>{{entidadBancaria.nombre}}</td>
+                    <td>{{entidadBancaria.codigoEntidadBancaria}}</td>
+                    <td>{{entidadBancaria.fechaCreacion}}</td>
+                    <td>{{entidadBancaria.direccion}}</td>
+                    <td>{{entidadBancaria.cif}}</td>
+                </tr>
+            </tbody>
+            </table>
+        </div><!-- Tabla -->
+        <p> Are you sure to delete {{entidadBancaria.nombre}} Bank Entity? </p>
+        <a class="btn btn-danger" href="" ng-click="delete()">Yes</a>
+        <a class="btn btn-info" href="#/entidadbancaria/detail/{{entidadBancaria.idEntidadBancaria}}">No</a>
+    {{message}}
+</div>
