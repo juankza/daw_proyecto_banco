@@ -17,7 +17,7 @@ public class DatabaseMigrationImplFlyway implements DatabaseMigration {
         try {
             Flyway flyway = new Flyway();
             flyway.setDataSource(dataSourceFactory.getDataSource());
-            flyway.setLocations("com.fpmislata.daw2.database.impl.flyway.script");
+            flyway.setLocations("com.fpmislata.daw2.database.sql");
             flyway.setEncoding("utf-8");
             flyway.migrate();
         } catch(Exception ex) {
