@@ -3,7 +3,7 @@
 
 <hibernate-mapping>
     <class name="com.fpmislata.daw2.business.domain.Usuario" table="usuario">
-        <id column="idUsuario" name="idUsuario" type="integer" />
+        <id column="idUsuario" name="idUsuario" />
         <property column="nombre" name="nombre" type="string" length="255" not-null="false" unique="false" />
         <property column="apellidos" name="apellidos" type="string" length="255" not-null="false" unique="false" />
         <property column="email" name="email" type="string" length="255" not-null="false" unique="true" />

@@ -29,15 +29,15 @@ public class GenericDAOImplHibernate<T, ID extends Serializable> implements Gene
 
     @Override
     public T insert(T entity) throws BusinessException {
-        T t;
+
         
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        t = (T)session.save(entity);
+        session.save(entity);
         session.getTransaction().commit();
         session.close();
         
-        return t;
+        return entity;
     }
 
     @Override
