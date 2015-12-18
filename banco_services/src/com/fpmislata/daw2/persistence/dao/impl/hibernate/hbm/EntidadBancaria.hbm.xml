@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.fpmislata.daw2.business.domain.EntidadBancaria" table="entidadbancaria">
+        <id column="idEntidadBancaria" name="idEntidadBancaria" type="integer" />
+        <property column="nombre" name="nombre" type="string" length="255" not-null="false" unique="true" />
+        <property column="codigoEntidadBancaria" name="codigoEntidadBancaria" type="string" length="4" not-null="false" unique="true" />
+        <property column="fechaCreacion" name="fechaCreacion" type="date" not-null="false" unique="false" />
+        <property column="direccion" name="direccion" type="string" length="255" not-null="false" unique="false" />
+        <property column="cif" name="cif" type="string" length="9" not-null="false" unique="true" />
+    </class>
+</hibernate-mapping>
