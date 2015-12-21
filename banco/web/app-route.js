@@ -1,9 +1,10 @@
-loginApp.config(['$routeProvider', function ($routeProvider) {
+loginApp.config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/', {
-            templateUrl: "login.html"
+            templateUrl : "login.html"
         });
-        $routeProvider.otherwise( {
-            redirectTo:"/"
+        $routeProvider.otherwise({
+            redirectTo : "/"
         });        
         
-    }]);
+    }
+]);
