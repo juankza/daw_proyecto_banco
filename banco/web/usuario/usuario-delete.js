@@ -7,7 +7,7 @@ function UsuarioDeleteController(usuarioService,$scope,$routeParams,$location){
     });
     $scope.delete = function(){
         response = usuarioService.delete($routeParams.idUsuario).success(function (data, status, headers, config) {
-        alert("Delete successful.");
+        alert("Borrado correctamente.");
         $location.path("/usuario/list");
     }).error(function (data, status, headers, config) {
         alert("HTTP request failed. Status: " + status);

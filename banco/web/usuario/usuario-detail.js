@@ -3,7 +3,6 @@ function UsuarioDetailController(usuarioService, $scope, $routeParams) {
     var response;
     response = usuarioService.detail($routeParams.idUsuario);
 
-
     response.success(function (data, status, headers, config) {
         $scope.usuario = data;
     }).error(function (data, status, headers, config) {

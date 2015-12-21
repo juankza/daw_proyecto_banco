@@ -10,7 +10,7 @@ function EntidadBancariaDeleteController($scope,$routeParams,entidadBancariaServ
     });
     $scope.delete = function(){
         response = entidadBancariaService.delete($routeParams.idEntidadBancaria).success(function (data, status, headers, config) {
-        alert("Delete successful.");
+        alert("Borrado correctamente.");
         $location.path("/entidadbancaria/list");
     }).error(function (data, status, headers, config) {
         alert("HTTP request failed. Status: " + status);

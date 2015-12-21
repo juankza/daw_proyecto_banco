@@ -4,12 +4,12 @@
         <table class="table">
             <thead>
                 <tr>
-                    <td><strong>Usuario ID</strong></td> 
-                    <td><strong>Name</strong></td>
-                    <td><strong>Surname</strong></td>
-                    <td><strong>Email</strong></td>
-                    <td><strong>Nickname</strong></td>
-                    <td><strong>Role</strong></td>
+                    <td><strong>ID</strong></td> 
+                    <td><strong>Nombre</strong></td>
+                    <td><strong>Apellido</strong></td>
+                    <td><strong>Correo</strong></td>
+                    <td><strong>Apodo</strong></td>
+                    <td><strong>Rol</strong></td>
                 </tr>
             </thead>
             <tbody>
@@ -24,8 +24,8 @@
             </tbody>
         </table>
     </div><!-- Tabla -->
-    <p> Are you sure to delete {{usuario.nombre}} Usuario? </p>
-    <a class="btn btn-danger" href="" ng-click="delete()">Yes</a>
-    <a class="btn btn-info" href="#/usuario/list">No</a>
+    <p>¿Estás seguro que quieres el usuario: {{usuario.nombre}}? </p>
+    <a class="btn btn-danger" href="" ng-click="delete()">Sí</a>
+    <a class="btn btn-info" href="#/usuario/detail/{{usuario.idUsuario}}">No</a>
 
 </div>

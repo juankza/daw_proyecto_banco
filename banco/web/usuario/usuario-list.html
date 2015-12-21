@@ -4,7 +4,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <td><strong>Usuario ID</strong></td>
+                    <td><strong>ID</strong></td>
                     <td><strong>Usuario Name</strong></td>
                     <td><strong>Details</strong></td>
                 </tr>
@@ -13,10 +13,10 @@
                 <tr ng-repeat="usuario in usuarios">
                     <td>{{usuario.idUsuario}}</td>
                     <td>{{usuario.nombre}}</td>
-                    <td><a class="btn btn-info" href="#/usuario/detail/{{usuario.idUsuario}}">Details</a></td>
+                    <td><a class="btn btn-info" href="#/usuario/detail/{{usuario.idUsuario}}">Detalles</a></td>
                 </tr>
             </tbody>
         </table>
     </div><!-- Tabla -->
-    <a class="btn btn-info" href="#/usuario/insert">INSERT</a>
+    <a class="btn btn-info" href="#/usuario/insert">INSERTAR</a>
 </div>

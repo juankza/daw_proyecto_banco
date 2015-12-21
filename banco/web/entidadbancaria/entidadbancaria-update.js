@@ -5,7 +5,6 @@ function EntidadBancariaUpdateController($scope, $location, entidadBancariaServi
     var response = entidadBancariaService.detail($routeParams.idEntidadBancaria).success(function (data, status, headers, config) {
       
         $scope.entidadBancaria = data;
-        console.log(JSON.stringify($scope.entidadBancaria));
         var fechaCreacion = new Date(data.fechaCreacion);
         $scope.entidadBancaria.fechaCreacion = fechaCreacion.getFullYear() + "-" + (fechaCreacion.getMonth()+1) + "-" + fechaCreacion.getDate();
     }).error(function (data, status, headers, config) {
@@ -14,7 +13,7 @@ function EntidadBancariaUpdateController($scope, $location, entidadBancariaServi
     
     $scope.update = function () {
        var response = entidadBancariaService.update($scope.entidadBancaria).success(function (data, status, headers, config) {
-            alert("Update successful.");
+            alert("Actualizado correctamente.");
             $location.path('/entidadbancaria/detail/' + $scope.entidadBancaria.idEntidadBancaria);
         }).error(function (data, status, headers, config) {
             if (status === 400) {
@@ -22,7 +21,6 @@ function EntidadBancariaUpdateController($scope, $location, entidadBancariaServi
             } else {
                 alert("HTTP request failed. Status: " + status);
             }
-            console.log(data);
         });
     }
 

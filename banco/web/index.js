@@ -11,8 +11,7 @@ function IndexController($scope, $location, $http) {
             location.href="./main.html";
         }).error(function (data, status, headers, config) {
             if (status === 400) {
-                $scope.errores = data;
-                alert(JSON.stringify($scope.errores));
+                $scope.errors = data;
                 
             }else{
                 alert("Ha fallado la petición HTTP. Estado: "+status);

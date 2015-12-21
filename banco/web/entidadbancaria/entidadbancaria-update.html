@@ -1,36 +1,36 @@
 <div ng-controller="EntidadBancariaUpdateController" ng-init="isDisabled = true">
     <form>
         <div class="row">
-            <div class="col-md-3"><strong>Bank Entity ID: </strong></div>
+            <div class="col-md-3"><strong>ID: </strong></div>
             <div class="col-md-5"><input type="text" name="idEntidadBancaria" ng-model="entidadBancaria.idEntidadBancaria" ng-disabled="{{isDisabled}}" class="form-control"/></div>
         </div>
 
         <div class="row">
-            <div class="col-md-3"><strong>Name: </strong></div>
+            <div class="col-md-3"><strong>Nombre: </strong></div>
             <div class="col-md-5"><input type="text" name="nombre" ng-model="entidadBancaria.nombre" class="form-control"/></div>
         </div>
 
         <div class="row">
-            <div class="col-md-3"><strong>Bank Code: </strong></div>
+            <div class="col-md-3"><strong>Código bancario: </strong></div>
             <div class="col-md-5"><input type="text" name="codigoEntidadBancaria" ng-model="entidadBancaria.codigoEntidadBancaria" class="form-control"/></div>
         </div>
 
         <div class="row">
-            <div class="col-md-3"><strong>Creation Date: </strong></div>
+            <div class="col-md-3"><strong>Fecha de creación: </strong></div>
             <div class="col-md-5"><input type="text" id="datepicker" name="fechaCreacion" ng-model="entidadBancaria.fechaCreacion" class="form-control" ng-readonly="true" /></div>
         </div>
 
         <div class="row">
-            <div class="col-md-3"><strong>Address: </strong></div>
+            <div class="col-md-3"><strong>Dirección: </strong></div>
             <div class="col-md-5"><input type="text" name="direccion" ng-model="entidadBancaria.direccion" class="form-control" /></div>
         </div>
 
         <div class="row">
-            <div class="col-md-3"><strong>CTC: </strong></div>
+            <div class="col-md-3"><strong>CIF: </strong></div>
             <div class="col-md-5"><input type="text" name="cif" ng-model="entidadBancaria.cif" class="form-control"/></div>
         </div>
         <div class="row">
-            <div class="col-md-12"><input  ng-click="update()" type="submit" value="Update" class="btn btn-info"/><br></div>
+            <div class="col-md-12"><input  ng-click="update()" type="submit" value="Actualizar" class="btn btn-info"/><br></div>
         </div>
         <div>
             <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>

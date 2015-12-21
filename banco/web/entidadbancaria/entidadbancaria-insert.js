@@ -8,7 +8,7 @@ function EntidadBancariaInsertController($scope, $location, entidadBancariaServi
         $scope.entidadBancaria.cif = $scope.entidadBancaria.cif.toUpperCase();
         var response = entidadBancariaService.insert($scope.entidadBancaria);
         response.success(function (data, status, headers, config) {
-            alert("Insert successful");
+            alert("Insertado correctamente");
             $location.path('/entidadbancaria/list');
             
         }).error(function (data, status, headers, config) {

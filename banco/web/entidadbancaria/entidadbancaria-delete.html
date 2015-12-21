@@ -4,12 +4,12 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <td><strong>Bank Entity ID</strong></td> 
-                    <td><strong>Name</strong></td>
-                    <td><strong>Bank Code</strong></td>
-                    <td><strong>Creation Date</strong></td>
-                    <td><strong>Address</strong></td>
-                    <td><strong>CTC</strong></td>
+                    <td><strong>ID</strong></td> 
+                    <td><strong>Nombre</strong></td>
+                    <td><strong>Código bancario</strong></td>
+                    <td><strong>Fecha creación</strong></td>
+                    <td><strong>Dirección</strong></td>
+                    <td><strong>CIF</strong></td>
                 </tr>
             </thead>
             <tbody>
@@ -24,8 +24,8 @@
             </tbody>
             </table>
         </div><!-- Tabla -->
-        <p> Are you sure to delete {{entidadBancaria.nombre}} Bank Entity? </p>
-        <a class="btn btn-danger" href="" ng-click="delete()">Yes</a>
+        <p> ¿Estás seguro que quieres borrar la entidad: {{entidadBancaria.nombre}}? </p>
+        <a class="btn btn-danger" href="" ng-click="delete()">Sí</a>
         <a class="btn btn-info" href="#/entidadbancaria/detail/{{entidadBancaria.idEntidadBancaria}}">No</a>
     {{message}}
 </div>
