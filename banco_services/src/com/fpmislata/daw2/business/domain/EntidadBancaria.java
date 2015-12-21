@@ -18,7 +18,7 @@ public class EntidadBancaria {
     private String nombre;
     
     @NotBlank
-    @Pattern(regexp="\\d+")
+    @Pattern(regexp = "\\d+", message = "Sólo se permiten carácteres numéricos")
     @Size(min = 4, max = 4)
     private String codigoEntidadBancaria;
     
