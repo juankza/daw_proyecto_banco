@@ -19,7 +19,7 @@ public class EntidadBancaria {
     
     @NotBlank
     @Pattern(regexp = "\\d+", message = "Sólo se permiten carácteres numéricos")
-    @Size(min = 4, max = 4)
+    @Size(min = 4, max = 4, message = "Tiene que contener obligatoriamente {max} carácteres")
     private String codigoEntidadBancaria;
     
     @NotNull
@@ -31,7 +31,7 @@ public class EntidadBancaria {
     private String direccion;
     
     @NotBlank
-    @Size(min = 9, max = 9)
+    @Size(min = 9, max = 9, message = "Tiene que contener obligatoriamente {max} carácteres")
     private String cif;
     
     public EntidadBancaria() { }
