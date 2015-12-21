@@ -16,50 +16,62 @@ public class GenericDAOImplHibernate<T, ID extends Serializable> implements Gene
 
     @Override
     public T get(ID id) throws BusinessException {
-        T t;
+        T entity;
+        Session session;
         
-        Session session = sessionFactory.openSession();
+        session = sessionFactory.openSession();
         session.beginTransaction();
-        t = (T)session.get(getEntityClass(), id);
+        entity = (T)session.get(getEntityClass(), id);
         session.getTransaction().commit();
         session.close();
         
-        return t;
+        return entity;
     }
 
     @Override
     public T insert(T entity) throws BusinessException {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.save(entity);
-        session.getTransaction().commit();
-        session.close();
-        
-        return entity;
+        Session session;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.save(entity);
+            session.getTransaction().commit();
+            session.close();
+
+            return entity;
+        } catch(javax.validation.ConstraintViolationException cve) {
+            throw new BusinessException(cve);
+        }
     }
 
     @Override
     public T update(T entity) throws BusinessException {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.update(entity);
-        session.getTransaction().commit();
-        session.close();
-        
-        return entity;
+        Session session;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.update(entity);
+            session.getTransaction().commit();
+            session.close();
+
+            return entity;
+        } catch(javax.validation.ConstraintViolationException cve) {
+            throw new BusinessException(cve);
+        }
     }
 
     @Override
     public boolean delete(ID id) throws BusinessException {
-        T t;
+        T entity;
+        Session session;
         boolean result;
         
-        Session session = sessionFactory.openSession();
+        session = sessionFactory.openSession();
         
-        t = get(id);
-        if(t != null) {
+        entity = get(id);
+        if(entity != null) {
             session.beginTransaction();
-            session.delete(t);
+            session.delete(entity);
             session.getTransaction().commit();
             result = true;
         } else {
@@ -72,15 +84,16 @@ public class GenericDAOImplHibernate<T, ID extends Serializable> implements Gene
 
     @Override
     public List<T> findAll() throws BusinessException {
-        List<T> ts;
+        List<T> entities;
+        Session session;
         
-        Session session = sessionFactory.openSession();
+        session = sessionFactory.openSession();
         session.beginTransaction();
-        ts = session.createQuery("SELECT t FROM " + getEntityClass().getName() + " t").list();
+        entities = session.createQuery("SELECT entity FROM " + getEntityClass().getName() + " entity").list();
         session.getTransaction().commit();
         session.close();
         
-        return ts;
+        return entities;
     }
 
     protected Class<T> getEntityClass() {
