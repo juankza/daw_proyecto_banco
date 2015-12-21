@@ -1,12 +1,13 @@
 
 package com.fpmislata.daw2.business.domain;
 
+import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Usuario {
+public class Usuario implements Serializable{
     
     private int idUsuario;
     
