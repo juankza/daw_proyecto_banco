@@ -37,6 +37,7 @@ public class UsuarioRESTController {
         try {
             usuario = usuarioService.get(idUsuario);
             if(usuario != null) {
+                usuario.setContrasena(null);
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
                 httpServletResponse.setContentType("application/json; charset=UTF-8");
                 httpServletResponse.getWriter().println(jsonTransformer.toJSON(usuario));
@@ -171,7 +172,7 @@ public class UsuarioRESTController {
         }
     }
     // TODO UPGRADE: Double type of search by name (Equals & Like).
-    @RequestMapping(value = "/{nombreUsuario}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/search/{nombreUsuario}", method = RequestMethod.GET, produces = "application/json")
     public void findByName(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
     @PathVariable("nombreUsuario") String nombreUsuario) {
         List<Usuario> usuarios;
