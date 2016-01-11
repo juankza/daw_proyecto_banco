@@ -14,12 +14,12 @@
             <div class="col-md-3"><strong>Apellidos: </strong></div>
             <div class="col-md-5"><input type="text" name="surname" ng-model="usuario.apellidos" class="form-control"/></div>
         </div>
-        
+
         <div class="row">
             <div class="col-md-3"><strong>Correo: </strong></div>
             <div class="col-md-5"><input type="text" name="email" ng-model="usuario.email" class="form-control"/></div>
         </div>
-        
+
         <div class="row">
             <div class="col-md-3"><strong>Apodo: </strong></div>
             <div class="col-md-5"><input type="text" name="password" ng-model="usuario.nickname" class="form-control"/></div>
@@ -31,8 +31,14 @@
         </div>
 
         <div class="row">
-            <div class="col-md-3"><strong>Rol: </strong></div>
-            <div class="col-md-5"><input type="text" name="role" ng-model="usuario.rol" class="form-control"/></div>
+            <div class="col-md-3"><strong>Rol</strong></div>
+            <div class="col-md-5">
+                <select ng-model="usuario.rol" class="form-control">
+                    <option value="ADMIN">Administrador</option>
+                    <option value="EMPLEADO">Empleado</option>
+                    <option value="CLIENTE">Cliente</option>
+                </select>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-12"><input ng-click="update()" type="submit" value="Actualizar" class="btn btn-info"/><br></div>

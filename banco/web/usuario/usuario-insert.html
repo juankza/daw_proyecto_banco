@@ -9,7 +9,7 @@
         <div class="col-md-3"><strong>Apellidos: </strong></div>
         <div class="col-md-5"><input type="text" ng-model="usuario.apellidos" class="form-control"/></div>
     </div>
-    
+
     <div class="row">
         <div class="col-md-3"><strong>Correo: </strong></div>
         <div class="col-md-5"><input type="text" ng-model="usuario.email" class="form-control"/></div>
@@ -26,8 +26,20 @@
     </div>
 
     <div class="row">
+        <!--
         <div class="col-md-3"><strong>Rol: </strong></div>
         <div class="col-md-5"><input type="text" ng-model="usuario.rol" class="form-control"/></div>
+        
+        -->
+        <div class="col-md-3"><strong>Rol</strong></div>
+        <div class="col-md-5">
+            
+        <select ng-model="usuario.rol" class="form-control">
+            <option selected value="ADMIN">Administrador</option>
+            <option value="EMPLEADO">Empleado</option>
+            <option value="CLIENTE">Cliente</option>
+        </select>
+        </div>
     </div>
 
     <div class="row">
