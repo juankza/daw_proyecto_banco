@@ -6,7 +6,7 @@ function UsuarioInsertController(usuarioService, $location, $scope) {
         $scope.usuario.rol = $scope.usuario.rol.toUpperCase();
         var response = usuarioService.insert($scope.usuario);
         response.success(function (data, status, headers, config) {
-            alert("OK");
+            alert("Insertado correctamente.");
             $location.path('/usuario/list');
         }).error(function (data, status, headers, config) {
             if (status === 400) {
