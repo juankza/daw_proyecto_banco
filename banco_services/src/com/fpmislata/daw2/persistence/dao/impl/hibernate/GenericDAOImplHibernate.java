@@ -6,8 +6,6 @@ import com.fpmislata.daw2.persistence.dao.GenericDAO;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -43,8 +41,9 @@ public class GenericDAOImplHibernate<T, ID extends Serializable> implements Gene
             return entity;
         } catch(javax.validation.ConstraintViolationException cve) {
             throw new BusinessException(cve);
+        } catch(org.hibernate.exception.ConstraintViolationException cve) {
+            throw new BusinessException(cve);
         }
-        
     }
     
     @Override
@@ -59,6 +58,8 @@ public class GenericDAOImplHibernate<T, ID extends Serializable> implements Gene
 
             return entity;
         } catch(javax.validation.ConstraintViolationException cve) {
+            throw new BusinessException(cve);
+        } catch(org.hibernate.exception.ConstraintViolationException cve) {
             throw new BusinessException(cve);
         }
     }
