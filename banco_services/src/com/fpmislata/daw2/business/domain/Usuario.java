@@ -3,8 +3,8 @@ package com.fpmislata.daw2.business.domain;
 
 import java.io.Serializable;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class Usuario implements Serializable{
@@ -19,7 +19,7 @@ public class Usuario implements Serializable{
     @Size(min = 2, max = 255)
     private String apellidos;
     
-    @Email
+    @Pattern(regexp="^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", message="Formato no válido")
     @Size(min = 5, max = 255)
     private String email;
     
