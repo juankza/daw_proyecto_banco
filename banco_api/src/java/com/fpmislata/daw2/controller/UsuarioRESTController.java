@@ -171,32 +171,32 @@ public class UsuarioRESTController {
         }
     }
     // TODO UPGRADE: Double type of search by name (Equals & Like).
-    @RequestMapping(value = "/{nombreUsuario}", method = RequestMethod.GET, produces = "application/json")
-    public void findByName(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-    @PathVariable("nombreUsuario") String nombreUsuario) {
-        List<Usuario> usuarios;
-        try {
-            usuarios = usuarioService.findByNombreLike(nombreUsuario);
-            if(usuarios != null && !usuarios.isEmpty()) {
-                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-                httpServletResponse.setContentType("application/json; charset=UTF-8");
-                httpServletResponse.getWriter().println(jsonTransformer.toJSON(usuarios));
-            } else {
-                httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
-            }
-        } catch(BusinessException bex) {
-            try {
-                httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                httpServletResponse.setContentType("application/json; charset=UTF-8");
-                httpServletResponse.getWriter().println(jsonTransformer.toJSON(bex.getBusinessMessages()));
-            } catch (IOException ex) {
-                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                Logger.getLogger(UsuarioRESTController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch(IOException ex) {
-            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            Logger.getLogger(UsuarioRESTController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    @RequestMapping(value = "/{nombreUsuario}", method = RequestMethod.GET, produces = "application/json")
+//    public void findByName(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+//    @PathVariable("nombreUsuario") String nombreUsuario) {
+//        List<Usuario> usuarios;
+//        try {
+//            usuarios = usuarioService.findByNombreLike(nombreUsuario);
+//            if(usuarios != null && !usuarios.isEmpty()) {
+//                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+//                httpServletResponse.setContentType("application/json; charset=UTF-8");
+//                httpServletResponse.getWriter().println(jsonTransformer.toJSON(usuarios));
+//            } else {
+//                httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
+//            }
+//        } catch(BusinessException bex) {
+//            try {
+//                httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+//                httpServletResponse.setContentType("application/json; charset=UTF-8");
+//                httpServletResponse.getWriter().println(jsonTransformer.toJSON(bex.getBusinessMessages()));
+//            } catch (IOException ex) {
+//                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+//                Logger.getLogger(UsuarioRESTController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        } catch(IOException ex) {
+//            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+//            Logger.getLogger(UsuarioRESTController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     
 }
