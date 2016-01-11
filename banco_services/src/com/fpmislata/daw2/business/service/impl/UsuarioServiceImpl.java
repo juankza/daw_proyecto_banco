@@ -22,8 +22,8 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> imp
 
     @Override
     public Usuario insert(Usuario usuario) throws BusinessException {
-//        List<BusinessMessage> businessMessages;
-//        businessMessages = new ArrayList<>();
+       List<BusinessMessage> businessMessages;
+        businessMessages = new ArrayList<>();
 //        
 //        if(usuario.getNombre() == null || usuario.getNombre().trim().equals("")) {
 //            businessMessages.add(new BusinessMessage("Nombre", "No puede estar vacío"));
@@ -41,12 +41,12 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> imp
 //            businessMessages.add(new BusinessMessage("Nickname", "No puede estar vacío"));
 //        }
 //        
-//        if(usuario.getContrasena() == null || usuario.getContrasena().trim().equals("")) {
-//            businessMessages.add(new BusinessMessage("Contraseña", "No puede estar vacío"));
-//        }
+       if(usuario.getContrasena() == null || usuario.getContrasena().trim().equals("")) {
+            businessMessages.add(new BusinessMessage("Contraseña desde servicio", "No puede estar vacío"));
+       }
 //        
-//        validate(businessMessages);
-
+        validate(businessMessages);
+        
         usuario.setContrasena(passwordManager.encrypt(usuario.getContrasena()));
 
         return usuarioDAO.insert(usuario);
