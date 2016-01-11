@@ -1,6 +1,6 @@
 function EntidadBancariaService($http){
     this.list = function(){
-          var response = $http(config = {
+          var response = $http({
             method: 'GET',
             url: '/api/entidadbancaria'
         });
