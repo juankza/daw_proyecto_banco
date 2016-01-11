@@ -1,14 +1,38 @@
 
 package com.fpmislata.daw2.business.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class EntidadBancaria {
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
+
+public class EntidadBancaria implements Serializable{
+    
     private int idEntidadBancaria;
+    
+    @NotBlank
+    @Size(min = 3, max = 255)
     private String nombre;
+    
+    @NotBlank
+    @Pattern(regexp = "\\d+", message = "Sólo se permiten carácteres numéricos")
+    @Size(min = 4, max = 4, message = "Tiene que contener obligatoriamente {max} carácteres")
     private String codigoEntidadBancaria;
+    
+    @NotNull
+    @Past
     private Date fechaCreacion;
+    
+    @NotBlank
+    @Size(min = 3, max = 255)
     private String direccion;
+    
+    @NotBlank
+    @Size(min = 9, max = 9, message = "Tiene que contener obligatoriamente {max} carácteres")
     private String cif;
     
     public EntidadBancaria() { }

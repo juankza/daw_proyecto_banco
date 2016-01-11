@@ -1,0 +1,29 @@
+<div ng-controller="EntidadBancariaDetailController">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td><strong>ID</strong></td> 
+                    <td><strong>Nombre</strong></td>
+                    <td><strong>Código bancario</strong></td>
+                    <td><strong>Fecha creación</strong></td>
+                    <td><strong>Dirección</strong></td>
+                    <td><strong>CIF</strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{entidadBancaria.idEntidadBancaria}}</td>
+                    <td>{{entidadBancaria.nombre}}</td>
+                    <td>{{entidadBancaria.codigoEntidadBancaria}}</td>
+                    <td>{{entidadBancaria.fechaCreacion}}</td>
+                    <td>{{entidadBancaria.direccion}}</td>
+                    <td>{{entidadBancaria.cif}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div><!-- Tabla -->
+
+    <a class="btn btn-info" href="#/entidadbancaria/update/{{entidadBancaria.idEntidadBancaria}}">ACTUALIZAR</a>
+    <a class="btn btn-danger" href="#/entidadbancaria/delete/{{entidadBancaria.idEntidadBancaria}}">BORRAR</a>
+</div>

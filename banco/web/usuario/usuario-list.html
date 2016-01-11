@@ -1,0 +1,22 @@
+<div ng-controller="UsuarioListController">
+    <h1>Usuario</h1>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td><strong>ID</strong></td>
+                    <td><strong>Usuario Name</strong></td>
+                    <td><strong>Details</strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="usuario in usuarios">
+                    <td>{{usuario.idUsuario}}</td>
+                    <td>{{usuario.nombre}}</td>
+                    <td><a class="btn btn-info" href="#/usuario/detail/{{usuario.idUsuario}}">Detalles</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div><!-- Tabla -->
+    <a class="btn btn-info" href="#/usuario/insert">INSERTAR</a>
+</div>

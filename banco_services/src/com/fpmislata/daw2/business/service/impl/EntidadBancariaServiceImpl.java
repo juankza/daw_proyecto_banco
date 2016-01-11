@@ -18,32 +18,32 @@ public class EntidadBancariaServiceImpl extends GenericServiceImpl<EntidadBancar
 
     @Override
     public EntidadBancaria insert(EntidadBancaria entidadBancaria) throws BusinessException {
-        List<BusinessMessage> businessMessages;
-        businessMessages = new ArrayList<>();
-        
-        if(entidadBancaria.getNombre() == null || entidadBancaria.getNombre().trim().equals("")) {
-            businessMessages.add(new BusinessMessage("Nombre", "No puede estar vacío"));
-        }
-        
-        if(entidadBancaria.getCodigoEntidadBancaria().length() != 4) {
-            businessMessages.add(new BusinessMessage("Codigo Entidad Bancaria", "Debe contener 4 carácteres"));
-        }
-        
-        if(entidadBancaria.getFechaCreacion() == null) {
-            businessMessages.add(new BusinessMessage("Fecha Creacion", "No puede estar vacío"));
-        }
-        
-        if(entidadBancaria.getDireccion() == null || entidadBancaria.getDireccion().trim().equals("")) {
-            businessMessages.add(new BusinessMessage("Direccion", "No puede estar vacío"));
-        }
-        
-        if(entidadBancaria.getCif() == null || entidadBancaria.getCif().trim().equals("")) {
-            businessMessages.add(new BusinessMessage("CIF", "No puede estar vacío"));
-        }
-
-        if(!businessMessages.isEmpty()) {
-            throw new BusinessException(businessMessages);
-        }
+//        List<BusinessMessage> businessMessages;
+//        businessMessages = new ArrayList<>();
+//        
+//        if(entidadBancaria.getNombre() == null || entidadBancaria.getNombre().trim().equals("")) {
+//            businessMessages.add(new BusinessMessage("Nombre", "No puede estar vacío"));
+//        }
+//        
+//        if(entidadBancaria.getCodigoEntidadBancaria().length() != 4) {
+//            businessMessages.add(new BusinessMessage("Codigo Entidad Bancaria", "Debe contener 4 carácteres"));
+//        }
+//        
+//        if(entidadBancaria.getFechaCreacion() == null) {
+//            businessMessages.add(new BusinessMessage("Fecha Creacion", "No puede estar vacío"));
+//        }
+//        
+//        if(entidadBancaria.getDireccion() == null || entidadBancaria.getDireccion().trim().equals("")) {
+//            businessMessages.add(new BusinessMessage("Direccion", "No puede estar vacío"));
+//        }
+//        
+//        if(entidadBancaria.getCif() == null || entidadBancaria.getCif().trim().equals("")) {
+//            businessMessages.add(new BusinessMessage("CIF", "No puede estar vacío"));
+//        }
+//
+//        if(!businessMessages.isEmpty()) {
+//            throw new BusinessException(businessMessages);
+//        }
         
         return entidadBancariaDAO.insert(entidadBancaria);
     
@@ -51,32 +51,32 @@ public class EntidadBancariaServiceImpl extends GenericServiceImpl<EntidadBancar
 
     @Override
     public EntidadBancaria update(EntidadBancaria entidadBancaria) throws BusinessException {
-        List<BusinessMessage> businessMessages;
-        businessMessages = new ArrayList<>();
-        
-        if(entidadBancaria.getNombre() == null || entidadBancaria.getNombre().trim().equals("")) {
-            businessMessages.add(new BusinessMessage("Nombre", "No puede estar vacío"));
-        }
-        
-        if(entidadBancaria.getCodigoEntidadBancaria().length() != 4) {
-            businessMessages.add(new BusinessMessage("Codigo Entidad Bancaria", "Debe contener 4 carácteres"));
-        }
-        
-        if(entidadBancaria.getFechaCreacion() == null) {
-            businessMessages.add(new BusinessMessage("Fecha Creacion", "No puede estar vacío"));
-        }
-        
-        if(entidadBancaria.getDireccion() == null || entidadBancaria.getDireccion().trim().equals("")) {
-            businessMessages.add(new BusinessMessage("Direccion", "No puede estar vacío"));
-        }
-        
-        if(entidadBancaria.getCif() == null || entidadBancaria.getCif().trim().equals("")) {
-            businessMessages.add(new BusinessMessage("CIF", "No puede estar vacío"));
-        }
-
-        if(!businessMessages.isEmpty()) {
-            throw new BusinessException(businessMessages);
-        }
+//        List<BusinessMessage> businessMessages;
+//        businessMessages = new ArrayList<>();
+//        
+//        if(entidadBancaria.getNombre() == null || entidadBancaria.getNombre().trim().equals("")) {
+//            businessMessages.add(new BusinessMessage("Nombre", "No puede estar vacío"));
+//        }
+//        
+//        if(entidadBancaria.getCodigoEntidadBancaria().length() != 4) {
+//            businessMessages.add(new BusinessMessage("Codigo Entidad Bancaria", "Debe contener 4 carácteres"));
+//        }
+//        
+//        if(entidadBancaria.getFechaCreacion() == null) {
+//            businessMessages.add(new BusinessMessage("Fecha Creacion", "No puede estar vacío"));
+//        }
+//        
+//        if(entidadBancaria.getDireccion() == null || entidadBancaria.getDireccion().trim().equals("")) {
+//            businessMessages.add(new BusinessMessage("Direccion", "No puede estar vacío"));
+//        }
+//        
+//        if(entidadBancaria.getCif() == null || entidadBancaria.getCif().trim().equals("")) {
+//            businessMessages.add(new BusinessMessage("CIF", "No puede estar vacío"));
+//        }
+//
+//        if(!businessMessages.isEmpty()) {
+//            throw new BusinessException(businessMessages);
+//        }
         
         return entidadBancariaDAO.update(entidadBancaria);
 

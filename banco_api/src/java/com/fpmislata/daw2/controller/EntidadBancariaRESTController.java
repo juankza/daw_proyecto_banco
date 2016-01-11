@@ -171,7 +171,7 @@ public class EntidadBancariaRESTController {
         }
     }
     // TODO UPGRADE: Double type of search by name (Equals & Like).
-    @RequestMapping(value = "/{nombreEntidadBancaria}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/search/{nombreEntidadBancaria}", method = RequestMethod.GET, produces = "application/json")
     public void findByName(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
     @PathVariable("nombreEntidadBancaria") String nombreEntidadBancaria) {
         List<EntidadBancaria> entidadesBancarias;
