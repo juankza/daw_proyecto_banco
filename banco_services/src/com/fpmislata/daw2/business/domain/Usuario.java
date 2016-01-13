@@ -19,6 +19,10 @@ public class Usuario implements Serializable{
     @Size(min = 2, max = 255)
     private String apellidos;
     
+    @NotBlank
+    @Size(min = 9, max = 9)
+    private String dni;
+    
     @Email
     @Size(min = 5, max = 255)
     private String email;
@@ -27,7 +31,7 @@ public class Usuario implements Serializable{
     @Size(min = 3, max = 255)
     private String nickname;
     
-    
+    //Quitada validación para hacerla en el servicio.
     @Size(min = 5, max = 255)
     private String contrasena;
     
@@ -36,15 +40,26 @@ public class Usuario implements Serializable{
 
     public Usuario() { }
 
-    public Usuario(int idUsuario, String nombre, String apellidos, String email, String nickname, String contrasena, Rol rol) {
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public Usuario(int idUsuario, String nombre, String apellidos, String dni, String email, String nickname, String contrasena, Rol rol) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellidos = apellidos;
+        this.dni = dni;
         this.email = email;
         this.nickname = nickname;
         this.contrasena = contrasena;
         this.rol = rol;
     }
+
+   
 
     public int getIdUsuario() {
         return idUsuario;

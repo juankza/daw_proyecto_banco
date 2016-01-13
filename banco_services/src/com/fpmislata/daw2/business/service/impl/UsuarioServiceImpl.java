@@ -42,7 +42,7 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> imp
 //        }
 //        
        if(usuario.getContrasena() == null || usuario.getContrasena().trim().equals("")) {
-            businessMessages.add(new BusinessMessage("Contraseña desde servicio", "No puede estar vacío"));
+            businessMessages.add(new BusinessMessage("Contraseña", "No puede estar vacío"));
        }
 //        
         validate(businessMessages);
