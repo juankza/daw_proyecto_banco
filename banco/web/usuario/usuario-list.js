@@ -6,7 +6,7 @@ function UsuarioListController(usuarioService, $scope) {
     response.success(function (data, status, headers, config) {
         $scope.usuarios = data;
     }).error(function (data, status, headers, config) {
-        alert("HTTP request failed. Status: " + status);
+        alert("Ha fallado la petición HTTP. Estado: " + status);
     });
 }
 app.controller("UsuarioListController", UsuarioListController);

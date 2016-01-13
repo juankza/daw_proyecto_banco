@@ -27,16 +27,18 @@
         <script src="usuario/usuario-detail.js" type="text/javascript"></script>
         <script src="usuario/usuario-delete.js" type="text/javascript"></script>
         <script src="usuario/usuario-list.js" type="text/javascript"></script>
-        
+        <script src="session/session-service.js" type="text/javascript"></script>
+        <script src="main.js" type="text/javascript"></script>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/user.css" rel="stylesheet" type="text/css"/>
         <link href="lib/jquery/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
+    <body ng-controller="MainController">
         <nav class="navbar navbar-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a href="#/"><img class="logo" src="img/logo.png"></a>
+                    <a href="/banco" ng-click="logout()">LOGOUT</a>
                 </div>
                 <!--<div class="navbar-right user-cp">Usuario</div>-->
             </div><!-- Container -->

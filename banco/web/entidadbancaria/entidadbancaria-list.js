@@ -6,7 +6,7 @@ function EntidadBancariaListController($scope,entidadBancariaService) {
     response.success(function (data, status, headers, config) {
         $scope.entidadesBancarias = data;
     }).error(function (data, status, headers, config) {
-        alert("HTTP request failed. Status: " + status);
+        alert("HTTP request failed. Status: " + status);    
     });
 }
 app.controller("EntidadBancariaListController", EntidadBancariaListController);
