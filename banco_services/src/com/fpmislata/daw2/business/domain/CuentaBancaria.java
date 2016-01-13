@@ -19,7 +19,7 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 public class CuentaBancaria implements Serializable {
 
-    private int idCuenta;
+    private int idCuentaBancaria;
     @NotNull
     private BigDecimal saldo;
     @NotNull
@@ -35,40 +35,19 @@ public class CuentaBancaria implements Serializable {
     @Size(min = 10, max = 10)
     private String numeroCuenta;
     @NotNull
-    private int idSucursalBancaria;
+    private SucursalBancaria sucursalBancaria;
     @NotNull
-    private int idUsuario;
+    private Usuario usuario;
 
     public CuentaBancaria() {
     }
 
-    public CuentaBancaria(BigDecimal saldo, Date fechaCreacion, String pin, String digitoControl, String numeroCuenta, int idSucursalBancaria, int idUsuario) {
-        this.saldo = saldo;
-        this.fechaCreacion = fechaCreacion;
-        this.pin = pin;
-        this.digitoControl = digitoControl;
-        this.numeroCuenta = numeroCuenta;
-        this.idSucursalBancaria = idSucursalBancaria;
-        this.idUsuario = idUsuario;
+    public int getIdCuentaBancaria() {
+        return idCuentaBancaria;
     }
 
-    public CuentaBancaria(int idCuenta, BigDecimal saldo, Date fechaCreacion, String pin, String digitoControl, String numeroCuenta, int idSucursalBancaria, int idUsuario) {
-        this.idCuenta = idCuenta;
-        this.saldo = saldo;
-        this.fechaCreacion = fechaCreacion;
-        this.pin = pin;
-        this.digitoControl = digitoControl;
-        this.numeroCuenta = numeroCuenta;
-        this.idSucursalBancaria = idSucursalBancaria;
-        this.idUsuario = idUsuario;
-    }
-
-    public int getIdCuenta() {
-        return idCuenta;
-    }
-
-    public void setIdCuenta(int idCuenta) {
-        this.idCuenta = idCuenta;
+    public void setIdCuentaBancaria(int idCuentaBancaria) {
+        this.idCuentaBancaria = idCuentaBancaria;
     }
 
     public BigDecimal getSaldo() {
@@ -111,20 +90,21 @@ public class CuentaBancaria implements Serializable {
         this.numeroCuenta = numeroCuenta;
     }
 
-    public int getIdSucursalBancaria() {
-        return idSucursalBancaria;
+    public SucursalBancaria getSucursalBancaria() {
+        return sucursalBancaria;
     }
 
-    public void setIdSucursalBancaria(int idSucursalBancaria) {
-        this.idSucursalBancaria = idSucursalBancaria;
+    public void setSucursalBancaria(SucursalBancaria sucursalBancaria) {
+        this.sucursalBancaria = sucursalBancaria;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
+   
 }

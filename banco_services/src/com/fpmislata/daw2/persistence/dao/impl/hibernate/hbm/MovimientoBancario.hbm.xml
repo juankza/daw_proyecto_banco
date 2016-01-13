@@ -13,7 +13,7 @@
         <property column="concepto" name="concepto" />
         <property column="cantidad" name="cantidad" />
         <property column="fecha" name="fecha" />
-        <many-to-one name="idCuentaBancaria">
+        <many-to-one name="cuentaBancaria">
             <column name="idCuentaBancaria"  />
         </many-to-one>
  

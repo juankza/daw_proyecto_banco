@@ -8,7 +8,7 @@
         <property column="fechaCreacion" name="fechaCreacion" />
         <property column="direccion" name="direccion" />
         <property column="telefono" name="telefono" />
-        <many-to-one name="idEntidadBancaria">
+        <many-to-one name="entidadBancaria">
             <column name="idEntidadBancaria"  />
         </many-to-one>
     </class>
