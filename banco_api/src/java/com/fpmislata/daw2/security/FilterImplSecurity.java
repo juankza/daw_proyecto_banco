@@ -39,29 +39,30 @@ public class FilterImplSecurity implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
             throws IOException, ServletException {
-        HttpServletRequest httpServletRequest = (HttpServletRequest)servletRequest;
-        HttpServletResponse httpServletResponse = (HttpServletResponse)servletResponse;
-        
+        HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
+
         WebApplicationContext webApplicationContext = WebApplicationContextUtils.getRequiredWebApplicationContext(httpServletRequest.getServletContext());
         AutowireCapableBeanFactory autowireCapableBeanFactory = webApplicationContext.getAutowireCapableBeanFactory();
         autowireCapableBeanFactory.autowireBean(this);
-        
+
         WebSession webSession = webSessionProvider.getWebSession(httpServletRequest, httpServletResponse);
-        
+
         Usuario usuario;
         String url = httpServletRequest.getRequestURI();
         HTTPMethod httpmethod = HTTPMethod.valueOf(httpServletRequest.getMethod());
 
-        if(webSession != null) {
+        if (webSession != null) {
             usuario = webSession.getUsuario();
         } else {
             usuario = null;
         }
 
-        if(authorization.isAuthorizedURL(usuario, url, httpmethod)) {
+        if (authorization.isAuthorizedURL(usuario, url, httpmethod)) {
             chain.doFilter(servletRequest, servletResponse);
         } else {
             httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+
         }
     }
 
