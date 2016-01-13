@@ -1,5 +1,5 @@
 
-CREATE TABLE `cuentabancaria` (
+CREATE TABLE IF NOT EXISTS `cuentabancaria` (
   `idCuentaBancaria` int(11) NOT NULL,
   `saldo` decimal(10,2) DEFAULT NULL,
   `fechaCreacion` datetime DEFAULT NULL,

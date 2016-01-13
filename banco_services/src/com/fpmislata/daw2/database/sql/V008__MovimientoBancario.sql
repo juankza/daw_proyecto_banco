@@ -1,5 +1,5 @@
 
-CREATE TABLE `movimientobancario` (
+CREATE TABLE IF NOT EXISTS `movimientobancario` (
   `idMovimientoBancario` int(11) NOT NULL,
   `tipo` varchar(9) DEFAULT NULL,
   `concepto` varchar(255) DEFAULT NULL,

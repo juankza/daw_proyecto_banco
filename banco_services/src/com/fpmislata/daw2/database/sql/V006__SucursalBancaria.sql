@@ -1,5 +1,5 @@
 
-CREATE TABLE `sucursalbancaria` (
+CREATE TABLE IF NOT EXISTS `sucursalbancaria` (
   `idSucursalBancaria` int(11) NOT NULL AUTO_INCREMENT,
   `codigoSucursalBancaria` varchar(4) DEFAULT NULL,
   `fechaCreacion` datetime DEFAULT NULL,
