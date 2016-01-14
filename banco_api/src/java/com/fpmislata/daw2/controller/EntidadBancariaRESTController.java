@@ -170,13 +170,26 @@ public class EntidadBancariaRESTController {
             Logger.getLogger(EntidadBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    // TODO UPGRADE: Double type of search by name (Equals & Like).
-    @RequestMapping(value = "/search/{nombreEntidadBancaria}", method = RequestMethod.GET, produces = "application/json")
-    public void findByName(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-    @PathVariable("nombreEntidadBancaria") String nombreEntidadBancaria) {
+    
+    @RequestMapping(value = "/search", method = RequestMethod.GET, produces = "application/json")
+    public void findByName(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         List<EntidadBancaria> entidadesBancarias;
+        String nombreEntidadBancaria;
+        String where;
         try {
-            entidadesBancarias = entidadBancariaService.findByNombreLike(nombreEntidadBancaria);
+            nombreEntidadBancaria = httpServletRequest.getParameter("nombre");
+            where = httpServletRequest.getParameter("where");
+            
+            if(where != null) {
+                if(where.trim().equals("eq")) {
+                    entidadesBancarias = entidadBancariaService.findByNombreEquals(nombreEntidadBancaria);
+                } else {
+                    entidadesBancarias = entidadBancariaService.findByNombreLike(nombreEntidadBancaria);
+                }
+            } else {
+                entidadesBancarias = entidadBancariaService.findByNombreLike(nombreEntidadBancaria);
+            }
+            
             if(entidadesBancarias != null && !entidadesBancarias.isEmpty()) {
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
                 httpServletResponse.setContentType("application/json; charset=UTF-8");
