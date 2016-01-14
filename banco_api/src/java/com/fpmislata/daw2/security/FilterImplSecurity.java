@@ -57,7 +57,7 @@ public class FilterImplSecurity implements Filter {
         } else {
             usuario = null;
         }
-
+        
         if (authorization.isAuthorizedURL(usuario, url, httpmethod)) {
             chain.doFilter(servletRequest, servletResponse);
         } else {
