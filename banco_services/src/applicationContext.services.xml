@@ -15,8 +15,10 @@
     
     <bean class="com.fpmislata.daw2.persistence.dao.impl.hibernate.UsuarioDAOImplHibernate" />
     <bean class="com.fpmislata.daw2.persistence.dao.impl.hibernate.CuentaBancariaDAOImplHibernate"/>
+    <bean class="com.fpmislata.daw2.persistence.dao.impl.hibernate.SucursalBancariaDAOImplHibernate" />
     <bean class="com.fpmislata.daw2.business.service.impl.UsuarioServiceImpl" />
     <bean class="com.fpmislata.daw2.business.service.impl.CuentaBancariaServiceImpl" />
+    <bean class="com.fpmislata.daw2.business.service.impl.SucursalBancariaServiceImpl" />
     <bean class="org.jasypt.util.password.BasicPasswordEncryptor" />
     <bean class="com.fpmislata.daw2.security.impl.PasswordManagerImplJasypt" />
 
