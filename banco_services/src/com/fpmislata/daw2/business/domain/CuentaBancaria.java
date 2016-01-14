@@ -5,6 +5,7 @@
  */
 package com.fpmislata.daw2.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -17,6 +18,7 @@ import org.hibernate.validator.constraints.NotBlank;
  *
  * @author Reim0n
  */
+@JsonIgnoreProperties({"sucursalBancaria", "usuario"})
 public class CuentaBancaria implements Serializable {
 
     private int idCuentaBancaria;

@@ -3,7 +3,9 @@
 
 <hibernate-mapping>
     <class name="com.fpmislata.daw2.business.domain.SucursalBancaria" table="sucursalbancaria">
-        <id column="idSucursalBancaria" name="idSucursalBancaria" />
+        <id column="idSucursalBancaria" name="idSucursalBancaria" >
+             <generator class="identity" />
+        </id>
         <property column="codigoSucursalBancaria" name="codigoSucursalBancaria" />
         <property column="fechaCreacion" name="fechaCreacion" />
         <property column="direccion" name="direccion" />

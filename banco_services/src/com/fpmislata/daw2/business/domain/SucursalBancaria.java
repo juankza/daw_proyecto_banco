@@ -5,6 +5,7 @@
  */
 package com.fpmislata.daw2.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,7 @@ import org.hibernate.validator.constraints.NotBlank;
  *
  * @author Lliurex
  */
+@JsonIgnoreProperties({"entidadBancaria"})
 public class SucursalBancaria implements Serializable {
 
     private int idSucursalBancaria;

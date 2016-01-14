@@ -15,6 +15,7 @@ public class HibernateUtil {
         Configuration configuration = new Configuration();
         configuration.configure();
         configuration.setProperty("hibernate.current_session_context_class", "thread");
+        
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
     }
@@ -32,14 +33,17 @@ public class HibernateUtil {
         }
     }
     
-    public static void closeSessionAndUnbindFromThread() {
-        Session session = ThreadLocalSessionContext.unbind(sessionFactory);
-        if (session!=null) {
-            session.close();
-        }
-    }
     public static void openSessionAndBindToThread() {
         Session session = sessionFactory.openSession();
         ThreadLocalSessionContext.bind(session);
     }
+    
+    public static void closeSessionAndUnbindFromThread() {
+        Session session = ThreadLocalSessionContext.unbind(sessionFactory);
+        
+        if ((session != null) && session.isOpen()) {
+            session.close();
+        }
+    }
+    
 }
