@@ -5,8 +5,8 @@
  */
 package com.fpmislata.daw2.controller;
 
-import com.fpmislata.daw2.business.domain.CuentaBancaria;
-import com.fpmislata.daw2.business.service.CuentaBancariaService;
+import com.fpmislata.daw2.business.domain.SucursalBancaria;
+import com.fpmislata.daw2.business.service.SucursalBancariaService;
 import com.fpmislata.daw2.core.exception.BusinessException;
 import com.fpmislata.daw2.core.exception.BusinessMessage;
 import com.fpmislata.daw2.core.json.JSONTransformer;
@@ -23,29 +23,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- *
- * @author Lliurex
- */
 @Controller
-@RequestMapping("/cuentabancaria")
-public class CuentaBancariaRESTController {
+@RequestMapping("/sucursalbancaria")
+public class SucursalBancariaRESTController {
 
     @Autowired
     JSONTransformer jsonTransformer;
     @Autowired
-    CuentaBancariaService cuentaBancariaService;
-    
+    SucursalBancariaService sucursalBancariaService;
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public void findAll(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        List<CuentaBancaria> cuentas;
+        List<SucursalBancaria> sucursales;
         try {
-            cuentas = cuentaBancariaService.findAll();
-            if (cuentas != null) {
+            sucursales = sucursalBancariaService.findAll();
+            if (sucursales != null) {
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
                 httpServletResponse.setContentType("application/json; charset=UTF-8");
-                httpServletResponse.getWriter().println(jsonTransformer.toJSON(cuentas));
+                httpServletResponse.getWriter().println(jsonTransformer.toJSON(sucursales));
             } else {
                 httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
             }
@@ -60,47 +55,19 @@ public class CuentaBancariaRESTController {
             }
         } catch (IOException ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            Logger.getLogger(CuentaBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SucursalBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-    public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonRequest) {
-        CuentaBancaria newCuentaBancaria;
-        CuentaBancaria insertedCuentaBancaria;
-
+    @RequestMapping(value = "/{idSucursalBancaria}", method = RequestMethod.GET, produces = "application/json")
+    public void get(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable int idSucursalBancaria) {
+        SucursalBancaria sucursalBancaria;
         try {
-            newCuentaBancaria = jsonTransformer.toObject(jsonRequest, CuentaBancaria.class);
-            insertedCuentaBancaria = cuentaBancariaService.insert(newCuentaBancaria);
-            if (insertedCuentaBancaria != null) {
+            sucursalBancaria = sucursalBancariaService.get(idSucursalBancaria);
+            if (sucursalBancaria != null) {
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
                 httpServletResponse.setContentType("application/json; charset=UTF-8");
-                httpServletResponse.getWriter().println(jsonTransformer.toJSON(insertedCuentaBancaria));
-            }
-        } catch (BusinessException bex) {
-            try {
-                httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                httpServletResponse.setContentType("application/json; charset=UTF-8");
-                httpServletResponse.getWriter().println(jsonTransformer.toJSON(bex.getBusinessMessages()));
-            } catch (IOException ex) {
-                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                Logger.getLogger(CuentaBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } catch (IOException ex) {
-            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            Logger.getLogger(CuentaBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @RequestMapping(value = "/{idCuentaBancaria}", method = RequestMethod.GET, produces = "application/json")
-    public void get(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
-        CuentaBancaria cuentaBancaria;
-        try {
-            cuentaBancaria = cuentaBancariaService.get(idCuentaBancaria);
-            if (cuentaBancaria != null) {
-                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-                httpServletResponse.setContentType("application/json; charset=UTF-8");
-                httpServletResponse.getWriter().println(jsonTransformer.toJSON(cuentaBancaria));
+                httpServletResponse.getWriter().println(jsonTransformer.toJSON(sucursalBancaria));
             } else {
                 httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
             }
@@ -115,27 +82,23 @@ public class CuentaBancariaRESTController {
             }
         } catch (IOException ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            Logger.getLogger(CuentaBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SucursalBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    @RequestMapping(value = "/{idCuentaBancaria}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-    public void update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria, @RequestBody String jsonRequest) {
-        CuentaBancaria newCuentaBancaria;
-        CuentaBancaria updatedCuentaBancaria;
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
+    public void insert(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonRequest) {
+        SucursalBancaria newSucursalBancaria;
+        SucursalBancaria insertedSucursalBancaria;
 
         try {
-            newCuentaBancaria = jsonTransformer.toObject(jsonRequest, CuentaBancaria.class);
-            newCuentaBancaria.setIdCuentaBancaria(idCuentaBancaria);
-            updatedCuentaBancaria = cuentaBancariaService.update(newCuentaBancaria);
-            if (updatedCuentaBancaria != null) {
+            newSucursalBancaria = jsonTransformer.toObject(jsonRequest, SucursalBancaria.class);
+            insertedSucursalBancaria = sucursalBancariaService.insert(newSucursalBancaria);
+            if (insertedSucursalBancaria != null) {
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
                 httpServletResponse.setContentType("application/json; charset=UTF-8");
-                httpServletResponse.getWriter().println(jsonTransformer.toJSON(updatedCuentaBancaria));
-            } else {
-                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                httpServletResponse.getWriter().println(jsonTransformer.toJSON(insertedSucursalBancaria));
             }
-
         } catch (BusinessException bex) {
             try {
                 httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -147,18 +110,19 @@ public class CuentaBancariaRESTController {
             }
         } catch (IOException ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            Logger.getLogger(CuentaBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SucursalBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
-    @RequestMapping(value = "/{idCuentaBancaria}", method = RequestMethod.DELETE)
-    public void delete(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idCuentaBancaria") int idCuentaBancaria) {
+    @RequestMapping(value = "/{idSucursalBancaria}", method = RequestMethod.DELETE)
+    public void delete(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idSucursalBancaria") int idSucursalBancaria) {
         try {
-            boolean isDeleted = cuentaBancariaService.delete(idCuentaBancaria);
+            boolean isDeleted = sucursalBancariaService.delete(idSucursalBancaria);
             if (isDeleted) {
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
             } else {
-                throw new BusinessException(new BusinessMessage(null, "Error: La cuenta bancaria ya había sido borrada anteriormente."));
+                throw new BusinessException(new BusinessMessage(null, "La sucursal bancaria ya había sido borrada anteriormente."));
             }
         } catch (BusinessException bex) {
             try {
@@ -172,4 +136,35 @@ public class CuentaBancariaRESTController {
         }
     }
 
+    @RequestMapping(value = "/{idSucursalBancaria}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+    public void update(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable("idSucursalBancaria") int idSucursalBancaria, @RequestBody String jsonRequest) {
+        SucursalBancaria newSucursalBancaria;
+        SucursalBancaria updatedSucursalBancaria;
+
+        try {
+            newSucursalBancaria = jsonTransformer.toObject(jsonRequest, SucursalBancaria.class);
+            newSucursalBancaria.setIdSucursalBancaria(idSucursalBancaria);
+            updatedSucursalBancaria = sucursalBancariaService.update(newSucursalBancaria);
+            if (updatedSucursalBancaria != null) {
+                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                httpServletResponse.setContentType("application/json; charset=UTF-8");
+                httpServletResponse.getWriter().println(jsonTransformer.toJSON(updatedSucursalBancaria));
+            } else {
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                
+            }
+        } catch (BusinessException bex) {
+             try {
+                httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                httpServletResponse.setContentType("application/json; charset=UTF-8");
+                httpServletResponse.getWriter().println(jsonTransformer.toJSON(bex.getBusinessMessages()));
+            } catch (IOException ex) {
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                Logger.getLogger(CuentaBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (IOException ex) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            Logger.getLogger(SucursalBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
