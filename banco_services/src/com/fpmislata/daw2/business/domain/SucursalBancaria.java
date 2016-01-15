@@ -1,41 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.fpmislata.daw2.business.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.NotBlank;
 
-/**
- *
- * @author Lliurex
- */
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class SucursalBancaria implements Serializable {
 
     private int idSucursalBancaria;
+    
     @NotBlank
     @Size(min = 4, max = 4, message = "Tiene que contener obligatoriamente {max} carácteres")
     private String codigoSucursalBancaria;
+    
     @NotNull
     @Past
     private Date fechaCreacion;
+    
     @NotBlank
     @Size(min = 3, max = 255)
     private String direccion;
+    
     @Size(min = 3, max = 30)
     private String telefono;
+    
     @NotNull
     private EntidadBancaria entidadBancaria;
 
-    public SucursalBancaria() {
+    public SucursalBancaria() { }
+
+    public SucursalBancaria(int idSucursalBancaria, String codigoSucursalBancaria, Date fechaCreacion, String direccion, String telefono, EntidadBancaria entidadBancaria) {
+        this.idSucursalBancaria = idSucursalBancaria;
+        this.codigoSucursalBancaria = codigoSucursalBancaria;
+        this.fechaCreacion = fechaCreacion;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.entidadBancaria = entidadBancaria;
     }
 
     public int getIdSucursalBancaria() {
@@ -85,7 +93,5 @@ public class SucursalBancaria implements Serializable {
     public void setEntidadBancaria(EntidadBancaria entidadBancaria) {
         this.entidadBancaria = entidadBancaria;
     }
-
-  
 
 }

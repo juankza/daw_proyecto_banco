@@ -1,41 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.fpmislata.daw2.business.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.NotBlank;
 
-/**
- *
- * @author Lliurex
- */
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class MovimientoBancario implements Serializable {
 
     private int idMovimientoBancario;
+    
     @NotNull
     private TipoMovimientoBancario tipoMovimientoBancario;
+    
     @NotBlank
     @Size(min = 3, max = 255)
     private String concepto;
+    
     @NotNull
     private BigDecimal cantidad;
+    
     @NotNull
     @Past
     private Date fecha;
+    
     @NotNull
     private CuentaBancaria cuentaBancaria;
 
-    public MovimientoBancario() {
+    public MovimientoBancario() { }
+
+    public MovimientoBancario(int idMovimientoBancario, TipoMovimientoBancario tipoMovimientoBancario, String concepto, BigDecimal cantidad, Date fecha, CuentaBancaria cuentaBancaria) {
+        this.idMovimientoBancario = idMovimientoBancario;
+        this.tipoMovimientoBancario = tipoMovimientoBancario;
+        this.concepto = concepto;
+        this.cantidad = cantidad;
+        this.fecha = fecha;
+        this.cuentaBancaria = cuentaBancaria;
     }
 
     public int getIdMovimientoBancario() {
@@ -85,6 +93,5 @@ public class MovimientoBancario implements Serializable {
     public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
         this.cuentaBancaria = cuentaBancaria;
     }
-
 
 }

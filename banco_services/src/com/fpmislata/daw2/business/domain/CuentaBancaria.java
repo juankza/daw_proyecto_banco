@@ -1,47 +1,59 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.fpmislata.daw2.business.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.NotBlank;
 
-/**
- *
- * @author Reim0n
- */
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class CuentaBancaria implements Serializable {
 
     private int idCuentaBancaria;
+    
     @NotNull
     private BigDecimal saldo;
+    
     @NotNull
     @Past
     private Date fechaCreacion;
+    
     @NotBlank
-    @Size(min = 4, max = 4)
+    @Size(min = 4, max = 4, message = "Tiene que contener obligatoriamente {max} carácteres")
     private String pin;
+    
     @NotBlank
-    @Size(min = 2, max = 2)
+    @Size(min = 2, max = 2, message = "Tiene que contener obligatoriamente {max} carácteres")
     private String digitoControl;
+    
     @NotBlank
-    @Size(min = 10, max = 10)
+    @Size(min = 10, max = 10, message = "Tiene que contener obligatoriamente {max} carácteres")
     private String numeroCuenta;
+    
     @NotNull
     private SucursalBancaria sucursalBancaria;
+    
     @NotNull
     private Usuario usuario;
 
-    public CuentaBancaria() {
+    public CuentaBancaria() { }
+
+    public CuentaBancaria(int idCuentaBancaria, BigDecimal saldo, Date fechaCreacion, String pin, String digitoControl, String numeroCuenta, SucursalBancaria sucursalBancaria, Usuario usuario) {
+        this.idCuentaBancaria = idCuentaBancaria;
+        this.saldo = saldo;
+        this.fechaCreacion = fechaCreacion;
+        this.pin = pin;
+        this.digitoControl = digitoControl;
+        this.numeroCuenta = numeroCuenta;
+        this.sucursalBancaria = sucursalBancaria;
+        this.usuario = usuario;
     }
 
     public int getIdCuentaBancaria() {
