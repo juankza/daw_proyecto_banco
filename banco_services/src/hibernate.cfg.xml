@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
+    <session-factory>
       
-    <property name="hibernate.connection.datasource">java:comp/env/jdbc/MySQLDS</property>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.connection.datasource">java:comp/env/jdbc/MySQLDS</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.show_sql">false</property>
     
-    <mapping resource="com/fpmislata/daw2/persistence/dao/impl/hibernate/hbm/EntidadBancaria.hbm.xml"/>
-        <mapping class="com.fpmislata.daw2.business.domain.EntidadBancaria"/>
-    <mapping resource="com/fpmislata/daw2/persistence/dao/impl/hibernate/hbm/Usuario.hbm.xml"/>
-        <mapping class="com.fpmislata.daw2.business.domain.Usuario"/>
+        <mapping resource="com/fpmislata/daw2/persistence/dao/impl/hibernate/hbm/EntidadBancaria.hbm.xml"/>
+        <mapping resource="com/fpmislata/daw2/persistence/dao/impl/hibernate/hbm/Usuario.hbm.xml"/>
+        <mapping resource="com/fpmislata/daw2/persistence/dao/impl/hibernate/hbm/CuentaBancaria.hbm.xml"/>
+        <mapping resource="com/fpmislata/daw2/persistence/dao/impl/hibernate/hbm/SucursalBancaria.hbm.xml"/>
         
-  </session-factory>
+        
+    </session-factory>
 </hibernate-configuration>

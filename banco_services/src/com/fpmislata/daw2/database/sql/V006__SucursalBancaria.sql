@@ -11,3 +11,4 @@ CREATE TABLE IF NOT EXISTS `sucursalbancaria` (
   INDEX `fk_entidadBancaria` (`idEntidadBancaria`),
   CONSTRAINT `fk_entidadBancaria` FOREIGN KEY (`idEntidadBancaria`) REFERENCES `entidadbancaria` (`idEntidadBancaria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+insert into sucursalbancaria values(null,"5968",curdate(),"Calle lol","+34625275130",4);

@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-
 <hibernate-mapping>
     <class name="com.fpmislata.daw2.business.domain.CuentaBancaria" table="cuentabancaria">
-        <id column="idCuentaBancaria" name="idCuentaBancaria" />
-        <property column="saldo" name="saldo" />
-        <property column="fechaCreacion" name="fechaCreacion" />
-        <property column="pin" name="pin" />
-        <property column="digitoControl" name="digitoControl" />
-        <property column="numeroCuenta" name="numeroCuenta" />
-        <many-to-one name="idSucursalBancaria">
-            <column name="idSucursalBancaria"  />
+        <id column="idCuentaBancaria" name="idCuentaBancaria">
+             <generator class="identity" />
+        </id>
+        <property column="saldo" name="saldo"/>
+        <property column="fechaCreacion" name="fechaCreacion"/>
+        <property column="pin" name="pin"/>
+        <property column="digitoControl" name="digitoControl"/>
+        <property column="numeroCuenta" name="numeroCuenta"/>
+        <many-to-one name="sucursalBancaria"  >
+            <column name="idSucursalBancaria"/>
         </many-to-one>
-        <many-to-one name="idUsuario">
-            <column name="idUsuario"  />
+        <many-to-one name="usuario">
+            <column name="idUsuario"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

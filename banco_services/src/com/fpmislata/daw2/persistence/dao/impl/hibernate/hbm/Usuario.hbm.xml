@@ -3,7 +3,9 @@
 
 <hibernate-mapping>
     <class name="com.fpmislata.daw2.business.domain.Usuario" table="usuario">
-        <id column="idUsuario" name="idUsuario" />
+        <id column="idUsuario" name="idUsuario" >
+             <generator class="identity" />
+        </id>
         <property column="nombre" name="nombre" type="string" length="255" not-null="false" unique="false" />
         <property column="apellidos" name="apellidos" type="string" length="255" not-null="false" unique="false" />
         <property column="dni" name="dni" />

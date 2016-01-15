@@ -5,6 +5,7 @@
  */
 package com.fpmislata.daw2.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -17,6 +18,7 @@ import org.hibernate.validator.constraints.NotBlank;
  *
  * @author Lliurex
  */
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class MovimientoBancario implements Serializable {
 
     private int idMovimientoBancario;
@@ -31,26 +33,9 @@ public class MovimientoBancario implements Serializable {
     @Past
     private Date fecha;
     @NotNull
-    private int idCuentaBancaria;
-
-    public MovimientoBancario(TipoMovimientoBancario tipoMovimientoBancario, String concepto, BigDecimal cantidad, Date fecha, int idCuentaBancaria) {
-        this.tipoMovimientoBancario = tipoMovimientoBancario;
-        this.concepto = concepto;
-        this.cantidad = cantidad;
-        this.fecha = fecha;
-        this.idCuentaBancaria = idCuentaBancaria;
-    }
+    private CuentaBancaria cuentaBancaria;
 
     public MovimientoBancario() {
-    }
-
-    public MovimientoBancario(int idMovimientoBancario, TipoMovimientoBancario tipoMovimientoBancario, String concepto, BigDecimal cantidad, Date fecha, int idCuentaBancaria) {
-        this.idMovimientoBancario = idMovimientoBancario;
-        this.tipoMovimientoBancario = tipoMovimientoBancario;
-        this.concepto = concepto;
-        this.cantidad = cantidad;
-        this.fecha = fecha;
-        this.idCuentaBancaria = idCuentaBancaria;
     }
 
     public int getIdMovimientoBancario() {
@@ -93,12 +78,13 @@ public class MovimientoBancario implements Serializable {
         this.fecha = fecha;
     }
 
-    public int getIdCuentaBancaria() {
-        return idCuentaBancaria;
+    public CuentaBancaria getCuentaBancaria() {
+        return cuentaBancaria;
     }
 
-    public void setIdCuentaBancaria(int idCuentaBancaria) {
-        this.idCuentaBancaria = idCuentaBancaria;
+    public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
+        this.cuentaBancaria = cuentaBancaria;
     }
+
 
 }

@@ -5,6 +5,7 @@
  */
 package com.fpmislata.daw2.business.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,7 @@ import org.hibernate.validator.constraints.NotBlank;
  *
  * @author Lliurex
  */
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class SucursalBancaria implements Serializable {
 
     private int idSucursalBancaria;
@@ -31,24 +33,9 @@ public class SucursalBancaria implements Serializable {
     @Size(min = 3, max = 30)
     private String telefono;
     @NotNull
-    private int idEntidadBancaria;
+    private EntidadBancaria entidadBancaria;
 
     public SucursalBancaria() {
-    }
-
-    public SucursalBancaria(int idSucursalBancaria, String codigoSucursalBancaria, Date fechaCreacion, String direccion, String telefono) {
-        this.idSucursalBancaria = idSucursalBancaria;
-        this.codigoSucursalBancaria = codigoSucursalBancaria;
-        this.fechaCreacion = fechaCreacion;
-        this.direccion = direccion;
-        this.telefono = telefono;
-    }
-
-    public SucursalBancaria(String codigoSucursalBancaria, Date fechaCreacion, String direccion, String telefono) {
-        this.codigoSucursalBancaria = codigoSucursalBancaria;
-        this.fechaCreacion = fechaCreacion;
-        this.direccion = direccion;
-        this.telefono = telefono;
     }
 
     public int getIdSucursalBancaria() {
@@ -65,14 +52,6 @@ public class SucursalBancaria implements Serializable {
 
     public void setCodigoSucursalBancaria(String codigoSucursalBancaria) {
         this.codigoSucursalBancaria = codigoSucursalBancaria;
-    }
-
-    public int getIdEntidadBancaria() {
-        return idEntidadBancaria;
-    }
-
-    public void setIdEntidadBancaria(int idEntidadBancaria) {
-        this.idEntidadBancaria = idEntidadBancaria;
     }
 
     public Date getFechaCreacion() {
@@ -98,5 +77,15 @@ public class SucursalBancaria implements Serializable {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public EntidadBancaria getEntidadBancaria() {
+        return entidadBancaria;
+    }
+
+    public void setEntidadBancaria(EntidadBancaria entidadBancaria) {
+        this.entidadBancaria = entidadBancaria;
+    }
+
+  
 
 }
