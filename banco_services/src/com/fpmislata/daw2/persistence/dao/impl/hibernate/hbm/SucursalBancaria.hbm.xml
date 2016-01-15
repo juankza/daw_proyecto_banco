@@ -2,16 +2,25 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
+    
     <class name="com.fpmislata.daw2.business.domain.SucursalBancaria" table="sucursalbancaria">
-        <id column="idSucursalBancaria" name="idSucursalBancaria" >
+        
+        <id column="idSucursalBancaria" name="idSucursalBancaria">
              <generator class="identity" />
         </id>
+        
         <property column="codigoSucursalBancaria" name="codigoSucursalBancaria" />
+        
         <property column="fechaCreacion" name="fechaCreacion" />
+        
         <property column="direccion" name="direccion" />
+        
         <property column="telefono" name="telefono" />
+        
         <many-to-one name="entidadBancaria">
-            <column name="idEntidadBancaria"  />
+            <column name="idEntidadBancaria" />
         </many-to-one>
+        
     </class>
+    
 </hibernate-mapping>
