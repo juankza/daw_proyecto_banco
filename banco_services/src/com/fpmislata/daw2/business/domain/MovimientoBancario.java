@@ -29,6 +29,9 @@ public class MovimientoBancario implements Serializable {
     private BigDecimal cantidad;
     
     @NotNull
+    private BigDecimal saldo;
+    
+    @NotNull
     @Past
     private Date fecha;
     
@@ -37,11 +40,12 @@ public class MovimientoBancario implements Serializable {
 
     public MovimientoBancario() { }
 
-    public MovimientoBancario(int idMovimientoBancario, TipoMovimientoBancario tipoMovimientoBancario, String concepto, BigDecimal cantidad, Date fecha, CuentaBancaria cuentaBancaria) {
+    public MovimientoBancario(int idMovimientoBancario, TipoMovimientoBancario tipoMovimientoBancario, String concepto, BigDecimal cantidad, BigDecimal saldo, Date fecha, CuentaBancaria cuentaBancaria) {
         this.idMovimientoBancario = idMovimientoBancario;
         this.tipoMovimientoBancario = tipoMovimientoBancario;
         this.concepto = concepto;
         this.cantidad = cantidad;
+        this.saldo = saldo;
         this.fecha = fecha;
         this.cuentaBancaria = cuentaBancaria;
     }
@@ -78,6 +82,14 @@ public class MovimientoBancario implements Serializable {
         this.cantidad = cantidad;
     }
 
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
+    }
+    
     public Date getFecha() {
         return fecha;
     }
