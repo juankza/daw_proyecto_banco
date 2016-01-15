@@ -1,0 +1,26 @@
+<div ng-controller="CuentaBancariaDetailController">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td><strong>ID cuenta</strong></td>
+                    <td><strong>Saldo</strong></td>
+                    <td><strong>CCC</strong></td>
+                    <td><strong>Sucursal Bancaria</strong></td>
+                    <td><strong>Usuario</strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{cuentaBancaria.idCuentaBancaria}}</td>
+                    <td>{{cuentaBancaria.saldo}}</td>
+                    <td>{{cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidadBancaria}} {{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}} {{cuentaBancaria.digitoControl}} {{cuentaBancaria.numeroCuenta}}</td>
+                    <td>{{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}}</td>
+                    <td>{{cuentaBancaria.usuario.nombre}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div><!-- Tabla -->
+
+
+</div>
