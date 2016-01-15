@@ -22,4 +22,5 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
         cuentaBancaria.setDigitoControl(digitoControl);
         return this.genericDAO.insert(cuentaBancaria);
     }
+
 }
