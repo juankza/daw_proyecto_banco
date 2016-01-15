@@ -38,8 +38,10 @@ public class MovimientoBancarioServiceImpl extends GenericServiceImpl<Movimiento
         
         
         cuentaBancaria.setSaldo(saldoPosterior);
+        
         movimientoBancario.setSaldo(saldoPosterior);
         cuentaBancariaDAO.update(cuentaBancaria);
+        movimientoBancario.setCuentaBancaria(cuentaBancaria);
         return this.genericDAO.insert(movimientoBancario);
     }
 }
