@@ -11,6 +11,7 @@
         <mapping resource="com/fpmislata/daw2/persistence/dao/impl/hibernate/hbm/Usuario.hbm.xml"/>
         <mapping resource="com/fpmislata/daw2/persistence/dao/impl/hibernate/hbm/CuentaBancaria.hbm.xml"/>
         <mapping resource="com/fpmislata/daw2/persistence/dao/impl/hibernate/hbm/SucursalBancaria.hbm.xml"/>
+        <mapping resource="com/fpmislata/daw2/persistence/dao/impl/hibernate/hbm/MovimientoBancario.hbm.xml" />
         
         
     </session-factory>

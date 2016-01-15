@@ -5,6 +5,7 @@
  */
 package com.fpmislata.daw2.business.service.impl;
 
+import com.fpmislata.daw2.business.domain.CuentaBancaria;
 import com.fpmislata.daw2.business.domain.MovimientoBancario;
 import com.fpmislata.daw2.business.domain.TipoMovimientoBancario;
 import com.fpmislata.daw2.business.service.MovimientoBancarioService;
@@ -26,15 +27,19 @@ public class MovimientoBancarioServiceImpl extends GenericServiceImpl<Movimiento
     @Override
     public MovimientoBancario insert(MovimientoBancario movimientoBancario) throws BusinessException{
         BigDecimal saldoPosterior;
+        CuentaBancaria cuentaBancaria = cuentaBancariaDAO.get(movimientoBancario.getCuentaBancaria().getIdCuentaBancaria());
         if (movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.INGRESO) {
-            saldoPosterior = movimientoBancario.getCuentaBancaria().getSaldo().add(movimientoBancario.getCantidad());
+            saldoPosterior = cuentaBancaria.getSaldo().add(movimientoBancario.getCantidad());
         }else if(movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.DEDUCCION){
-            saldoPosterior = movimientoBancario.getCuentaBancaria().getSaldo().subtract(movimientoBancario.getCantidad());
+            saldoPosterior = cuentaBancaria.getSaldo().subtract(movimientoBancario.getCantidad());
         }else{
             throw new BusinessException(new BusinessMessage("Tipo Movimiento","El tipo de movimiento es inválido"));
         }
         
         
+        cuentaBancaria.setSaldo(saldoPosterior);
+        movimientoBancario.setSaldo(saldoPosterior);
+        cuentaBancariaDAO.update(cuentaBancaria);
         return this.genericDAO.insert(movimientoBancario);
     }
 }

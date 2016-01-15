@@ -9,7 +9,7 @@
              <generator class="identity" />
         </id>
         
-        <property column="tipo" name="tipo">
+        <property column="tipo" name="tipoMovimientoBancario">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">com.fpmislata.daw2.business.domain.TipoMovimientoBancario</param>
                 <param name="type">12</param>
@@ -19,6 +19,8 @@
         <property column="concepto" name="concepto" />
         
         <property column="cantidad" name="cantidad" />
+        
+        <property column="saldo" name="saldo" />
         
         <property column="fecha" name="fecha" />
         
