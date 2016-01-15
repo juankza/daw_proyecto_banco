@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `movimientobancario` (
   `tipo` varchar(9) DEFAULT NULL,
   `concepto` varchar(255) DEFAULT NULL,
   `cantidad` decimal(10,2) DEFAULT NULL,
+  `saldo` decimal(10,2) DEFAULT NULL,
   `fecha` datetime DEFAULT NULL,
   `idCuentaBancaria` int(11) NOT NULL,
   PRIMARY KEY (`idMovimientoBancario`),

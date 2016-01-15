@@ -15,7 +15,7 @@ import com.fpmislata.daw2.core.util.ControlDigitGenerator;
  * @author Lliurex
  */
 public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria, Integer> implements CuentaBancariaService{
-    
+   
     @Override
     public CuentaBancaria insert(CuentaBancaria cuentaBancaria) throws BusinessException{
         String digitoControl = ControlDigitGenerator.generateControlDigit(cuentaBancaria.getSucursalBancaria().getEntidadBancaria().getCodigoEntidadBancaria(), cuentaBancaria.getSucursalBancaria().getCodigoSucursalBancaria(), cuentaBancaria.getNumeroCuenta());
