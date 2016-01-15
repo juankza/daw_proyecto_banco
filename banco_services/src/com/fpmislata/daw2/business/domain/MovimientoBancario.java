@@ -18,7 +18,7 @@ import org.hibernate.validator.constraints.NotBlank;
  *
  * @author Lliurex
  */
-@JsonIgnoreProperties({"cuentaBancaria"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class MovimientoBancario implements Serializable {
 
     private int idMovimientoBancario;
