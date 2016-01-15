@@ -26,8 +26,9 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
    EntidadBancariaDAO entidadBancariaDAO;
     @Override
     public CuentaBancaria insert(CuentaBancaria cuentaBancaria) throws BusinessException{
-        SucursalBancaria sucursalBancaria = sucursalBancariaDAO.get(cuentaBancaria.getSucursalBancaria().getIdSucursalBancaria());
+        SucursalBancaria sucursalBancaria = sucursalBancariaDAO.get(cuentaBancaria.getSucursalBancaria().getIdSucursalBancaria()); 
         EntidadBancaria entidadBancaria = entidadBancariaDAO.get(cuentaBancaria.getSucursalBancaria().getEntidadBancaria().getIdEntidadBancaria());
+        
         String digitoControl = ControlDigitGenerator.generateControlDigit(entidadBancaria.getCodigoEntidadBancaria(), sucursalBancaria.getCodigoSucursalBancaria(), cuentaBancaria.getNumeroCuenta());
         cuentaBancaria.setDigitoControl(digitoControl);
         return this.genericDAO.insert(cuentaBancaria);
