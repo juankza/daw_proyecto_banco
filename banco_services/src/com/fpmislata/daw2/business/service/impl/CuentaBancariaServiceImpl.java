@@ -10,6 +10,7 @@ import com.fpmislata.daw2.business.domain.EntidadBancaria;
 import com.fpmislata.daw2.business.domain.SucursalBancaria;
 import com.fpmislata.daw2.business.service.CuentaBancariaService;
 import com.fpmislata.daw2.core.exception.BusinessException;
+import com.fpmislata.daw2.core.exception.BusinessMessage;
 import com.fpmislata.daw2.core.util.ControlDigitGenerator;
 import com.fpmislata.daw2.persistence.dao.EntidadBancariaDAO;
 import com.fpmislata.daw2.persistence.dao.SucursalBancariaDAO;
@@ -26,6 +27,12 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
    EntidadBancariaDAO entidadBancariaDAO;
     @Override
     public CuentaBancaria insert(CuentaBancaria cuentaBancaria) throws BusinessException{
+        if (cuentaBancaria.getSucursalBancaria() == null) {
+            throw new BusinessException(new BusinessMessage("Sucursal Bancaria","No puede ser null"));
+        }
+        if (cuentaBancaria.getSucursalBancaria().getEntidadBancaria() == null) {
+            throw new BusinessException(new BusinessMessage("Entidad Bancaria","No puede ser null"));
+        }
         SucursalBancaria sucursalBancaria = sucursalBancariaDAO.get(cuentaBancaria.getSucursalBancaria().getIdSucursalBancaria()); 
         EntidadBancaria entidadBancaria = entidadBancariaDAO.get(cuentaBancaria.getSucursalBancaria().getEntidadBancaria().getIdEntidadBancaria());
         
@@ -33,5 +40,6 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
         cuentaBancaria.setDigitoControl(digitoControl);
         return this.genericDAO.insert(cuentaBancaria);
     }
+    
 
 }

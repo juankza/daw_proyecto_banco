@@ -13,6 +13,7 @@ import com.fpmislata.daw2.core.exception.BusinessException;
 import com.fpmislata.daw2.core.exception.BusinessMessage;
 import com.fpmislata.daw2.persistence.dao.CuentaBancariaDAO;
 import java.math.BigDecimal;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -43,5 +44,21 @@ public class MovimientoBancarioServiceImpl extends GenericServiceImpl<Movimiento
         cuentaBancariaDAO.update(cuentaBancaria);
         movimientoBancario.setCuentaBancaria(cuentaBancaria);
         return this.genericDAO.insert(movimientoBancario);
+    }
+
+    @Override
+    public List<MovimientoBancario> getMovimientosByCuenta(int idCuentaBancaria) throws BusinessException {
+        List<MovimientoBancario> movimientos;
+        try {
+            movimientos = this.findAll();
+            for (int i = 0; i < movimientos.size(); i++) {
+                if (movimientos.get(i).getCuentaBancaria().getIdCuentaBancaria() != idCuentaBancaria) {
+                    movimientos.remove(i);
+                }
+            }
+        } catch (BusinessException bex) {
+            throw new BusinessException(bex);
+        }
+        return movimientos;
     }
 }

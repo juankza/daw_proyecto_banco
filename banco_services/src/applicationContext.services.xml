@@ -13,6 +13,7 @@
     <bean class="com.fpmislata.daw2.persistence.dao.impl.hibernate.EntidadBancariaDAOImplHibernate" />
     <bean class="com.fpmislata.daw2.business.service.impl.EntidadBancariaServiceImpl" />
     
+    
     <bean class="com.fpmislata.daw2.persistence.dao.impl.hibernate.UsuarioDAOImplHibernate" />
     <bean class="com.fpmislata.daw2.persistence.dao.impl.hibernate.CuentaBancariaDAOImplHibernate"/>
     <bean class="com.fpmislata.daw2.persistence.dao.impl.hibernate.SucursalBancariaDAOImplHibernate" />
