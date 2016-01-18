@@ -8,6 +8,7 @@
                     <td><strong>CCC</strong></td>
                     <td><strong>Sucursal Bancaria</strong></td>
                     <td><strong>Usuario</strong></td>
+
                 </tr>
             </thead>
             <tbody>
@@ -16,11 +17,13 @@
                     <td>{{cuentaBancaria.saldo}}</td>
                     <td>{{cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidadBancaria}} {{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}} {{cuentaBancaria.digitoControl}} {{cuentaBancaria.numeroCuenta}}</td>
                     <td>{{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}}</td>
-                    <td>{{cuentaBancaria.usuario.nombre}}</td>
+                    <td>{{cuentaBancaria.usuario.nombre}} {{cuentaBancaria.usuario.apellidos}}</td>
+
                 </tr>
             </tbody>
         </table>
-    </div><!-- Tabla -->
 
+    </div><!-- Tabla -->
+<a class="btn btn-danger" href="#/cuentabancaria/delete/{{cuentaBancaria.idCuentaBancaria}}">BORRAR</a>
 
 </div>

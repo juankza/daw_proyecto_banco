@@ -5,6 +5,7 @@
             <thead>
                 <tr>
                     <td><strong>ID cuenta</strong></td>
+                    <td><strong>Cliente</strong></td>
                     <td><strong>CCC</strong></td>
                     <td><strong>Acciones</strong></td>
 
@@ -13,13 +14,15 @@
             <tbody>
                 <tr ng-repeat="cuentaBancaria in cuentasBancarias">
                     <td>{{cuentaBancaria.idCuentaBancaria}}</td>
+                    <td>{{cuentaBancaria.usuario.nombre}} {{cuentaBancaria.usuario.apellidos}}</td>
                     <td>{{cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidadBancaria}} {{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}} {{cuentaBancaria.digitoControl}} {{cuentaBancaria.numeroCuenta}}</td>
+
                     <td><a class="btn btn-info" href="#/cuentabancaria/detail/{{cuentaBancaria.idCuentaBancaria}}">Detalles</a></td>
-                    
+
                 </tr>
             </tbody>
         </table>
     </div><!-- Tabla -->
-    <a class="btn btn-info" href="#/entidadbancaria/insert">INSERTAR</a>
+    <a class="btn btn-info" href="#/cuentabancaria/insert">INSERTAR</a>
 
 </div>

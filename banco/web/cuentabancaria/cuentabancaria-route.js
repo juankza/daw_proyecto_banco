@@ -7,4 +7,13 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: "./cuentabancaria/cuentabancaria-detail.html",
             controller: "CuentaBancariaDetailController"
         });
+        $routeProvider.when('/cuentabancaria/insert', {
+            templateUrl: "./cuentabancaria/cuentabancaria-insert.html",
+            controller: "CuentaBancariaInsertController"
+        });
+        $routeProvider.when('/cuentabancaria/delete/:idCuentaBancaria', {
+            templateUrl: "./cuentabancaria/cuentabancaria-delete.html",
+            controller: "CuentaBancariaDeleteController"
+        });
+        
     }]);

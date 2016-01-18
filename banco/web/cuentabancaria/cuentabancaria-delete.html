@@ -1,16 +1,30 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<div ng-controller="CuentaBancariaDeleteController">
+        <h1>Cuenta Bancaria</h1>
+        <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td><strong>ID cuenta</strong></td>
+                    <td><strong>Saldo</strong></td>
+                    <td><strong>CCC</strong></td>
+                    <td><strong>Sucursal Bancaria</strong></td>
+                    <td><strong>Usuario</strong></td>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{cuentaBancaria.idCuentaBancaria}}</td>
+                    <td>{{cuentaBancaria.saldo}}</td>
+                    <td>{{cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidadBancaria}} {{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}} {{cuentaBancaria.digitoControl}} {{cuentaBancaria.numeroCuenta}}</td>
+                    <td>{{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}}</td>
+                    <td>{{cuentaBancaria.usuario.nombre}} {{cuentaBancaria.usuario.apellidos}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+        <p> ¿Estás seguro que quieres borrar la cuenta: {{cuentaBancaria.numeroCuenta}}? </p>
+        <a class="btn btn-danger" href="" ng-click="delete()">Sí</a>
+        <a class="btn btn-info" href="#/cuentabancaria/detail/{{cuentaBancaria.idCuentaBancaria}}">No</a>
+    {{message}}
+</div>
