@@ -13,7 +13,7 @@ public class AuthorizationImplDummy implements Authorization {
     
     @Override
     public boolean isAuthorizedURL(Usuario usuario, String url, HTTPMethod httpmethod) {
-        if(url.equalsIgnoreCase(URL_API) || url.equalsIgnoreCase(URL_SESSION)) {
+        if(url.equals(URL_API) || url.equals(URL_API + "/") || url.equals(URL_SESSION) || url.equals(URL_SESSION + "/")) {
             return true;
         } else {
             if(usuario != null) {
