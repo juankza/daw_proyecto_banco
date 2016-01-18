@@ -14,10 +14,10 @@
             <tbody>
                 <tr>
                     <td>{{cuentaBancaria.idCuentaBancaria}}</td>
-                    <td>{{cuentaBancaria.saldo}}</td>
+                    <td>{{cuentaBancaria.saldo}} EUR</td>
                     <td>{{cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidadBancaria}} {{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}} {{cuentaBancaria.digitoControl}} {{cuentaBancaria.numeroCuenta}}</td>
-                    <td>{{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}}</td>
-                    <td>{{cuentaBancaria.usuario.nombre}} {{cuentaBancaria.usuario.apellidos}}</td>
+                    <td>Sucursal nº: <strong>{{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}}</strong> <br> {{cuentaBancaria.sucursalBancaria.direccion}}</td>
+                    <td><a href="#/usuario/detail/{{cuentaBancaria.usuario.idUsuario}}">{{cuentaBancaria.usuario.nombre}} {{cuentaBancaria.usuario.apellidos}}</a></td>
 
                 </tr>
             </tbody>

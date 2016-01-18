@@ -5,7 +5,7 @@ function MainController($scope, sessionService) {
         response.success(function (data, status, headers, config) {
             location.href = "/banco";
         }).error(function (data, status, headers, config) {
-            alert("Ha fallado la petición HTTP. Estado: " + status);
+            console.log("[+] LoginService: "+"Ha fallado la petición HTTP. Estado: " + status);
         });
     };
 
