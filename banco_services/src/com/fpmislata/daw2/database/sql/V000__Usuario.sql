@@ -15,6 +15,6 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT IGNORE INTO `usuario` (`idUsuario`, `nombre`, `apellidos`, `dni`, `email`, `nickname`, `contrasena`, `rol`) VALUES
-        (3, 'admin', 'admin', '23824980Q', 'admin@domain.com', 'admin', 'p8GAoFkhecQKX8c2YhysR+zInVWkkOZN', 'ADMIN'),
-        (4, 'empleado', 'empleado', '73557374Q', 'empleado@domain.com', 'empleado', 'gTs5Pef8K6jEcDQeGEm7oFdJjbw9LZhc', 'EMPLEADO'),
-        (5, 'cliente', 'cliente', '48689633J', 'cliente@domain.com', 'cliente', '4T5qxwjLwQcN2cVeDoMeK35r6XwEhjjL', 'CLIENTE');
+    (3, 'admin', 'admin', '23824980Q', 'admin@domain.com', 'admin', 'p8GAoFkhecQKX8c2YhysR+zInVWkkOZN', 'ADMIN'),
+    (4, 'empleado', 'empleado', '73557374Q', 'empleado@domain.com', 'empleado', 'gTs5Pef8K6jEcDQeGEm7oFdJjbw9LZhc', 'EMPLEADO'),
+    (5, 'cliente', 'cliente', '48689633J', 'cliente@domain.com', 'cliente', '4T5qxwjLwQcN2cVeDoMeK35r6XwEhjjL', 'CLIENTE');
