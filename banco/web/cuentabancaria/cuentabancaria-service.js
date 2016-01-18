@@ -31,5 +31,12 @@ function CuentaBancariaService($http) {
         });
         return response;
     };
+    this.getMovimientosByCuenta = function(idCuentaBancaria){
+        var response = $http({
+            method: 'GET',
+            url: '/api/cuentabancaria/' + idCuentaBancaria + "/movimientobancario"
+        });
+        return response;
+    }
 }
 app.service("cuentaBancariaService", CuentaBancariaService);
