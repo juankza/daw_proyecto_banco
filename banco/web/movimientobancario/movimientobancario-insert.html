@@ -1,0 +1,41 @@
+<form ng-controller="MovimientoBancarioInsertController">
+
+    <div class="row">
+        <div class="col-md-3"><strong>Tipo movimiento: </strong></div>
+        <div class="col-md-5">
+        <select ng-model="tipoMovimientoBancario" class="form-control">
+                <option selected value="INGRESO">Haber</option>
+                <option value="DEDUCCION">Debe</option>
+            
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"><strong>Concepto: </strong></div>
+        <div class="col-md-5"><input type="text" name="concepto" ng-model="movimientoBancario.concepto" class="form-control"/></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"><strong>Cantidad: </strong></div>
+        <div class="col-md-5"><input  type="text" name="cantidad" ng-model="movimientoBancario.cantidad" class="form-control" /></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"><strong>Fecha: </strong></div>
+        <div class="col-md-5"><input type="text" id="datepicker" name="fecha" ng-model="movimientoBancario.fecha" class="form-control" ng-readonly="true"/></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"><strong>Cuenta Bancaria: </strong></div>
+        <div class="col-md-5"><a href="#/cuentabancaria/detail/{{movimientoBancario.cuentaBancaria.idCuentaBancaria}}">{{ccc}}</a></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <input  ng-click="insert()" type="submit" value="Insertar" class="btn btn-info"/><br>
+        </div>
+    </div>
+    <div>
+        <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
+    </div>
+
+</form>

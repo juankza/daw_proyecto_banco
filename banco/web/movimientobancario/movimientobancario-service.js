@@ -7,5 +7,13 @@ function MovimientoBancarioService($http){
         });
         return response;  
     };
+    this.insert = function(movimientoBancario){
+        var response = $http({
+           method: 'POST',
+           url: '/api/movimientobancario',
+           data: movimientoBancario
+        });
+        return response;
+    };
 }
 app.service("movimientoBancarioService",MovimientoBancarioService);

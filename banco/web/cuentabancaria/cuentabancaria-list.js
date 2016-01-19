@@ -8,7 +8,7 @@ function CuentaBancariaListController(cuentaBancariaService, $scope, $location) 
         alert("Ha fallado la petición HTTP. Estado: " + status);
     });
     $scope.findByDni = function () {
-        if ($scope.dni === undefined) {
+        if ($scope.dni === undefined || $scope.dni === "") {
             alert("DNI no puede estar vacío.");
         } else {
             var response = cuentaBancariaService.findByDni($scope.dni);
@@ -29,6 +29,15 @@ function CuentaBancariaListController(cuentaBancariaService, $scope, $location) 
                 alert("Ha fallado la petición HTTP. Estado: " + status);
             });
         }
+    };
+    $scope.refresh = function () {
+        var response = cuentaBancariaService.list();
+
+        response.success(function (data, status, headers, config) {
+            $scope.cuentasBancarias = data;
+        }).error(function (data, status, headers, config) {
+            alert("Ha fallado la petición HTTP. Estado: " + status);
+        });
     };
 }
 app.controller("CuentaBancariaListController", CuentaBancariaListController);
