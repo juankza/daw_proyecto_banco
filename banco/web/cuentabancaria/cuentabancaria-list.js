@@ -1,12 +1,19 @@
-CuentaBancariaListController.$inject = ['cuentaBancariaService','$scope'];
-function CuentaBancariaListController(cuentaBancariaService,$scope){
-    var response = cuentaBancariaService.list(); 
-    
+CuentaBancariaListController.$inject = ['cuentaBancariaService', '$scope'];
+function CuentaBancariaListController(cuentaBancariaService, $scope) {
+    var response = cuentaBancariaService.list();
+
     response.success(function (data, status, headers, config) {
         $scope.cuentasBancarias = data;
     }).error(function (data, status, headers, config) {
-        alert("Ha fallado la petición HTTP. Estado: " + status);    
+        alert("Ha fallado la petición HTTP. Estado: " + status);
     });
-    
+    $scope.findByDni = function () {
+        var response = cuentaBancariaService.findByDni($scope.dni);
+        response.success(function (data, status, headers, config) {
+            $scope.cuentasBancarias = data;
+        }).error(function (data, status, headers, config) {
+            alert("Ha fallado la petición HTTP. Estado: " + status);
+        });
+    };
 }
-app.controller("CuentaBancariaListController",CuentaBancariaListController);
+app.controller("CuentaBancariaListController", CuentaBancariaListController);

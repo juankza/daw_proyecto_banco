@@ -34,7 +34,7 @@ public class Usuario implements Serializable{
     
     @NotBlank
     @Size(min = 3, max = 255)
-    private String nickname;
+    private String apodo;
     
     @Size(min = 5, max = 255)
     private String contrasena;
@@ -44,13 +44,13 @@ public class Usuario implements Serializable{
 
     public Usuario() { }
 
-    public Usuario(int idUsuario, String nombre, String apellidos, String dni, String email, String nickname, String contrasena, Rol rol) {
+    public Usuario(int idUsuario, String nombre, String apellidos, String dni, String email, String apodo, String contrasena, Rol rol) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.dni = dni;
         this.email = email;
-        this.nickname = nickname;
+        this.apodo = apodo;
         this.contrasena = contrasena;
         this.rol = rol;
     }
@@ -95,12 +95,12 @@ public class Usuario implements Serializable{
         this.email = email;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getApodo() {
+        return apodo;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setApodo(String apodo) {
+        this.apodo = apodo;
     }
 
     public String getContrasena() {
@@ -118,7 +118,5 @@ public class Usuario implements Serializable{
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-
-   
     
 }

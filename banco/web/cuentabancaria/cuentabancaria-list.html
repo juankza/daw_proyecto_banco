@@ -1,5 +1,5 @@
 <div ng-controller="CuentaBancariaListController">
-    <h1>Cuenta Bancaria</h1>
+    <h1>Cuentas Bancarias</h1>
     <div class="table-responsive">
         <table class="table">
             <thead>
@@ -23,6 +23,7 @@
             </tbody>
         </table>
     </div><!-- Tabla -->
+    <p>Buscar por DNI: <input type="text" ng-model="dni">    <button class="btn btn-info" ng-click="findByDni()"> Buscar </button></p>
     <a class="btn btn-info" href="#/cuentabancaria/insert">INSERTAR</a>
 
 </div>

@@ -1,5 +1,5 @@
 <div ng-controller="CuentaBancariaGetMovimientosByCuentaController">
-    <h1>Movimiento Bancario</h1>
+    <h2>Movimientos de la cuenta: {{cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidadBancaria}} {{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}} {{cuentaBancaria.digitoControl}} {{cuentaBancaria.numeroCuenta}}</h2>
     <div class="table-responsive">
         <table class="table">
             <thead>
@@ -23,6 +23,7 @@
                 </tr>
             </tbody>
         </table>
+        <a class="btn btn-info" href="#/cuentabancaria/list">Volver</a>
     </div><!-- Tabla -->
 
 

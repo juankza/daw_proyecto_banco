@@ -1,5 +1,5 @@
-<div>
-    <form ng-controller="UsuarioUpdateController" ng-init="isDisabled = true">
+<div ng-controller="UsuarioUpdateController" ng-init="isDisabled = true">
+    <form>
         <div class="row">
             <div class="col-md-3"><strong>ID: </strong></div>
             <div class="col-md-5"><input type="text" name="idUsuario" ng-model="usuario.idUsuario" ng-disabled="{{isDisabled}}" class="form-control"/></div>
@@ -22,7 +22,7 @@
 
         <div class="row">
             <div class="col-md-3"><strong>Apodo: </strong></div>
-            <div class="col-md-5"><input type="text" name="password" ng-model="usuario.nickname" class="form-control"/></div>
+            <div class="col-md-5"><input type="text" name="text" ng-model="usuario.apodo" class="form-control"/></div>
         </div>
 
         <div class="row">
@@ -41,11 +41,15 @@
             </div>
         </div>
         <div class="row">
+            
             <div class="col-md-12"><input ng-click="update()" type="submit" value="Actualizar" class="btn btn-info"/><br></div>
+            <a class="btn btn-info" href="#/usuario/detail/{{usuario.idUsuario}}">Volver</a>
         </div>
+        
         <div>
             <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
         </div>
 
     </form>
+    
 </div>

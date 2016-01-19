@@ -37,6 +37,14 @@ function CuentaBancariaService($http) {
             url: '/api/cuentabancaria/' + idCuentaBancaria + "/movimientobancario"
         });
         return response;
-    }
+    };
+    this.findByDni = function(dni){
+        var response = $http({
+        method: 'GET',
+        url: '/api/cuentabancaria/search',
+        params: {dni: dni}
+        });
+        return response;
+    };
 }
 app.service("cuentaBancariaService", CuentaBancariaService);

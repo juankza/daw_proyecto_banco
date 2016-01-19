@@ -24,27 +24,11 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> imp
     public Usuario insert(Usuario usuario) throws BusinessException {
        List<BusinessMessage> businessMessages;
         businessMessages = new ArrayList<>();
-//        
-//        if(usuario.getNombre() == null || usuario.getNombre().trim().equals("")) {
-//            businessMessages.add(new BusinessMessage("Nombre", "No puede estar vacío"));
-//        }
-//        
-//        if(usuario.getApellidos()== null || usuario.getApellidos().trim().equals("")) {
-//            businessMessages.add(new BusinessMessage("Apellidos", "No puede estar vacío"));
-//        }
-//        
-//        if(usuario.getEmail() == null || usuario.getEmail().trim().equals("")) {
-//            businessMessages.add(new BusinessMessage("Email", "No puede estar vacío"));
-//        }
-//        
-//        if(usuario.getNickname() == null || usuario.getNickname().trim().equals("")) {
-//            businessMessages.add(new BusinessMessage("Nickname", "No puede estar vacío"));
-//        }
-//        
-       if(usuario.getContrasena() == null || usuario.getContrasena().trim().equals("")) {
+        
+        if(usuario.getContrasena() == null || usuario.getContrasena().trim().equals("")) {
             businessMessages.add(new BusinessMessage("Contraseña", "No puede estar vacío"));
-       }
-//        
+        }
+        
         validate(businessMessages);
         
         usuario.setContrasena(passwordManager.encrypt(usuario.getContrasena()));
@@ -55,30 +39,6 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> imp
 
     @Override
     public Usuario update(Usuario usuario) throws BusinessException {
-//        List<BusinessMessage> businessMessages;
-//        businessMessages = new ArrayList<>();
-//        
-//        if(usuario.getNombre() == null || usuario.getNombre().trim().equals("")) {
-//            businessMessages.add(new BusinessMessage("Nombre", "No puede estar vacío"));
-//        }
-//        
-//        if(usuario.getApellidos()== null || usuario.getApellidos().trim().equals("")) {
-//            businessMessages.add(new BusinessMessage("Apellidos", "No puede estar vacío"));
-//        }
-//        
-//        if(usuario.getEmail() == null || usuario.getEmail().trim().equals("")) {
-//            businessMessages.add(new BusinessMessage("Email", "No puede estar vacío"));
-//        }
-//        
-//        if(usuario.getNickname() == null || usuario.getNickname().trim().equals("")) {
-//            businessMessages.add(new BusinessMessage("Nickname", "No puede estar vacío"));
-//        }
-//        
-//        if(usuario.getContrasena() == null || usuario.getContrasena().trim().equals("")) {
-//            businessMessages.add(new BusinessMessage("Contraseña", "No puede estar vacío"));
-//        }
-//        
-//        validate(businessMessages);
         if (usuario.getContrasena() != null) {
             usuario.setContrasena(passwordManager.encrypt(usuario.getContrasena()));
         } else {

@@ -1,5 +1,18 @@
 CuentaBancariaGetMovimientosByCuentaController.$inject = ['cuentaBancariaService','$scope','$routeParams'];
 function CuentaBancariaGetMovimientosByCuentaController(cuentaBancariaService,$scope,$routeParams){
+    
+    var response = cuentaBancariaService.detail($routeParams.idCuentaBancaria);
+    response.success(function (data, status, headers, config) {
+        $scope.cuentaBancaria = data;
+    }).error(function (data, status, headers, config) {
+        alert("Ha fallado la petición HTTP. Estado: " + status);    
+    });
+    
+    
+    
+    
+    
+    
     var response = cuentaBancariaService.getMovimientosByCuenta($routeParams.idCuentaBancaria);
    response.success(function (data, status, headers, config) {
         $scope.movimientosBancarios = data;

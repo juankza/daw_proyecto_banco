@@ -17,7 +17,7 @@
         
         <property column="email" name="email" />
         
-        <property column="nickname" name="nickname" />
+        <property column="apodo" name="apodo" />
         
         <property column="contrasena" name="contrasena" />
         

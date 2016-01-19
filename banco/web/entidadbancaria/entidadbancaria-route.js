@@ -19,5 +19,9 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: "./entidadbancaria/entidadbancaria-update.html",
             controller: "EntidadBancariaUpdateController"
         });
+        $routeProvider.when('/entidadbancaria/:idEntidadBancaria/sucursales', {
+            templateUrl: "./entidadbancaria/entidadbancaria-getsucursalesbyentidad.html",
+            controller: "EntidadBancariaGetSucursalesByEntidadController"
+        });
         
     }]);
