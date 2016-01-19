@@ -23,13 +23,13 @@ public class CuentaBancariaDAOImplHibernate extends GenericDAOImplHibernate<Cuen
     public List<CuentaBancaria> findByNumeroCuenta(String numeroCuenta) throws BusinessException {
         List<CuentaBancaria> cuentasBancarias;
         
-        Session session = sessionFactory.openSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         cuentasBancarias = session.createQuery("SELECT cb FROM " + getEntityClass().getName() + " cb WHERE numeroCuenta = :numeroCuenta")
                 .setString("numeroCuenta", numeroCuenta)
                 .list();
         session.getTransaction().commit();
-        session.close();
+        
         
         return cuentasBancarias;
     }
