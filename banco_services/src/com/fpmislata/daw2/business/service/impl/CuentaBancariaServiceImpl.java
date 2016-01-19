@@ -45,7 +45,15 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
         if (cuentaBancaria.getNumeroCuenta() == null || cuentaBancaria.getNumeroCuenta().length() != 10) {
             businessMessages.add(new BusinessMessage("Número cuenta","El número de cuenta no debe estar vacío y debe tener 10 carácteres fijos de longitud."));
         }
-        
+        if (cuentaBancaria.getSaldo() == null) {
+            businessMessages.add(new BusinessMessage("Saldo","No puede ser null"));
+        }
+        if (cuentaBancaria.getFechaCreacion() == null) {
+            businessMessages.add(new BusinessMessage("Fecha creación","No puede ser null"));
+        }
+        if (cuentaBancaria.getPin() == null) {
+            businessMessages.add(new BusinessMessage("PIN","No puede ser null"));
+        }
         
         if (!businessMessages.isEmpty()) {
             throw new BusinessException(businessMessages);
