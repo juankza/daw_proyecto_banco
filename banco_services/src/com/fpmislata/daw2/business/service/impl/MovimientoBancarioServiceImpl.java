@@ -24,7 +24,6 @@ public class MovimientoBancarioServiceImpl extends GenericServiceImpl<Movimiento
     @Autowired
     CuentaBancariaDAO cuentaBancariaDAO;
     
-    
     @Override
     public MovimientoBancario insert(MovimientoBancario movimientoBancario) throws BusinessException{
         BigDecimal saldoPosterior;

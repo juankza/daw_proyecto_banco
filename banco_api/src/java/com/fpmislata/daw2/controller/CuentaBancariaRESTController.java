@@ -174,4 +174,43 @@ public class CuentaBancariaRESTController {
         }
     }
 
+    @RequestMapping(value = "/search", method = RequestMethod.GET, produces = "application/json")
+    public void findByName(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+        List<CuentaBancaria> cuentasBancarias;
+        String numeroCuentaBancaria;
+        String dniUsuario;
+        try {
+            numeroCuentaBancaria = httpServletRequest.getParameter("numero");
+            dniUsuario = httpServletRequest.getParameter("dni");
+            
+            if(numeroCuentaBancaria != null) {
+                cuentasBancarias = cuentaBancariaService.findByNumeroCuenta(numeroCuentaBancaria);
+            } else if(dniUsuario != null) {
+                cuentasBancarias = cuentaBancariaService.getCuentasByDNI(dniUsuario);
+            } else {
+                cuentasBancarias = null;
+            }
+            
+            if(cuentasBancarias != null && !cuentasBancarias.isEmpty()) {
+                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                httpServletResponse.setContentType("application/json; charset=UTF-8");
+                httpServletResponse.getWriter().println(jsonTransformer.toJSON(cuentasBancarias));
+            } else {
+                httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            }
+        } catch(BusinessException bex) {
+            try {
+                httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                httpServletResponse.setContentType("application/json; charset=UTF-8");
+                httpServletResponse.getWriter().println(jsonTransformer.toJSON(bex.getBusinessMessages()));
+            } catch (IOException ex) {
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                Logger.getLogger(CuentaBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch(IOException ex) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            Logger.getLogger(CuentaBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

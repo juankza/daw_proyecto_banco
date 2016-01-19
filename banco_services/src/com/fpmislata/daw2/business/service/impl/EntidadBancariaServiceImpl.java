@@ -2,11 +2,9 @@
 package com.fpmislata.daw2.business.service.impl;
 
 import com.fpmislata.daw2.business.domain.EntidadBancaria;
-import com.fpmislata.daw2.business.domain.SucursalBancaria;
 import com.fpmislata.daw2.business.service.EntidadBancariaService;
 import com.fpmislata.daw2.core.exception.BusinessException;
 import com.fpmislata.daw2.persistence.dao.EntidadBancariaDAO;
-import com.fpmislata.daw2.persistence.dao.SucursalBancariaDAO;
 
 import java.util.List;
 
@@ -16,8 +14,6 @@ public class EntidadBancariaServiceImpl extends GenericServiceImpl<EntidadBancar
     @Autowired
     private EntidadBancariaDAO entidadBancariaDAO;
     
-   
-
     @Override
     public EntidadBancaria insert(EntidadBancaria entidadBancaria) throws BusinessException {
         return entidadBancariaDAO.insert(entidadBancaria);

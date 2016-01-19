@@ -12,8 +12,10 @@ import com.fpmislata.daw2.business.service.CuentaBancariaService;
 import com.fpmislata.daw2.core.exception.BusinessException;
 import com.fpmislata.daw2.core.exception.BusinessMessage;
 import com.fpmislata.daw2.core.util.ControlDigitGenerator;
+import com.fpmislata.daw2.persistence.dao.CuentaBancariaDAO;
 import com.fpmislata.daw2.persistence.dao.EntidadBancariaDAO;
 import com.fpmislata.daw2.persistence.dao.SucursalBancariaDAO;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -21,10 +23,14 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Lliurex
  */
 public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria, Integer> implements CuentaBancariaService{
-   @Autowired
-   SucursalBancariaDAO sucursalBancariaDAO;
-   @Autowired
-   EntidadBancariaDAO entidadBancariaDAO;
+    
+    @Autowired
+    CuentaBancariaDAO cuentaBancariaDAO;
+    @Autowired
+    SucursalBancariaDAO sucursalBancariaDAO;
+    @Autowired
+    EntidadBancariaDAO entidadBancariaDAO;
+
     @Override
     public CuentaBancaria insert(CuentaBancaria cuentaBancaria) throws BusinessException{
         if (cuentaBancaria.getSucursalBancaria() == null) {
@@ -40,6 +46,24 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
         cuentaBancaria.setDigitoControl(digitoControl);
         return this.genericDAO.insert(cuentaBancaria);
     }
-    
 
+    @Override
+    public List<CuentaBancaria> findByNumeroCuenta(String numeroCuenta) throws BusinessException {
+        return cuentaBancariaDAO.findByNumeroCuenta(numeroCuenta);
+    }
+    
+    @Override
+    public List<CuentaBancaria> getCuentasByDNI(String dni) throws BusinessException {
+        List<CuentaBancaria> cuentas;
+        
+        cuentas = this.findAll();
+        for(int i = 0; i < cuentas.size(); i++) {
+            if(cuentas.get(i).getUsuario().getDni().equals(dni)) {
+                cuentas.remove(i);
+            }
+        }
+        
+        return cuentas;
+    }
+    
 }
