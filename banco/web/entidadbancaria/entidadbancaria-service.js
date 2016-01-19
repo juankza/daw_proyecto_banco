@@ -38,6 +38,13 @@ function EntidadBancariaService($http){
         });
         return response;
     };
+    this.getSucursalesByEntidad = function(idEntidadBancaria){
+        var response = $http({
+            method: 'GET',
+            url: '/api/entidadbancaria/' + idEntidadBancaria + '/sucursalbancaria'
+        });
+      return response;  
+    }
 }
 EntidadBancariaService.$inject = ['$http'];
 app.service("entidadBancariaService",EntidadBancariaService);

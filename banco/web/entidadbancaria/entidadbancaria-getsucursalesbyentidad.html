@@ -1,0 +1,31 @@
+<div ng-controller="EntidadBancariaGetSucursalesByEntidadController">
+    <h2>Sucursal Bancaria</h2>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td><strong>ID sucursal</strong></td>
+                    <td><strong>Código Sucursal</strong></td>
+                    <td><strong>Dirección</strong></td>
+                    <td><strong>Acciones</strong></td>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="sucursalBancaria in sucursalesBancarias">
+                    <td>{{sucursalBancaria.idSucursalBancaria}}</td>
+                    <td>{{sucursalBancaria.codigoSucursalBancaria}}</td>
+                    <td>{{sucursalBancaria.direccion}}</td>
+                    
+
+
+                    <td><a class="btn btn-info" href="#/sucursalbancaria/detail/{{sucursalBancaria.idSucursalBancaria}}">Detalles</a></td>
+
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-info" href="#/entidadbancaria/list">Volver</a>
+    </div><!-- Tabla -->
+
+
+</div>

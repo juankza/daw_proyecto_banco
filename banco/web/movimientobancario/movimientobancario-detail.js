@@ -3,10 +3,8 @@ function MovimientoBancarioDetailController($scope,movimientoBancarioService,$ro
     var response = movimientoBancarioService.detail($routeParams.idMovimientoBancario);
     response.success(function (data, status, headers, config) {
         $scope.movimientoBancario = data;
-        for (var i = 0; i < $scope.movimientosBancarios.length; i++) {
-            var fecha = new Date($scope.movimientosBancarios[i].fecha);
-           $scope.movimientosBancarios[i].fecha =  fecha.getFullYear() + "-" + (fecha.getMonth()+1) + "-" + fecha.getDate();
-        }
+        $scope.movimientoBancario.fecha = new Date($scope.movimientoBancario.fecha);
+        $scope.movimientoBancario.fecha = $scope.movimientoBancario.fecha.getFullYear() + "-" + ($scope.movimientoBancario.fecha.getMonth()+1) + "-" + $scope.movimientoBancario.fecha.getDate();
     }).error(function (data, status, headers, config) {
         alert("Detail HTTP request failed. Status: " + status);
         console.log(data);
