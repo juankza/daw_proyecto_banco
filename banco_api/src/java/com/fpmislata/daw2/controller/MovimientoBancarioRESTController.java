@@ -117,4 +117,5 @@ public class MovimientoBancarioRESTController {
             Logger.getLogger(SucursalBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+   
 }
