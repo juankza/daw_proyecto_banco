@@ -1,0 +1,30 @@
+<div ng-controller="CuentaBancariaDetailController">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td><strong>ID cuenta</strong></td>
+                    <td><strong>Saldo</strong></td>
+                    <td><strong>CCC</strong></td>
+                    <td><strong>Sucursal Bancaria</strong></td>
+                    <td><strong>Usuario</strong></td>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{cuentaBancaria.idCuentaBancaria}}</td>
+                    <td>{{cuentaBancaria.saldo}} EUR</td>
+                    <td>{{cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidadBancaria}} {{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}} {{cuentaBancaria.digitoControl}} {{cuentaBancaria.numeroCuenta}}</td>
+                    <td>Sucursal nº: <strong>{{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}}</strong> <br> {{cuentaBancaria.sucursalBancaria.direccion}}</td>
+                    <td><a href="#/usuario/detail/{{cuentaBancaria.usuario.idUsuario}}">{{cuentaBancaria.usuario.nombre}} {{cuentaBancaria.usuario.apellidos}}</a></td>
+
+                </tr>
+            </tbody>
+        </table>
+
+    </div><!-- Tabla -->
+<a class="btn btn-danger" href="#/cuentabancaria/delete/{{cuentaBancaria.idCuentaBancaria}}">BORRAR</a>
+<a class="btn btn-info" href="#/cuentabancaria/{{cuentaBancaria.idCuentaBancaria}}/movimientos">Ver movimientos bancarios</a>
+
+</div>

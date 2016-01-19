@@ -1,0 +1,48 @@
+<form ng-controller="CuentaBancariaInsertController">
+
+    <div class="row">
+        <div class="col-md-3"><strong>Saldo: </strong></div>
+        <div class="col-md-5"><input type="text" name="saldo" ng-model="cuentaBancaria.saldo" class="form-control"/></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"><strong>Número de cuenta: </strong></div>
+        <div class="col-md-5"><input type="text" name="numeroCuenta" ng-model="cuentaBancaria.numeroCuenta" class="form-control"/></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"><strong>Fecha de creación: </strong></div>
+        <div class="col-md-5"><input id="datepicker" type="text" name="creationDate" ng-model="cuentaBancaria.fechaCreacion" class="form-control" ng-readonly="true" /></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"><strong>Pin: </strong></div>
+        <div class="col-md-5"><input type="password" name="pin" ng-model="cuentaBancaria.pin" class="form-control"/></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"><strong>Sucursal Bancaria: </strong></div>
+        <div class="col-md-5">
+            <select ng-model="cuentaBancaria.sucursalBancaria" ng-options="sucursalBancaria as sucursalBancaria.direccion for sucursalBancaria in sucursalesBancarias track by sucursalBancaria.direccion" >
+                <option value="">--Elige opcion--</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"><strong>Usuario: </strong></div>
+        <div class="col-md-5">
+        <select ng-model="cuentaBancaria.usuario" ng-options="usuario as usuario.nombre for usuario in usuarios track by usuario.nickname" >
+            <option value="">--Elige opcion--</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <input  ng-click="insert()" type="submit" value="Insertar" class="btn btn-info"/><br>
+        </div>
+    </div>
+    <div>
+        <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
+    </div>
+
+</form>

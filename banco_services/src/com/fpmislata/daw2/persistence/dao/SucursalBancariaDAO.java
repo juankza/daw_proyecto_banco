@@ -6,6 +6,8 @@
 package com.fpmislata.daw2.persistence.dao;
 
 import com.fpmislata.daw2.business.domain.SucursalBancaria;
+import com.fpmislata.daw2.core.exception.BusinessException;
+import java.util.List;
 
 /**
  *
@@ -13,4 +15,5 @@ import com.fpmislata.daw2.business.domain.SucursalBancaria;
  */
 public interface SucursalBancariaDAO extends GenericDAO<SucursalBancaria, Integer> {
     
+//    public List<SucursalBancaria> getSucursalesByEntidad(int idEntidadBancaria) throws BusinessException;
 }
