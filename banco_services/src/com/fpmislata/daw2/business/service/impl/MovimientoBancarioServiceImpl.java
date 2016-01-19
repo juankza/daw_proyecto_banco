@@ -50,9 +50,9 @@ public class MovimientoBancarioServiceImpl extends GenericServiceImpl<Movimiento
         List<MovimientoBancario> movimientos;
         try {
             movimientos = this.findAll();
-            for (int i = 0; i < movimientos.size(); i++) {
-                if (movimientos.get(i).getCuentaBancaria().getIdCuentaBancaria() != idCuentaBancaria) {
-                    movimientos.remove(i);
+            for (int i = movimientos.size(); i > 0; i--) {
+                if (movimientos.get(i-1).getCuentaBancaria().getIdCuentaBancaria() != idCuentaBancaria) {
+                    movimientos.remove(i-1);
                 }
             }
         } catch (BusinessException bex) {

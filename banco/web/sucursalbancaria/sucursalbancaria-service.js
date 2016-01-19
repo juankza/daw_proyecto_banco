@@ -7,5 +7,12 @@ function SucursalBancariaService($http){
         });
         return response;  
     };
+    this.detail = function(idSucursalBancaria){
+        var response = $http({
+        method : 'GET',
+        url: '/api/sucursalbancaria/' + idSucursalBancaria
+        });
+        return response;
+    };
 }
 app.service("sucursalBancariaService",SucursalBancariaService);

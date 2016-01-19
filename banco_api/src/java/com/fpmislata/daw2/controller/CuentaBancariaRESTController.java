@@ -1,23 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.fpmislata.daw2.controller;
 
 import com.fpmislata.daw2.business.domain.CuentaBancaria;
-import com.fpmislata.daw2.business.domain.SucursalBancaria;
+import com.fpmislata.daw2.business.domain.MovimientoBancario;
 import com.fpmislata.daw2.business.service.CuentaBancariaService;
+import com.fpmislata.daw2.business.service.MovimientoBancarioService;
 import com.fpmislata.daw2.core.exception.BusinessException;
 import com.fpmislata.daw2.core.exception.BusinessMessage;
 import com.fpmislata.daw2.core.json.JSONTransformer;
+
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,10 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- *
- * @author Lliurex
- */
 @Controller
 @RequestMapping("/cuentabancaria")
 public class CuentaBancariaRESTController {
@@ -37,7 +32,9 @@ public class CuentaBancariaRESTController {
     JSONTransformer jsonTransformer;
     @Autowired
     CuentaBancariaService cuentaBancariaService;
-    
+
+    @Autowired
+    MovimientoBancarioService movimientoBancarioService;
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public void findAll(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
@@ -175,7 +172,7 @@ public class CuentaBancariaRESTController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET, produces = "application/json")
-    public void findByName(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
+    public void findBy(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         List<CuentaBancaria> cuentasBancarias;
         String numeroCuentaBancaria;
         String dniUsuario;
@@ -208,6 +205,34 @@ public class CuentaBancariaRESTController {
                 Logger.getLogger(CuentaBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch(IOException ex) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            Logger.getLogger(CuentaBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @RequestMapping(value = "/{idCuentaBancaria}/movimientobancario")
+    public void getMovimientosByCuenta(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable int idCuentaBancaria) {
+        List<MovimientoBancario> movimientosBancarios;
+
+        try {
+            movimientosBancarios = movimientoBancarioService.getMovimientosByCuenta(idCuentaBancaria);
+            if (movimientosBancarios != null && !movimientosBancarios.isEmpty()) {
+                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                httpServletResponse.setContentType("application/json; charset=UTF-8");
+                httpServletResponse.getWriter().println(jsonTransformer.toJSON(movimientosBancarios));
+            } else {
+                httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            }
+        } catch (BusinessException bex) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            httpServletResponse.setContentType("application/json; charset=UTF-8");
+            try {
+                httpServletResponse.getWriter().println(jsonTransformer.toJSON(bex.getBusinessMessages()));
+            } catch (IOException ex) {
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                Logger.getLogger(CuentaBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (IOException ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             Logger.getLogger(CuentaBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
         }

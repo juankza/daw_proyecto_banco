@@ -14,17 +14,18 @@ import java.util.List;
  *
  * @author Lliurex
  */
-public class SucursalBancariaServiceImpl extends GenericServiceImpl<SucursalBancaria, Integer> implements SucursalBancariaService{
+public class SucursalBancariaServiceImpl extends GenericServiceImpl<SucursalBancaria, Integer> implements SucursalBancariaService {
 
     @Override
     public List<SucursalBancaria> getSucursalesByEntidad(int idEntidadBancaria) throws BusinessException {
         List<SucursalBancaria> sucursales;
-        
+
         try {
             sucursales = this.findAll();
-            for (int i = 0; i < sucursales.size(); i++) {
-                if (sucursales.get(i).getEntidadBancaria().getIdEntidadBancaria() != idEntidadBancaria) {
-                    sucursales.remove(i);
+
+            for (int i = sucursales.size(); i > 0; i--) {
+                if (sucursales.get(i-1).getEntidadBancaria().getIdEntidadBancaria() != idEntidadBancaria) {
+                    sucursales.remove(i-1);
                 }
             }
         } catch (BusinessException bex) {
