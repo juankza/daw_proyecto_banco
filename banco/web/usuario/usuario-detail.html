@@ -1,29 +1,53 @@
-<div ng-controller="UsuarioDetailController">
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <td><strong>ID</strong></td> 
-                    <td><strong>Nombre</strong></td>
-                    <td><strong>Apellido</strong></td>
-                    <td><strong>Apodo</strong></td>
-                    <td><strong>Correo</strong></td>
-                    <td><strong>Rol</strong></td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{usuario.idUsuario}}</td>
-                    <td>{{usuario.nombre}}</td>
-                    <td>{{usuario.apellidos}}</td>
-                    <td>{{usuario.apodo}}</td>
-                    <td>{{usuario.email}}</td>
-                    <td>{{usuario.rol}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div><!-- Tabla -->
+<div ng-controller="UsuarioDetailController" ng-init="isDisabled = true">
+    <form>
+        <div class="row">
+            <div class="col-md-3"><strong>ID: </strong></div>
+            <div class="col-md-5"><input type="text" name="idUsuario" ng-model="usuario.idUsuario" ng-disabled="{{isDisabled}}" class="form-control"/></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>Nombre: </strong></div>
+            <div class="col-md-5"><input type="text" name="name" ng-model="usuario.nombre" ng-disabled="{{isDisabled}}" class="form-control"/></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>Apellidos: </strong></div>
+            <div class="col-md-5"><input type="text" name="surname" ng-model="usuario.apellidos" ng-disabled="{{isDisabled}}" class="form-control"/></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>Correo: </strong></div>
+            <div class="col-md-5"><input type="text" name="email" ng-model="usuario.email" ng-disabled="{{isDisabled}}" class="form-control"/></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>Apodo: </strong></div>
+            <div class="col-md-5"><input type="text" name="text" ng-model="usuario.apodo" ng-disabled="{{isDisabled}}" class="form-control"/></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>Contraseña: </strong></div>
+            <div class="col-md-5"><input type="password" name="password" ng-model="usuario.contrasena" ng-disabled="{{isDisabled}}" class="form-control"/></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>Rol</strong></div>
+            <div class="col-md-5">
+                <select ng-model="usuario.rol" class="form-control" ng-disabled="{{isDisabled}}">
+                    <option value="ADMIN">Administrador</option>
+                    <option value="EMPLEADO">Empleado</option>
+                    <option value="CLIENTE">Cliente</option>
+                </select>
+            </div>
+        </div>
+       
+        <div>
+            <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
+        </div>
+
+    </form>
 
     <a class="btn btn-info" href="#/usuario/update/{{usuario.idUsuario}}">ACTUALIZAR</a>
     <a class="btn btn-danger" href="#/usuario/delete/{{usuario.idUsuario}}">BORRAR</a>
+    <a class="btn btn-info" href="#/usuario/list">Volver</a>
 </div>

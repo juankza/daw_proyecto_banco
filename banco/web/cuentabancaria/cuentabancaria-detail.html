@@ -1,30 +1,38 @@
-<div ng-controller="CuentaBancariaDetailController">
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <td><strong>ID cuenta</strong></td>
-                    <td><strong>Saldo</strong></td>
-                    <td><strong>CCC</strong></td>
-                    <td><strong>Sucursal Bancaria</strong></td>
-                    <td><strong>Usuario</strong></td>
+<div ng-controller="CuentaBancariaDetailController" ng-init="isDisabled = true">
+    <form>
+        <div class="row">
+            <div class="col-md-3"><strong>ID cuenta: </strong></div>
+            <div class="col-md-5"><input type="text" name="idEntidadBancaria" ng-disabled="{{isDisabled}}" ng-model="cuentaBancaria.idCuentaBancaria" ng-disabled="{{isDisabled}}" class="form-control"/></div>
+        </div>
 
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{cuentaBancaria.idCuentaBancaria}}</td>
-                    <td>{{cuentaBancaria.saldo}} EUR</td>
-                    <td>{{cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidadBancaria}} {{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}} {{cuentaBancaria.digitoControl}} {{cuentaBancaria.numeroCuenta}}</td>
-                    <td>Sucursal nº: <strong>{{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}}</strong> <br> {{cuentaBancaria.sucursalBancaria.direccion}}</td>
-                    <td><a href="#/usuario/detail/{{cuentaBancaria.usuario.idUsuario}}">{{cuentaBancaria.usuario.nombre}} {{cuentaBancaria.usuario.apellidos}}</a></td>
+        <div class="row">
+            <div class="col-md-3"><strong>Saldo</strong></div>
+            <div class="col-md-5"><input type="text" name="nombre" ng-disabled="{{isDisabled}}" ng-model="cuentaBancaria.saldo" class="form-control"/></div>
+        </div>
 
-                </tr>
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-md-3"><strong>CCC: </strong></div>
+            <div class="col-md-5"><input type="text" name="codigoEntidadBancaria" ng-disabled="{{isDisabled}}" ng-model="ccc" class="form-control"/></div>
+        </div>
 
-    </div><!-- Tabla -->
+        <div class="row">
+            <div class="col-md-3"><strong>Sucursal:  </strong></div>
+            <div class="col-md-5"><input type="text" id="datepicker" name="fechaCreacion" ng-disabled="{{isDisabled}}" ng-model="sucursal" class="form-control" ng-readonly="true" /></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>Usuario: </strong></div>
+            <div class="col-md-5"><input type="text" name="direccion" ng-disabled="{{isDisabled}}" ng-model="usuario" class="form-control" /></div>
+        </div>
+
+        
+        <div>
+            <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
+        </div>
+
+    </form>
 <a class="btn btn-danger" href="#/cuentabancaria/delete/{{cuentaBancaria.idCuentaBancaria}}">BORRAR</a>
 <a class="btn btn-info" href="#/cuentabancaria/{{cuentaBancaria.idCuentaBancaria}}/movimientos">Ver movimientos bancarios</a>
+<a class="btn btn-info" href="#/cuentabancaria/list">Volver</a>
 
 </div>
