@@ -5,7 +5,8 @@ function IndexController($scope, $location, $http,baseApi) {
         var response = $http({
             method: 'POST',
             url: baseApi + '/api/session',
-            data: $scope.loginData
+            data: $scope.loginData,
+            headers: {"Access-Control-Allow-Origin":"*"}
         });
         response.success(function (data, status, headers, config) {
             location.href="./main.html";
