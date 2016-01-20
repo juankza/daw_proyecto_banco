@@ -21,7 +21,7 @@ function CuentaBancariaInsertController($scope, cuentaBancariaService, usuarioSe
     $scope.cuentaBancaria = {};
 
     $scope.insert = function () {
-        
+        $scope.cuentaBancaria.usuario = $scope.usuario;
         var response = cuentaBancariaService.insert($scope.cuentaBancaria);
         response.success(function (data, status, headers, config) {
             alert("Insertado correctamente");
