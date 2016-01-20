@@ -1,10 +1,10 @@
-IndexController.$inject = ['$scope', '$location', '$http'];
-function IndexController($scope, $location, $http) {
+IndexController.$inject = ['$scope', '$location', '$http','baseApi'];
+function IndexController($scope, $location, $http,baseApi) {
     $scope.loginData = {};
     $scope.login = function () {
         var response = $http({
             method: 'POST',
-            url: '/api/session',
+            url: baseApi + '/api/session',
             data: $scope.loginData
         });
         response.success(function (data, status, headers, config) {
