@@ -1,6 +1,7 @@
 EntidadBancariaDetailController.$inject = ['$routeParams','$scope','entidadBancariaService'];
 function EntidadBancariaDetailController($routeParams,$scope,entidadBancariaService){
     var response;
+    
 response = entidadBancariaService.detail($routeParams.idEntidadBancaria);
 
 
@@ -9,7 +10,7 @@ response = entidadBancariaService.detail($routeParams.idEntidadBancaria);
         var fechaCreacion = new Date(data.fechaCreacion);
         $scope.entidadBancaria.fechaCreacion = fechaCreacion.getFullYear() + "-" + (fechaCreacion.getMonth()+1) + "-" + fechaCreacion.getDate();
     }).error(function (data, status, headers, config) {
-        alert("Detail HTTP request failed. Status: " + status);
+        alert("1Detail HTTP request failed. Status: " + status);
         console.log(data);
     });
 

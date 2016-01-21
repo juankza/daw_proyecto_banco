@@ -8,7 +8,7 @@ function CuentaBancariaDeleteController(cuentaBancariaService, $scope, $routePar
         $scope.sucursal = $scope.cuentaBancaria.sucursalBancaria.codigoSucursalBancaria + "  " + $scope.cuentaBancaria.sucursalBancaria.direccion;
         $scope.usuario = $scope.cuentaBancaria.usuario.nombre + " " + $scope.cuentaBancaria.usuario.apellidos;
     }).error(function (data, status, headers, config) {
-        alert("HTTP request failed. Status: " + status);
+        alert("1HTTP request failed. Status: " + status);
     });
 
 

@@ -6,7 +6,7 @@ function MovimientoBancarioDetailController($scope,movimientoBancarioService,$ro
         $scope.movimientoBancario.fecha = new Date($scope.movimientoBancario.fecha);
         $scope.movimientoBancario.fecha = $scope.movimientoBancario.fecha.getFullYear() + "-" + ($scope.movimientoBancario.fecha.getMonth()+1) + "-" + $scope.movimientoBancario.fecha.getDate();
     }).error(function (data, status, headers, config) {
-        alert("Detail HTTP request failed. Status: " + status);
+        alert("2Detail HTTP request failed. Status: " + status);
         console.log(data);
     });
 }

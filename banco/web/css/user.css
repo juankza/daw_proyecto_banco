@@ -69,6 +69,9 @@ ul li a {
 ul li a:hover {
     background-color: #54A759 !important;
 }
+#botonLogout{
+    padding: 25px 15px;
+}
 
 @media all and (max-width: 768px) {
     .login {

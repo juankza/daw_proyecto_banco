@@ -1,0 +1,36 @@
+<form ng-controller="SucursalBancariaInsertController">
+
+
+
+    <div class="row">
+        <div class="col-md-3"><strong>Código sucursal: </strong></div>
+        <div class="col-md-5"><input type="text" name="concepto" ng-model="sucursalBancaria.codigoSucursalBancaria" class="form-control"/></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3"><strong>Fecha creación: </strong></div>
+        <div class="col-md-5"><input id="datepicker" type="text" name="fechaCreación" ng-model="sucursalBancaria.fechaCreacion" class="form-control" ng-readonly="true"/></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"><strong>Dirección: </strong></div>
+        <div class="col-md-5"><input type="text"  name="fecha" ng-model="sucursalBancaria.direccion" class="form-control"/></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"><strong>Teléfono: </strong></div>
+        <div class="col-md-5"><input type="text"  name="fecha" ng-model="sucursalBancaria.telefono" class="form-control"/></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"><strong>Entidad Bancaria: </strong></div>
+        <div class="col-md-5"><a href="#/entidadbancaria/detail/{{sucursalBancaria.entidadBancaria.idEntidadBancaria}}">{{sucursalBancaria.entidadBancaria.nombre}}</a></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <input  ng-click="insert()" type="submit" value="Insertar" class="btn btn-info"/><br>
+        </div>
+    </div>
+    <div>
+        <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
+    </div>
+
+</form>

@@ -1,4 +1,4 @@
-<div ng-controller="SucursalBancariaDetailController" ng-init="isDisabled = true">
+<div ng-init="isDisabled = true">
     <form>
         <div class="row">
             <div class="col-md-3"><strong>ID: </strong></div>
@@ -31,7 +31,8 @@
         </div>
 
     </form>
-    {{mensaje}}
-    <a class="btn btn-danger" href="#/sucursalbancaria/delete/{{sucursalBancaria.idSucursalBancaria}}">Borrar</a>
-    <a class="btn btn-info" href="#/entidadbancaria/detail/{{sucursalBancaria.entidadBancaria.idEntidadBancaria}}">Volver</a>
+    
+    <p>¿Estás seguro que quieres borrar la sucursal: {{sucursalBancaria.codigoSucursalBancaria}} {{sucursalBancaria.direccion}}? </p>
+    <a class="btn btn-danger" href="" ng-click="delete()">Sí</a>
+    <a class="btn btn-info" href="#/entidadbancaria/detail/{{sucursalBancaria.entidadBancaria.idEntidadBancaria}}">No</a>
 </div>

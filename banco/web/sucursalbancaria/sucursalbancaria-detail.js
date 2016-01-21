@@ -6,7 +6,7 @@ function SucursalBancariaDetailController(sucursalBancariaService, $scope, $rout
         var fechaCreacion = new Date($scope.sucursalBancaria.fechaCreacion);
         $scope.sucursalBancaria.fechaCreacion = fechaCreacion.getFullYear() + "-" + (fechaCreacion.getMonth()+1) + "-" + fechaCreacion.getDate();
     }).error(function (data, status, headers, config) {
-        alert("Detail HTTP request failed. Status: " + status);
+        alert("3Detail HTTP request failed. Status: " + status);
       
     });
 }

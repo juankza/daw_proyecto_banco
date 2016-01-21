@@ -14,5 +14,20 @@ function SucursalBancariaService($http){
         });
         return response;
     };
+    this.insert = function(sucursalBancaria){
+      var response = $http({
+         method: 'POST',
+         url: '/api/sucursalbancaria',
+         data: sucursalBancaria
+      }); 
+      return response;
+    };
+    this.delete = function(idSucursalBancaria){
+      var response = $http({
+          method: 'DELETE',
+          url: '/api/sucursalbancaria/' + idSucursalBancaria
+      });
+      return response;
+    };
 }
 app.service("sucursalBancariaService",SucursalBancariaService);
