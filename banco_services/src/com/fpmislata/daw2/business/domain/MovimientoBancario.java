@@ -1,4 +1,4 @@
-
+    
 package com.fpmislata.daw2.business.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
