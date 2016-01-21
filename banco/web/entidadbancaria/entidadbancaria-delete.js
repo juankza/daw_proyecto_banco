@@ -13,7 +13,11 @@ function EntidadBancariaDeleteController($scope,$routeParams,entidadBancariaServ
         alert("Borrado correctamente.");
         $location.path("/entidadbancaria/list");
     }).error(function (data, status, headers, config) {
-        alert("Ha fallado la petición HTTP. Estado: " + status);
+         if (status === 400) {
+                $scope.errors = data;
+            } else {
+                alert("Ha fallado la petición HTTP. Estado HTTP: " + status);
+            }
     });
         
     }

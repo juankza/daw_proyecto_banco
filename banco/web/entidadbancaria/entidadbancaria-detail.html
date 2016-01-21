@@ -36,9 +36,45 @@
             <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
         </div>
 
+        
+        
+        
     </form>
-    <a class="btn btn-info" href="#/entidadbancaria/update/{{entidadBancaria.idEntidadBancaria}}">ACTUALIZAR</a>
-    <a class="btn btn-danger" href="#/entidadbancaria/delete/{{entidadBancaria.idEntidadBancaria}}">BORRAR</a>
-    <a class="btn btn-info" href="#/entidadbancaria/{{entidadBancaria.idEntidadBancaria}}/sucursales">Ver sucursales bancarias.</a>
+    
+    
+    <!-- Maestro - Detalle -->
+    <div>
+    <h4>Sucursales de {{entidadBancaria.nombre}}</h4>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td><strong>ID sucursal</strong></td>
+                    <td><strong>Código Sucursal</strong></td>
+                    <td><strong>Dirección</strong></td>
+                    <td><strong>Acciones</strong></td>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="sucursalBancaria in sucursalesBancarias">
+                    <td>{{sucursalBancaria.idSucursalBancaria}}</td>
+                    <td>{{sucursalBancaria.codigoSucursalBancaria}}</td>
+                    <td>{{sucursalBancaria.direccion}}</td>
+                    
+
+
+                    <td><a class="btn btn-info" href="#/sucursalbancaria/detail/{{sucursalBancaria.idSucursalBancaria}}">Detalles</a></td>
+
+                </tr>
+            </tbody>
+        </table>
+        
+    </div><!-- Tabla -->
+
+
+</div>
+    <a class="btn btn-info" href="#/entidadbancaria/update/{{entidadBancaria.idEntidadBancaria}}">Actualizar Entidad Bancaria</a>
+    <a class="btn btn-danger" href="#/entidadbancaria/delete/{{entidadBancaria.idEntidadBancaria}}">Borrar Entidad Bancaria</a>
     <a class="btn btn-info" href="#/entidadbancaria/list">Volver</a>
 </div>

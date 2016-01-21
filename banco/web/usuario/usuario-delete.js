@@ -10,7 +10,11 @@ function UsuarioDeleteController(usuarioService,$scope,$routeParams,$location){
         alert("Borrado correctamente.");
         $location.path("/usuario/list");
     }).error(function (data, status, headers, config) {
-        alert("HTTP request failed. Status: " + status);
+         if (status === 400) {
+                $scope.errors = data;
+            } else {
+                alert("Ha fallado la petición HTTP. Estado HTTP: " + status);
+            }
     });
         
     };

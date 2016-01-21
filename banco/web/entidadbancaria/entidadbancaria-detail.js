@@ -12,6 +12,14 @@ response = entidadBancariaService.detail($routeParams.idEntidadBancaria);
         alert("Detail HTTP request failed. Status: " + status);
         console.log(data);
     });
-    
+
+ 
+    var response = entidadBancariaService.getSucursalesByEntidad($routeParams.idEntidadBancaria);
+    response.success(function (data, status, headers, config) {
+        $scope.sucursalesBancarias = data;
+        
+    }).error(function (data, status, headers, config) {
+        alert("Ha fallado la petición HTTP. Estado: " + status);    
+    });
 }
 app.controller("EntidadBancariaDetailController",EntidadBancariaDetailController);
