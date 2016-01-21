@@ -15,13 +15,13 @@ public class UsuarioDAOImplHibernate extends GenericDAOImplHibernate<Usuario, In
     public List<Usuario> findByNombreEquals(String nombre) throws BusinessException {
         List<Usuario> usuarios;
         
-        Session session = sessionFactory.openSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         usuarios = session.createQuery("SELECT u FROM " + getEntityClass().getName() + " u WHERE nombre = :nombre")
                 .setString("nombre", nombre)
                 .list();
         session.getTransaction().commit();
-        session.close();
+      //  session.close();
         
         return usuarios;
     }
@@ -30,13 +30,13 @@ public class UsuarioDAOImplHibernate extends GenericDAOImplHibernate<Usuario, In
     public List<Usuario> findByNombreLike(String nombre) throws BusinessException {
         List<Usuario> usuarios;
         
-        Session session = sessionFactory.openSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         usuarios = session.createQuery("SELECT u FROM " + getEntityClass().getName() + " u WHERE nombre like :nombre")
                 .setString("nombre", "%" + nombre + "%")
                 .list();
         session.getTransaction().commit();
-        session.close();
+      //  session.close();
         
         return usuarios;
     }
@@ -46,7 +46,7 @@ public class UsuarioDAOImplHibernate extends GenericDAOImplHibernate<Usuario, In
         List<Usuario> usuarios;
         Usuario usuario;
         
-        Session session = sessionFactory.openSession();
+       Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         usuarios = session.createQuery("SELECT u FROM " + getEntityClass().getName() + " u WHERE email = :email")
                 .setString("email", email)

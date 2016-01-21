@@ -41,8 +41,6 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> imp
     public Usuario update(Usuario usuario) throws BusinessException {
         if (usuario.getContrasena() != null) {
             usuario.setContrasena(passwordManager.encrypt(usuario.getContrasena()));
-        } else {
-            usuario.setContrasena(usuarioDAO.get(usuario.getIdUsuario()).getContrasena());
         }
 
         return usuarioDAO.update(usuario);

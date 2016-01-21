@@ -15,13 +15,13 @@ public class EntidadBancariaDAOImplHibernate extends GenericDAOImplHibernate<Ent
     public List<EntidadBancaria> findByNombreEquals(String nombre) throws BusinessException {
         List<EntidadBancaria> entidadesBancarias;
         
-        Session session = sessionFactory.openSession();
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         entidadesBancarias = session.createQuery("SELECT eb FROM " + getEntityClass().getName() + " eb WHERE nombre = :nombre")
                 .setString("nombre", nombre)
                 .list();
         session.getTransaction().commit();
-        session.close();
+       // session.close();
         
         return entidadesBancarias;
     }
@@ -30,13 +30,13 @@ public class EntidadBancariaDAOImplHibernate extends GenericDAOImplHibernate<Ent
     public List<EntidadBancaria> findByNombreLike(String nombre) throws BusinessException {
         List<EntidadBancaria> entidadesBancarias;
         
-        Session session = sessionFactory.openSession();
+       Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         entidadesBancarias = session.createQuery("SELECT eb FROM " + getEntityClass().getName() + " eb WHERE nombre like :nombre")
                 .setString("nombre", "%" + nombre + "%")
                 .list();
         session.getTransaction().commit();
-        session.close();
+       // session.close();
         
         return entidadesBancarias;
     }

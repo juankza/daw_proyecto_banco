@@ -3,20 +3,22 @@ package com.fpmislata.daw2.persistence.dao.impl.hibernate;
 import com.fpmislata.daw2.business.domain.CuentaBancaria;
 import com.fpmislata.daw2.business.domain.SucursalBancaria;
 import com.fpmislata.daw2.core.exception.BusinessException;
+import com.fpmislata.daw2.core.exception.BusinessMessage;
 import com.fpmislata.daw2.persistence.dao.GenericDAO;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.NonUniqueObjectException;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 public class GenericDAOImplHibernate<T, ID extends Serializable> implements GenericDAO<T, ID> {
 
-    protected SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
+    //protected SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+    
     @Override
     public T get(ID id) throws BusinessException {
         T entity;
@@ -30,7 +32,7 @@ public class GenericDAOImplHibernate<T, ID extends Serializable> implements Gene
         return entity;
     }
 
-    @Override
+     @Override
     public T insert(T entity) throws BusinessException {
         Session session;
         try {
@@ -48,7 +50,6 @@ public class GenericDAOImplHibernate<T, ID extends Serializable> implements Gene
             throw new BusinessException(cve);
         }
     }
-
     @Override
     public T update(T entity) throws BusinessException {
         Session session;
@@ -73,22 +74,28 @@ public class GenericDAOImplHibernate<T, ID extends Serializable> implements Gene
         T entity;
         Session session;
         boolean result;
-        
-        session = HibernateUtil.getSessionFactory().getCurrentSession();
-        //session = sessionFactory.openSession();
+        try {
+            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            //session = sessionFactory.openSession();
 
-        entity = get(id);
-        if (entity != null) {
-            session.beginTransaction();
-            session.delete(entity);
-            session.getTransaction().commit();
-            result = true;
-        } else {
-            result = false;
+            entity = get(id);
+            if (entity != null) {
+                session.beginTransaction();
+                session.delete(entity);
+                session.getTransaction().commit();
+                result = true;
+            } else {
+                result = false;
+            }
+
+            //session.close();
+            return result;
+        } catch (javax.validation.ConstraintViolationException cve) {
+            throw new BusinessException(new BusinessMessage("Restricción","La base de datos no permite esta operación."));
+        } catch (org.hibernate.exception.ConstraintViolationException cve) {
+            throw new BusinessException(new BusinessMessage("Restricción","La base de datos no permite esta operación."));
         }
 
-        //session.close();
-        return result;
     }
 
     @Override

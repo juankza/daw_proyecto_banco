@@ -19,7 +19,7 @@
         
         <property column="apodo" name="apodo" />
         
-        <property column="contrasena" name="contrasena" />
+        <property column="contrasena" name="contrasena" update="false"/>
         
         <property column="rol" name="rol" >
             <type name="org.hibernate.type.EnumType">
