@@ -26,7 +26,11 @@ public class MovimientoBancarioServiceImpl extends GenericServiceImpl<Movimiento
     
     @Override
     public MovimientoBancario insert(MovimientoBancario movimientoBancario) throws BusinessException{
+        if (movimientoBancario.getCantidad()==null) {
+           throw new BusinessException(new BusinessMessage("Cantidad","No puede ser nula."));
+        }
         BigDecimal saldoPosterior;
+        
         CuentaBancaria cuentaBancaria = cuentaBancariaDAO.get(movimientoBancario.getCuentaBancaria().getIdCuentaBancaria());
         if (movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.INGRESO) {
             saldoPosterior = cuentaBancaria.getSaldo().add(movimientoBancario.getCantidad());
