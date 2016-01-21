@@ -28,7 +28,7 @@ public class SucursalBancaria implements Serializable {
     @NotBlank
     @Size(min = 3, max = 255)
     private String direccion;
-    
+    @NotBlank
     @Size(min = 3, max = 30)
     private String telefono;
     
