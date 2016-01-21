@@ -1,0 +1,27 @@
+<div ng-controller="SucursalBancariaUpdateController" ng-init="isDisabled = false">
+    <form>
+        <div class="row">
+            <div class="col-md-3"><strong>Código Sucursal:  </strong></div>
+            <div class="col-md-5"><input type="text" name="nombre" ng-model="sucursalBancaria.codigoSucursalBancaria" class="form-control" ng-disabled="{{isDisabled}}"/></div>
+        </div> 
+
+        <div class="row">
+            <div class="col-md-3"><strong>Dirección: </strong></div>
+            <div class="col-md-5"><input type="text"  name="fechaCreacion" ng-model="sucursalBancaria.direccion" ng-disabled="{{isDisabled}}" class="form-control" /></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>Teléfono: </strong></div>
+            <div class="col-md-5"><input type="text" name="direccion" ng-model="sucursalBancaria.telefono" ng-disabled="{{isDisabled}}" class="form-control" /></div>
+        </div>
+
+      
+        <div>
+            <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
+        </div>
+
+    </form>
+    {{mensaje}}
+    <button class="btn btn-info" ng-click="update()">Actualizar</button>
+    <a class="btn btn-info" href="#/entidadbancaria/detail/{{sucursalBancaria.entidadBancaria.idEntidadBancaria}}">Volver</a>
+</div>

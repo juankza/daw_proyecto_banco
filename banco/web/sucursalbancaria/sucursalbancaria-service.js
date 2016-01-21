@@ -29,5 +29,13 @@ function SucursalBancariaService($http){
       });
       return response;
     };
+    this.update = function(sucursalBancaria){
+        var response = $http({
+           method: 'PUT',
+           url: '/api/sucursalbancaria/' + sucursalBancaria.idSucursalBancaria,
+           data: sucursalBancaria
+        });
+        return response;
+    };
 }
 app.service("sucursalBancariaService",SucursalBancariaService);
