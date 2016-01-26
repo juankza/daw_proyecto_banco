@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.fpmislata.daw2.business.service.impl;
 
 import com.fpmislata.daw2.business.domain.CuentaBancaria;
@@ -16,10 +12,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author Lliurex
- */
 public class MovimientoBancarioServiceImpl extends GenericServiceImpl<MovimientoBancario, Integer> implements MovimientoBancarioService {
     @Autowired
     CuentaBancariaDAO cuentaBancariaDAO;
