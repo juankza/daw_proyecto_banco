@@ -27,7 +27,7 @@ public class CuentaBancaria implements Serializable {
     private Date fechaCreacion;
     
     @NotBlank
-    @Pattern(regexp="[0-9]{4}",message="Tiene que contener 4 carácteres numéricos")
+    @Pattern(regexp="[0-9]{4}",message = "Tiene que contener 4 carácteres numéricos")
     @Size(min = 4, max = 4, message = "Tiene que contener obligatoriamente {max} carácteres")
     private String pin;
     
@@ -36,7 +36,7 @@ public class CuentaBancaria implements Serializable {
     private String digitoControl;
     
     @NotBlank
-    @Pattern(regexp = "[0-9]{10}",message="Solo puede contener 10 carácteres numéricos")
+    @Pattern(regexp = "[0-9]{10}",message = "Solo puede contener 10 carácteres numéricos")
     @Size(min = 10, max = 10, message = "Tiene que contener obligatoriamente {max} carácteres")
     private String numeroCuenta;
     
@@ -122,6 +122,4 @@ public class CuentaBancaria implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
-   
 }
