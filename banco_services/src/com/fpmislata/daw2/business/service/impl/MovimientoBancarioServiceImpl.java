@@ -26,12 +26,11 @@ public class MovimientoBancarioServiceImpl extends GenericServiceImpl<Movimiento
         CuentaBancaria cuentaBancaria = cuentaBancariaDAO.get(movimientoBancario.getCuentaBancaria().getIdCuentaBancaria());
         if (movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.INGRESO) {
             saldoPosterior = cuentaBancaria.getSaldo().add(movimientoBancario.getCantidad());
-        }else if(movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.DEDUCCION){
+        } else if (movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.DEDUCCION) {
             saldoPosterior = cuentaBancaria.getSaldo().subtract(movimientoBancario.getCantidad());
-        }else{
+        } else {
             throw new BusinessException(new BusinessMessage("Tipo Movimiento","El tipo de movimiento es inválido"));
         }
-        
         
         cuentaBancaria.setSaldo(saldoPosterior);
         
