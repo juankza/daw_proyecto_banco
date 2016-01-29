@@ -2,10 +2,6 @@
 package com.fpmislata.daw2.business.domain;
 
 import java.math.BigDecimal;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.NotBlank;
 
 public class Transaccion {
     private String cuentaOrigen;
@@ -13,6 +9,10 @@ public class Transaccion {
     private BigDecimal importe;
     private String concepto;
     private String pin;
+    
+    public Transaccion() {
+        
+    }
     
     public Transaccion(String cuentaOrigen, String cuentaDestino, BigDecimal importe, String concepto, String pin) {
         this.cuentaOrigen = cuentaOrigen;
