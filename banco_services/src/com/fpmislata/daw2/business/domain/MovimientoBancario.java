@@ -62,7 +62,6 @@ public class MovimientoBancario implements Serializable {
     public int getIdMovimientoBancario() {
         return idMovimientoBancario;
     }
-
     public void setIdMovimientoBancario(int idMovimientoBancario) {
         this.idMovimientoBancario = idMovimientoBancario;
     }
@@ -70,7 +69,6 @@ public class MovimientoBancario implements Serializable {
     public TipoMovimientoBancario getTipoMovimientoBancario() {
         return tipoMovimientoBancario;
     }
-
     public void setTipoMovimientoBancario(TipoMovimientoBancario tipoMovimientoBancario) {
         this.tipoMovimientoBancario = tipoMovimientoBancario;
     }
@@ -78,7 +76,6 @@ public class MovimientoBancario implements Serializable {
     public String getConcepto() {
         return concepto;
     }
-
     public void setConcepto(String concepto) {
         this.concepto = concepto;
     }
@@ -86,7 +83,6 @@ public class MovimientoBancario implements Serializable {
     public BigDecimal getCantidad() {
         return cantidad;
     }
-
     public void setCantidad(BigDecimal cantidad) {
         this.cantidad = cantidad;
     }
@@ -94,7 +90,6 @@ public class MovimientoBancario implements Serializable {
     public BigDecimal getSaldo() {
         return saldo;
     }
-
     public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
@@ -102,7 +97,6 @@ public class MovimientoBancario implements Serializable {
     public Date getFecha() {
         return fecha;
     }
-
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
@@ -110,7 +104,6 @@ public class MovimientoBancario implements Serializable {
     public CuentaBancaria getCuentaBancaria() {
         return cuentaBancaria;
     }
-
     public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
         this.cuentaBancaria = cuentaBancaria;
     }

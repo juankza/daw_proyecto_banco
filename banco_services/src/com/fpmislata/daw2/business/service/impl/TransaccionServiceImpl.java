@@ -29,9 +29,6 @@ public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Inte
 
     @Override
     public Transaccion insertaTransaccion(Transaccion transaccion) throws BusinessException {
-        /*transaccion.getCuentaOrigen().trim().substring(0, 4);
-        transaccion.getCuentaOrigen().trim().substring(4, 8);
-        transaccion.getCuentaOrigen().trim().substring(8, 10);*/
         MovimientoBancario movimientoBancarioOrigen = null, movimientoBancarioDestino = null;
         String numCuentaBancariaOrigen = transaccion.getCuentaOrigen().trim().substring(10, 20);
         String numCuentaBancariaDestino = transaccion.getCuentaDestino().trim().substring(10, 20);

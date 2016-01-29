@@ -16,7 +16,6 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class CuentaBancaria implements Serializable {
-
     private int idCuentaBancaria;
     
     @NotNull
@@ -62,7 +61,6 @@ public class CuentaBancaria implements Serializable {
     public int getIdCuentaBancaria() {
         return idCuentaBancaria;
     }
-
     public void setIdCuentaBancaria(int idCuentaBancaria) {
         this.idCuentaBancaria = idCuentaBancaria;
     }
@@ -70,7 +68,6 @@ public class CuentaBancaria implements Serializable {
     public BigDecimal getSaldo() {
         return saldo;
     }
-
     public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
@@ -78,7 +75,6 @@ public class CuentaBancaria implements Serializable {
     public Date getFechaCreacion() {
         return fechaCreacion;
     }
-
     public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
@@ -86,7 +82,6 @@ public class CuentaBancaria implements Serializable {
     public String getPin() {
         return pin;
     }
-
     public void setPin(String pin) {
         this.pin = pin;
     }
@@ -94,7 +89,6 @@ public class CuentaBancaria implements Serializable {
     public String getDigitoControl() {
         return digitoControl;
     }
-
     public void setDigitoControl(String digitoControl) {
         this.digitoControl = digitoControl;
     }
@@ -102,7 +96,6 @@ public class CuentaBancaria implements Serializable {
     public String getNumeroCuenta() {
         return numeroCuenta;
     }
-
     public void setNumeroCuenta(String numeroCuenta) {
         this.numeroCuenta = numeroCuenta;
     }
@@ -110,7 +103,6 @@ public class CuentaBancaria implements Serializable {
     public SucursalBancaria getSucursalBancaria() {
         return sucursalBancaria;
     }
-
     public void setSucursalBancaria(SucursalBancaria sucursalBancaria) {
         this.sucursalBancaria = sucursalBancaria;
     }
@@ -118,8 +110,8 @@ public class CuentaBancaria implements Serializable {
     public Usuario getUsuario() {
         return usuario;
     }
-
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+    
 }
