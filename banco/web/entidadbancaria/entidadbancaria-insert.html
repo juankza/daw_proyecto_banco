@@ -1,33 +1,40 @@
-<form ng-controller="EntidadBancariaInsertController">
+<form ng-controller="EntidadBancariaInsertController" name="entidadBancariaForm" novalidate ng-init="required = true">
 
     <div class="row">
         <div class="col-md-3"><strong>Nombre: </strong></div>
-        <div class="col-md-5"><input type="text" name="name" ng-model="entidadBancaria.nombre" class="form-control"/></div>
+        <div class="col-md-5"><input type="text" name="nombre" ng-model="entidadBancaria.nombre" class="form-control" ng-required="required"/></div>
+        <span ng-show="entidadBancariaForm.nombre.$error.required && entidadBancariaForm.nombre.$dirty">El campo es requerido</span>
     </div>
 
     <div class="row">
         <div class="col-md-3"><strong>Código Bancario: </strong></div>
-        <div class="col-md-5"><input type="text" name="bankCode" ng-model="entidadBancaria.codigoEntidadBancaria" class="form-control"/></div>
+        <div class="col-md-5"><input type="text" name="codigoEntidadBancaria" ng-model="entidadBancaria.codigoEntidadBancaria" class="form-control" ng-pattern="/^[0-9]{4}$/" ng-required="required"/></div>
+        <span ng-show="entidadBancariaForm.codigoEntidadBancaria.$error.required && entidadBancariaForm.codigoEntidadBancaria.$dirty">El campo es requerido</span>
+        <span ng-show="entidadBancariaForm.codigoEntidadBancaria.$error.pattern && entidadBancariaForm.codigoEntidadBancaria.$dirty">El campo tiene un formato inválido.</span>
     </div>
 
     <div class="row">
         <div class="col-md-3"><strong>Fecha de creación: </strong></div>
-        <div class="col-md-5"><input id="datepicker" type="text" name="creationDate" ng-model="entidadBancaria.fechaCreacion" class="form-control" ng-readonly="true" /></div>
+        <div class="col-md-5"><input id="datepicker" type="text" name="fechaCreacion" ng-model="entidadBancaria.fechaCreacion" class="form-control" ng-readonly="true" ng-required="required"/></div>
+        <span ng-show="entidadBancariaForm.fechaCreacion.$error.required && entidadBancariaForm.fechaCreacion.$dirty">El campo es requerido</span>
     </div>
 
     <div class="row">
         <div class="col-md-3"><strong>Dirección: </strong></div>
-        <div class="col-md-5"><input type="text" name="address" ng-model="entidadBancaria.direccion" class="form-control"/></div>
+        <div class="col-md-5"><input type="text" name="direccion" ng-model="entidadBancaria.direccion" class="form-control" ng-required="required"/></div>
+        <span ng-show="entidadBancariaForm.direccion.$error.required && entidadBancariaForm.direccion.$dirty">El campo es requerido</span>
     </div>
 
     <div class="row">
         <div class="col-md-3"><strong>CIF: </strong></div>
-        <div class="col-md-5"><input type="text" name="ctc" ng-model="entidadBancaria.cif" class="form-control"/></div>
+        <div class="col-md-5"><input type="text" name="cif" ng-model="entidadBancaria.cif" class="form-control" ng-required="required" ng-pattern="/^[0-9]{8}[A-Z]$/"/></div>
+        <span ng-show="entidadBancariaForm.cif.$error.required && entidadBancariaForm.cif.$dirty">El campo es requerido</span>
+         <span ng-show="entidadBancariaForm.cif.$error.pattern && entidadBancariaForm.cif.$dirty">El campo tiene un formato inválido.</span>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <input  ng-click="insert()" type="submit" value="Insertar" class="btn btn-info"/><br>
+            <button  ng-click="insert()" type="submit" class="btn btn-info" ng-disabled="entidadBancariaForm.$invalid">Insertar</button><br>
         </div>
     </div>
     <div>
