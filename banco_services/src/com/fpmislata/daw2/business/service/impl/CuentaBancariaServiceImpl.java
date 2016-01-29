@@ -11,12 +11,13 @@ import com.fpmislata.daw2.core.util.ControlDigitGenerator;
 import com.fpmislata.daw2.persistence.dao.CuentaBancariaDAO;
 import com.fpmislata.daw2.persistence.dao.EntidadBancariaDAO;
 import com.fpmislata.daw2.persistence.dao.SucursalBancariaDAO;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria, Integer> implements CuentaBancariaService{
-    
+public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria, Integer> implements CuentaBancariaService {
     @Autowired
     CuentaBancariaDAO cuentaBancariaDAO;
     @Autowired
@@ -25,7 +26,7 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
     EntidadBancariaDAO entidadBancariaDAO;
 
     @Override
-    public CuentaBancaria insert(CuentaBancaria cuentaBancaria) throws BusinessException{
+    public CuentaBancaria insert(CuentaBancaria cuentaBancaria) throws BusinessException {
         List<BusinessMessage> businessMessages = new ArrayList();
         if (cuentaBancaria.getSucursalBancaria() == null) {
             businessMessages.add(new BusinessMessage("Sucursal Bancaria","No puede ser null"));
@@ -69,11 +70,6 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
         List<CuentaBancaria> cuentas;
         
         cuentas = this.findAll();
-//        for(int i = 0; i < cuentas.size(); i++) {
-//            if(cuentas.get(i).getUsuario().getDni().equals(dni)) {
-//                cuentas.remove(i);
-//            }
-//        }
         for (int i = cuentas.size(); i > 0; i--) {
             if (!cuentas.get(i-1).getUsuario().getDni().equals(dni)) {
                 cuentas.remove(i-1);

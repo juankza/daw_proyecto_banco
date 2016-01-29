@@ -8,8 +8,10 @@ import com.fpmislata.daw2.business.service.MovimientoBancarioService;
 import com.fpmislata.daw2.core.exception.BusinessException;
 import com.fpmislata.daw2.core.exception.BusinessMessage;
 import com.fpmislata.daw2.persistence.dao.CuentaBancariaDAO;
+
 import java.math.BigDecimal;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class MovimientoBancarioServiceImpl extends GenericServiceImpl<MovimientoBancario, Integer> implements MovimientoBancarioService {
@@ -17,7 +19,7 @@ public class MovimientoBancarioServiceImpl extends GenericServiceImpl<Movimiento
     CuentaBancariaDAO cuentaBancariaDAO;
     
     @Override
-    public MovimientoBancario insert(MovimientoBancario movimientoBancario) throws BusinessException{
+    public MovimientoBancario insert(MovimientoBancario movimientoBancario) throws BusinessException {
         if (movimientoBancario.getCantidad()==null) {
            throw new BusinessException(new BusinessMessage("Cantidad","No puede ser nula."));
         }
@@ -55,4 +57,5 @@ public class MovimientoBancarioServiceImpl extends GenericServiceImpl<Movimiento
         }
         return movimientos;
     }
+    
 }

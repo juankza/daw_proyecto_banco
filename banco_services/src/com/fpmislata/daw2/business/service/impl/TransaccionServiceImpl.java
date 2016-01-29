@@ -21,7 +21,6 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Integer> implements TransaccionService {
-
     @Autowired
     CuentaBancariaDAO cuentaBancariaDAO;
     @Autowired

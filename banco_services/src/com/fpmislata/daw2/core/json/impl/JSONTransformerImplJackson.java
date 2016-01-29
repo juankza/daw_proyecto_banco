@@ -25,4 +25,5 @@ public class JSONTransformerImplJackson implements JSONTransformer {
             throw new RuntimeException(ex);
         }
     }
+    
 }

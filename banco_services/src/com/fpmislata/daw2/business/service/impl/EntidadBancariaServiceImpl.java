@@ -17,13 +17,11 @@ public class EntidadBancariaServiceImpl extends GenericServiceImpl<EntidadBancar
     @Override
     public EntidadBancaria insert(EntidadBancaria entidadBancaria) throws BusinessException {
         return entidadBancariaDAO.insert(entidadBancaria);
-    
     }
 
     @Override
     public EntidadBancaria update(EntidadBancaria entidadBancaria) throws BusinessException {
         return entidadBancariaDAO.update(entidadBancaria);
-
     }
     
     @Override
@@ -35,7 +33,5 @@ public class EntidadBancariaServiceImpl extends GenericServiceImpl<EntidadBancar
     public List<EntidadBancaria> findByNombreLike(String nombre) throws BusinessException {
         return entidadBancariaDAO.findByNombreLike(nombre);
     }
-    
-    
     
 }
