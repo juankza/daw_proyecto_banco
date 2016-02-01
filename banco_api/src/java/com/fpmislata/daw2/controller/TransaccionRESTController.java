@@ -40,7 +40,7 @@ public class TransaccionRESTController {
         } catch (BusinessException bex) {
             try {
                 httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                httpServletResponse.setCharacterEncoding("application/json; charset=UTF-8");
+                httpServletResponse.setContentType("application/json; charset=UTF-8");
                 httpServletResponse.getWriter().println(jsonTransformer.toJSON(bex.getBusinessMessages()));
             } catch (IOException ex) {
                 httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
