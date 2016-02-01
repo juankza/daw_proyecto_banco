@@ -28,16 +28,16 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
     @Override
     public CuentaBancaria insert(CuentaBancaria cuentaBancaria) throws BusinessException {
         List<BusinessMessage> businessMessages = new ArrayList();
-        if (cuentaBancaria.getSucursalBancaria() == null) {
+        /*if (cuentaBancaria.getSucursalBancaria() == null) {
             businessMessages.add(new BusinessMessage("Sucursal Bancaria","No puede ser null"));
             throw new BusinessException(businessMessages);
         }
         if (cuentaBancaria.getSucursalBancaria().getEntidadBancaria() == null) {
             businessMessages.add(new BusinessMessage("Entidad Bancaria","No puede ser null"));
-        }
-        if (cuentaBancaria.getNumeroCuenta() == null || cuentaBancaria.getNumeroCuenta().length() != 10) {
-            businessMessages.add(new BusinessMessage("Número cuenta","El número de cuenta no debe estar vacío y debe tener 10 carácteres fijos de longitud."));
-        }
+        }*/
+        if (cuentaBancaria.getNumeroCuenta() == null || cuentaBancaria.getNumeroCuenta().length() != 10 || !cuentaBancaria.getNumeroCuenta().matches("\\d+")) {
+            businessMessages.add(new BusinessMessage("Número cuenta","El número de cuenta no debe estar vacío o contener letras/símbolos y debe tener 10 carácteres de longitud."));
+        }/*
         if (cuentaBancaria.getSaldo() == null) {
             businessMessages.add(new BusinessMessage("Saldo","No puede ser null"));
         }
@@ -47,7 +47,7 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
         if (cuentaBancaria.getPin() == null) {
             businessMessages.add(new BusinessMessage("PIN","No puede ser null"));
         }
-        
+        */
         if (!businessMessages.isEmpty()) {
             throw new BusinessException(businessMessages);
         }
