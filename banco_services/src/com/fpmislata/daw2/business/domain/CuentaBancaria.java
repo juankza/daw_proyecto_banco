@@ -27,16 +27,16 @@ public class CuentaBancaria implements Serializable {
     
     @NotBlank
     @Pattern(regexp="\\d+",message = "Tiene que contener carácteres numéricos")
-    @Size(min = 4, max = 4, message = "Tiene que contener obligatoriamente {max} carácteres")
+    @Size(min = 4, max = 4, message = "Tiene que contener {max} carácteres")
     private String pin;
     
     @NotBlank
-    @Size(min = 2, max = 2, message = "Tiene que contener obligatoriamente {max} carácteres")
+    @Size(min = 2, max = 2, message = "Tiene que contener {max} carácteres")
     private String digitoControl;
     
     @NotBlank
     @Pattern(regexp = "\\d+",message = "Solo puede contener carácteres numéricos")
-    @Size(min = 10, max = 10, message = "Tiene que contener obligatoriamente {max} carácteres")
+    @Size(min = 10, max = 10, message = "Tiene que contener {max} carácteres")
     private String numeroCuenta;
     
     @NotNull
