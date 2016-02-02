@@ -1,11 +1,6 @@
-<div ng-controller="UsuarioDeleteController" ng-init="isDisabled = true">
+<div ng-init="isDisabled = true">
    
     <form>
-        <div class="row">
-            <div class="col-md-3"><strong>ID: </strong></div>
-            <div class="col-md-5"><input type="text" name="idUsuario" ng-model="usuario.idUsuario" ng-disabled="{{isDisabled}}" class="form-control"/></div>
-        </div>
-
         <div class="row">
             <div class="col-md-3"><strong>Nombre: </strong></div>
             <div class="col-md-5"><input type="text" name="name" ng-model="usuario.nombre" ng-disabled="{{isDisabled}}" class="form-control"/></div>
@@ -41,15 +36,10 @@
                 </select>
             </div>
         </div>
-       
-        <div>
-            <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
-        </div>
 
     </form>
     <p>¿Estás seguro que quieres borrar el usuario: {{usuario.nombre}}? </p>
-    <a class="btn btn-danger" href="" ng-click="delete()">Sí</a>
-    <a class="btn btn-info" href="#/usuario/detail/{{usuario.idUsuario}}">No</a>
-    <a class="btn btn-info" href="#/usuario/list">Volver</a>
+    <a class="btn btn-default btn-delete" href="" ng-click="delete()">Sí</a>
+    <a class="btn btn-default btn-back" href="#/usuario/detail/{{usuario.idUsuario}}">No</a>
 
 </div>

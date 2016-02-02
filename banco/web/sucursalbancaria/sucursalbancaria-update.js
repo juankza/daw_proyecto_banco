@@ -1,5 +1,5 @@
-SucursalBancariaUpdateController.$inject = ['$scope', 'sucursalBancariaService', '$routeParams','$location'];
-function SucursalBancariaUpdateController($scope, sucursalBancariaService, $routeParams,$location) {
+SucursalBancariaUpdateController.$inject = ['$scope', 'sucursalBancariaService', '$routeParams','$location','messageService'];
+function SucursalBancariaUpdateController($scope, sucursalBancariaService, $routeParams,$location,messageService) {
     var response = sucursalBancariaService.detail($routeParams.idSucursalBancaria);
     response.success(function (data, status, headers, config) {
         $scope.sucursalBancaria = data;
@@ -16,8 +16,8 @@ function SucursalBancariaUpdateController($scope, sucursalBancariaService, $rout
             $location.path("/sucursalbancaria/detail/"+$scope.sucursalBancaria.idSucursalBancaria);
         }).error(function (data, status, headers, config) {
             if (status === 400) {
-                $scope.errors = data;
-                
+                $scope.$parent.errorMessages = data;
+                messageService.showError("error");
             } else {
                 alert(" HTTP request failed. Status: " + status);
 

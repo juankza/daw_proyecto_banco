@@ -1,43 +1,192 @@
 <!DOCTYPE html>
-<html ng-app="loginApp">
+<html ng-app="app">
+    
     <head>
-        <title>Ecobank</title>
+        <!-- META -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ecobank</title>
         <link rel="icon" href="img/favicon.png" sizes="16x16" type="image/png">
-        <script src="lib/bootstrap/jquery.js" type="text/javascript"></script>
-        <script src="lib/angular/js/angular.js" type="text/javascript"></script>
-        <script src="lib/angular/js/angular-locale_es-es.js" type="text/javascript"></script>
-        <script src="lib/angular/js/angular-route.js" type="text/javascript"></script>
+        <!-- LIBRARIES -->
+        <script src="lib/jquery/jquery-2.2.0.min.js" type="text/javascript"></script>
+        <script src="lib/jquery/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="lib/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="lib/angular/angular.js" type="text/javascript"></script>
+        <script src="lib/angular/angular-locale_es-es.js" type="text/javascript"></script>
+        <script src="lib/angular/angular-route.js" type="text/javascript"></script>
+        <!-- ANGULARJS CONFIG -->
         <script src="app.js" type="text/javascript"></script>
         <script src="app-route.js" type="text/javascript"></script>
+        <!-- JavaScript -->
+        <script src="message/message-service.js" type="text/javascript"></script>
+        <script src="session/session-service.js" type="text/javascript"></script>
         <script src="index.js" type="text/javascript"></script>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- Custom CSS -->
-        <link href="css/user.css" rel="stylesheet">
-        <link href="css/login.css" rel="stylesheet" type="text/css"/>
-    </head>
-    <body>
-        <nav class="navbar navbar-top" role="navigation">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <img class="logo" src="img/logo.png">
-                </div>
-                <!--<div class="navbar-right user-cp">Usuario</div>-->
-            </div><!-- Container -->
-        </nav>
-        <div ng-view></div>
+        <!-- CSS -->
+        <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="lib/jquery/jquery-ui.min.css" rel="stylesheet" />
+        <link href="index.css" rel="stylesheet" />
         
-        <footer class="footer navbar-fixed-bottom">
-            <div class="container-fluid">
-                <div class="row">
-                <p class="text-muted col-xs-2 col-sm-2 col-xs-offset-8 col-sm-offset-8 col-md-offset-8 col-md-2">Contáctanos</p>
-                <p class="text-muted col-xs-2 col-sm-2 col-md-2"><a href="#/easter">EcoBank© 2016</a></p>
+    </head>
+    
+    <body ng-controller="IndexController">
+        
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" ng-show="session.usuario !== null">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#/">
+                        <img class="navbar-brand" src="img/logo.png" alt="Ecobank logo">
+                    </a>
+                </div>
+                <div id="nav-main" ng-show="session.usuario !== null">
+                    <div id="navbar-collapse" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a ng-href="#/entidadbancaria/list">Entidades</a>
+                            </li>
+                            <li>
+                                <a ng-href="#/cuentabancaria/list">Cuentas</a>
+                            </li>
+                            <li>
+                                <a ng-href="#/usuario/list">Usuarios</a>
+                            </li>
+                            <li id="btn-menu-li">
+                                <a id="btn-menu" class="btn btn-default" ng-click="toggleText = !toggleText" href="#nav-user" target="_self" data-toggle="collapse" aria-expanded="false" aria-controls="nav-user">{{menuText}}</a>
+                            </li>
+                        </ul>
+                        <ul id="nav-user" class="collapse nav navbar-nav nav-collapse">
+                            <li>
+                                <a ng-href="#/usuario/detail/{{session.usuario.idUsuario}}">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                    {{session.usuario.apodo}}
+                                </a>
+                            </li>
+                            <li>
+                                <a ng-click="toggleText = !toggleText; logout();" href="#nav-user" target="_self" data-toggle="collapse">
+                                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                                    Cerrar sesión
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </footer>
-        <!-- Scripts -->
-        <script src="lib/bootstrap/bootstrap.js" type="text/javascript"></script>
+        </nav>
+        
+        <div id="main-container" ng-view></div>
+        
+        <div id="errorModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Mensaje del servidor</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-danger" role="alert">
+                            <span class="sr-only">Error:</span>
+                            <div ng-repeat="errorMessage in errorMessages">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <strong>{{errorMessage.fieldName}}</strong>
+                                <span ng-show="errorMessage.fieldName !== null"> - </span>
+                                {{errorMessage.message}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-white" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="infoModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Mensaje del servidor</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info" role="alert">
+                            <span class="sr-only">Info:</span>
+                            <div ng-repeat="infoMessage in infoMessages">
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                <strong>{{infoMessage.fieldName}}</strong>
+                                <span ng-show="infoMessage.fieldName !== null"> - </span>
+                                {{infoMessage.message}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-white" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--<footer class="footer navbar-fixed-bottom">
+            <div class="container-fluid">
+                <div class="row">
+                    <p class="text-muted col-xs-2 col-sm-2 col-xs-offset-8 col-sm-offset-8 col-md-offset-8 col-md-2">Contáctanos</p>
+                    <p class="text-muted col-xs-2 col-sm-2 col-md-2">EcoBank© 2016</p>
+                </div>
+            </div>
+        </footer>-->
+        
+        <!-- ### ALL FILES ### -->
+        <script src="main.js" type="text/javascript"></script>
+        <script src="login/login.js" type="text/javascript"></script>
+        <link href="login/login.css" rel="stylesheet" />
+        
+        <!-- ENTIDAD BANCARIA -->
+        <script src="entidadbancaria/entidadbancaria-route.js" type="text/javascript"></script>
+        <script src="entidadbancaria/entidadbancaria-service.js" type="text/javascript"></script>
+        <script src="entidadbancaria/entidadbancaria-detail.js" type="text/javascript"></script>
+        <script src="entidadbancaria/entidadbancaria-insert.js" type="text/javascript"></script>
+        <script src="entidadbancaria/entidadbancaria-update.js" type="text/javascript"></script>
+        <script src="entidadbancaria/entidadbancaria-delete.js" type="text/javascript"></script>
+        <script src="entidadbancaria/entidadbancaria-list.js" type="text/javascript"></script>
+        <script src="entidadbancaria/entidadbancaria-getsucursalesbyentidad.js" type="text/javascript"></script>
+
+        <!-- SUCURSAL BANCARIA -->
+        <script src="sucursalbancaria/sucursalbancaria-route.js" type="text/javascript"></script>
+        <script src="sucursalbancaria/sucursalbancaria-service.js" type="text/javascript"></script>
+        <script src="sucursalbancaria/sucursalbancaria-detail.js" type="text/javascript"></script>
+        <script src="sucursalbancaria/sucursalbancaria-insert.js" type="text/javascript"></script>
+        <script src="sucursalbancaria/sucursalbancaria-update.js" type="text/javascript"></script>
+        <script src="sucursalbancaria/sucursalbancaria-delete.js" type="text/javascript"></script>
+        <script src="sucursalbancaria/sucursalbancaria-list.js" type="text/javascript"></script>
+        
+        <!-- CUENTA BANCARIA -->
+        <script src="cuentabancaria/cuentabancaria-route.js" type="text/javascript"></script>
+        <script src="cuentabancaria/cuentabancaria-service.js" type="text/javascript"></script>
+        <script src="cuentabancaria/cuentabancaria-detail.js" type="text/javascript"></script>
+        <script src="cuentabancaria/cuentabancaria-insert.js" type="text/javascript"></script>
+        <script src="cuentabancaria/cuentabancaria-delete.js" type="text/javascript"></script>
+        <script src="cuentabancaria/cuentabancaria-list.js" type="text/javascript"></script>
+        <script src="cuentabancaria/cuentabancaria-getmovimientosbycuenta.js" type="text/javascript"></script>
+        
+        <!-- MOVIMIENTO BANCARIO -->
+        <script src="movimientobancario/movimientobancario-route.js" type="text/javascript"></script>
+        <script src="movimientobancario/movimientobancario-service.js" type="text/javascript"></script>
+        <script src="movimientobancario/movimientobancario-detail.js" type="text/javascript"></script>
+        <script src="movimientobancario/movimientobancario-insert.js" type="text/javascript"></script>
+        
+        <!-- USUARIO -->
+        <script src="usuario/usuario-route.js" type="text/javascript"></script>
+        <script src="usuario/usuario-service.js" type="text/javascript"></script>
+        <script src="usuario/usuario-detail.js" type="text/javascript"></script>
+        <script src="usuario/usuario-insert.js" type="text/javascript"></script>
+        <script src="usuario/usuario-update.js" type="text/javascript"></script>
+        <script src="usuario/usuario-delete.js" type="text/javascript"></script>
+        <script src="usuario/usuario-list.js" type="text/javascript"></script>
+        
     </body>
+    
 </html>

@@ -1,10 +1,5 @@
-<div ng-controller="UsuarioDetailController" ng-init="isDisabled = true">
+<div ng-init="isDisabled = true">
     <form>
-        <div class="row">
-            <div class="col-md-3"><strong>ID: </strong></div>
-            <div class="col-md-5"><input type="text" name="idUsuario" ng-model="usuario.idUsuario" ng-disabled="{{isDisabled}}" class="form-control"/></div>
-        </div>
-
         <div class="row">
             <div class="col-md-3"><strong>Nombre: </strong></div>
             <div class="col-md-5"><input type="text" name="name" ng-model="usuario.nombre" ng-disabled="{{isDisabled}}" class="form-control"/></div>
@@ -40,14 +35,10 @@
                 </select>
             </div>
         </div>
-       
-        <div>
-            <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
-        </div>
 
     </form>
 
-    <a class="btn btn-info" href="#/usuario/update/{{usuario.idUsuario}}">ACTUALIZAR</a>
-    <a class="btn btn-danger" href="#/usuario/delete/{{usuario.idUsuario}}">BORRAR</a>
-    <a class="btn btn-info" href="#/usuario/list">Volver</a>
+    <a class="btn btn-default btn-update" href="#/usuario/update/{{usuario.idUsuario}}">Actualizar</a>
+    <a class="btn btn-default btn-delete" href="#/usuario/delete/{{usuario.idUsuario}}">Borrar</a>
+    <a class="btn btn-default btn-back" href="#/usuario/list">Volver</a>
 </div>

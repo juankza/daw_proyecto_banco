@@ -1,10 +1,5 @@
-<div ng-controller="SucursalBancariaDetailController" ng-init="isDisabled = true">
+<div ng-init="isDisabled = true">
     <form>
-        <div class="row">
-            <div class="col-md-3"><strong>ID: </strong></div>
-            <div class="col-md-5"><input type="text" name="idEntidadBancaria" ng-model="sucursalBancaria.idSucursalBancaria" ng-disabled="{{isDisabled}}" class="form-control"/></div>
-        </div>
-
         <div class="row">
             <div class="col-md-3"><strong>Código Sucursal:  </strong></div>
             <div class="col-md-5"><input type="text" name="nombre" ng-model="sucursalBancaria.codigoSucursalBancaria" class="form-control" ng-disabled="{{isDisabled}}"/></div>
@@ -25,14 +20,9 @@
             <div class="col-md-5"><input type="text" name="direccion" ng-model="sucursalBancaria.telefono" ng-disabled="{{isDisabled}}" class="form-control" /></div>
         </div>
 
-      
-        <div>
-            <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
-        </div>
-
     </form>
     {{mensaje}}
-    <a class="btn btn-info" href="#/sucursalbancaria/update/{{sucursalBancaria.idSucursalBancaria}}">Actualizar</a>
-    <a class="btn btn-danger" href="#/sucursalbancaria/delete/{{sucursalBancaria.idSucursalBancaria}}">Borrar</a>
-    <a class="btn btn-info" href="#/entidadbancaria/detail/{{sucursalBancaria.entidadBancaria.idEntidadBancaria}}">Volver</a>
+    <a class="btn btn-default btn-update" href="#/sucursalbancaria/update/{{sucursalBancaria.idSucursalBancaria}}">Actualizar</a>
+    <a class="btn btn-default btn-delete" href="#/sucursalbancaria/delete/{{sucursalBancaria.idSucursalBancaria}}">Borrar</a>
+    <a class="btn btn-default btn-back" href="#/entidadbancaria/detail/{{sucursalBancaria.entidadBancaria.idEntidadBancaria}}">Volver</a>
 </div>

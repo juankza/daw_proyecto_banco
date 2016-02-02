@@ -1,0 +1,47 @@
+
+form#login-form { display: block; }
+
+.panel-login {
+    display: block;
+    margin-top: 150px;
+    background-color: rgba(0,0,0,0.7);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 0px;
+    color: #aaa;
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+}
+
+.panel-login>.panel-heading { background-color: rgba(0,0,0,0.3); border-color: transparent; color: #00415d; text-align:center; }
+
+.panel-login>.panel-heading span {
+    text-decoration: none;
+    color: #aaa;
+    font-weight: bold;
+    font-size: 15px;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+.panel-login>.panel-heading span.active{ color: rgba(45,134,51,1); font-size: 18px; }
+
+.panel-login input[type="text"], .panel-login input[type="email"], .panel-login input[type="password"] {
+    color: #aaa;
+    background-color: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/*
+.forgot-password { font-style: normal !important; text-decoration: underline; color: #aaa; }
+.forgot-password:hover { text-decoration: underline; color: #ccc; }
+*/
+
+/* *** MEDIA *** */
+@media(max-width: 767px) {
+    
+    .panel-login { margin-top: 100px; }
+    
+}
+
+/* *** *** *** */

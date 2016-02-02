@@ -1,5 +1,5 @@
-UsuarioUpdateController.$inject = ['$scope', '$location', 'usuarioService', '$routeParams'];
-function UsuarioUpdateController($scope, $location, usuarioService, $routeParams) {
+UsuarioUpdateController.$inject = ['$scope', '$location', 'usuarioService', '$routeParams','messageService'];
+function UsuarioUpdateController($scope, $location, usuarioService, $routeParams,messageService) {
     var response = usuarioService.detail($routeParams.idUsuario).success(function (data, status, headers, config) {
         $scope.usuario = data;
     }).error(function (data, status, headers, config) {
@@ -11,7 +11,8 @@ function UsuarioUpdateController($scope, $location, usuarioService, $routeParams
             $location.path('/usuario/detail/' + $scope.usuario.idUsuario);
         }).error(function (data, status, headers, config) {
             if (status === 400) {
-                $scope.errors = data;
+                $scope.$parent.errorMessages = data;
+                messageService.showError("error");
             } else {
                 alert("HTTP request failed. Status: " + status);
             }

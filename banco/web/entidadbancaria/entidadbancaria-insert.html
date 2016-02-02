@@ -1,4 +1,4 @@
-<form ng-controller="EntidadBancariaInsertController" name="entidadBancariaForm" novalidate ng-init="required = true">
+<form name="entidadBancariaForm" novalidate ng-init="required = true">
 
     <div class="row">
         <div class="col-md-3"><strong>Nombre: </strong></div>
@@ -29,16 +29,13 @@
         <div class="col-md-3"><strong>CIF: </strong></div>
         <div class="col-md-5"><input type="text" name="cif" ng-model="entidadBancaria.cif" class="form-control" ng-required="required" ng-pattern="/^[0-9]{8}[A-Z]$/"/></div>
         <span ng-show="entidadBancariaForm.cif.$error.required && entidadBancariaForm.cif.$dirty">El campo es requerido</span>
-         <span ng-show="entidadBancariaForm.cif.$error.pattern && entidadBancariaForm.cif.$dirty">El campo tiene un formato inválido.</span>
+        <span ng-show="entidadBancariaForm.cif.$error.pattern && entidadBancariaForm.cif.$dirty">El campo tiene un formato inválido.</span>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <button  ng-click="insert()" type="submit" class="btn btn-info" ng-disabled="entidadBancariaForm.$invalid">Insertar</button><br>
+            <button  ng-click="insert()" type="submit" class="btn btn-default btn-insert" ng-disabled="entidadBancariaForm.$invalid">Insertar</button><br>
         </div>
-    </div>
-    <div>
-        <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
     </div>
 
 </form>

@@ -1,5 +1,5 @@
-MovimientoBancarioInsertController.$inject = ['movimientoBancarioService', '$scope', '$routeParams', 'cuentaBancariaService'];
-function MovimientoBancarioInsertController(movimientoBancarioService, $scope, $routeParams, cuentaBancariaService) {
+MovimientoBancarioInsertController.$inject = ['movimientoBancarioService', '$scope', '$routeParams', 'cuentaBancariaService','messageService'];
+function MovimientoBancarioInsertController(movimientoBancarioService, $scope, $routeParams, cuentaBancariaService,messageService) {
     $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
     $scope.movimientoBancario = {};
     //Obtenemos objeto cuenta que se pasa por ruta
@@ -19,7 +19,8 @@ function MovimientoBancarioInsertController(movimientoBancarioService, $scope, $
         alert("Insertado correctamente.");
     }).error(function (data, status, headers, config) {
        if (status === 400) {
-                $scope.errors = data;
+                $scope.$parent.errorMessages = data;
+                messageService.showError("error");
             } else {
                 alert("Ha fallado la petición HTTP. Estado HTTP: " + status);
             }

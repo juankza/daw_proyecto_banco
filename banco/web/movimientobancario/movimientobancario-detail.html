@@ -1,10 +1,5 @@
-<div ng-controller="MovimientoBancarioDetailController" ng-init="isDisabled = true">
+<div ng-init="isDisabled = true">
     <form>
-        <div class="row">
-            <div class="col-md-3"><strong>ID: </strong></div>
-            <div class="col-md-5"><input type="text" name="idEntidadBancaria" ng-model="movimientoBancario.idMovimientoBancario" ng-disabled="{{isDisabled}}" class="form-control"/></div>
-        </div>
-
         <div class="row">
             <div class="col-md-3"><strong>Tipo Movimiento: </strong></div>
             <div class="col-md-5"><input type="text" name="nombre" ng-model="movimientoBancario.tipoMovimientoBancario" class="form-control" ng-disabled="{{isDisabled}}"/></div>
@@ -29,11 +24,7 @@
             <div class="col-md-3"><strong>Fecha: </strong></div>
             <div class="col-md-5"><input type="text"  id="datepicker" name="fecha" ng-disabled="{{isDisabled}}" ng-model="movimientoBancario.fecha" class="form-control"/></div>
         </div>
-        
-        <div>
-            <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
-        </div>
 
     </form>
-    <a class="btn btn-info" href="#/cuentabancaria/detail/{{movimientoBancario.cuentaBancaria.idCuentaBancaria}}">Volver</a>
+    <a class="btn btn-default btn-back" href="#/cuentabancaria/detail/{{movimientoBancario.cuentaBancaria.idCuentaBancaria}}">Volver</a>
 </div>

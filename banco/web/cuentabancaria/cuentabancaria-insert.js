@@ -1,5 +1,5 @@
-CuentaBancariaInsertController.$inject = ['$scope', 'cuentaBancariaService', 'usuarioService','sucursalBancariaService','$location'];
-function CuentaBancariaInsertController($scope, cuentaBancariaService, usuarioService,sucursalBancariaService,$location) {
+CuentaBancariaInsertController.$inject = ['$scope', 'cuentaBancariaService', 'usuarioService','sucursalBancariaService','$location','messageService'];
+function CuentaBancariaInsertController($scope, cuentaBancariaService, usuarioService,sucursalBancariaService,$location,messageService) {
     $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
 
     var response = usuarioService.list();
@@ -29,7 +29,8 @@ function CuentaBancariaInsertController($scope, cuentaBancariaService, usuarioSe
 
         }).error(function (data, status, headers, config) {
             if (status === 400) {
-                $scope.errors = data;
+                $scope.$parent.errorMessages = data;
+                messageService.showError("error");
             } else {
                 alert("Ha fallado la petición HTTP. Estado HTTP: " + status);
             }
