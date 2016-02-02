@@ -1,3 +1,4 @@
+
 package com.fpmislata.daw2.business.service.impl;
 
 import com.fpmislata.daw2.business.domain.Credenciales;
@@ -14,7 +15,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> implements UsuarioService {
-
     @Autowired
     private UsuarioDAO usuarioDAO;
     @Autowired
@@ -28,13 +28,9 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> imp
         if(usuario.getContrasena() == null || usuario.getContrasena().trim().equals("")) {
             businessMessages.add(new BusinessMessage("Contraseña", "No puede estar vacío"));
         }
-        
         validate(businessMessages);
-        
         usuario.setContrasena(passwordManager.encrypt(usuario.getContrasena()));
-
         return usuarioDAO.insert(usuario);
-
     }
 
     @Override
@@ -42,9 +38,7 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> imp
         if (usuario.getContrasena() != null) {
             usuario.setContrasena(passwordManager.encrypt(usuario.getContrasena()));
         }
-
         return usuarioDAO.update(usuario);
-
     }
 
     @Override
@@ -55,9 +49,7 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> imp
         if (nombre == null || nombre.trim().equals("")) {
             businessMessages.add(new BusinessMessage("Nombre", "No puede estar vacío"));
         }
-
         validate(businessMessages);
-
         return usuarioDAO.findByNombreEquals(nombre);
     }
 
@@ -69,9 +61,7 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> imp
         if (nombre == null || nombre.trim().equals("")) {
             businessMessages.add(new BusinessMessage("Nombre", "No puede estar vacío."));
         }
-
         validate(businessMessages);
-
         return usuarioDAO.findByNombreLike(nombre);
     }
 
@@ -80,7 +70,6 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> imp
         if (email == null || email.trim().equals("")) {
             throw new RuntimeException("Email no puede estar vacío");
         }
-
         return usuarioDAO.getByEmail(email);
     }
 
@@ -93,17 +82,13 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario, Integer> imp
         if (credenciales == null) {
             throw new RuntimeException("Credenciales no puede ser null");
         }
-
         if (credenciales.getEmail() == null || credenciales.getEmail().trim().equals("")) {
             businessMessages.add(new BusinessMessage("Email", "No puede estar vacío"));
         }
-
         if (credenciales.getContrasena() == null || credenciales.getContrasena().trim().equals("")) {
             businessMessages.add(new BusinessMessage("Contraseña", "No puede estar vacío"));
         }
-
         validate(businessMessages);
-
         usuario = getByEmail(credenciales.getEmail());
 
         if (usuario != null && passwordManager.check(credenciales.getContrasena(), usuario.getContrasena())) {

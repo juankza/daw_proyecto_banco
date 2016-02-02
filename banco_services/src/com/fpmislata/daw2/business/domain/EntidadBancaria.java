@@ -14,8 +14,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-public class EntidadBancaria implements Serializable{
-    
+public class EntidadBancaria implements Serializable {
     private int idEntidadBancaria;
     
     @NotBlank

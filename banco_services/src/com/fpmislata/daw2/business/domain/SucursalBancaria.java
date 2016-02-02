@@ -15,7 +15,6 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class SucursalBancaria implements Serializable {
-
     private int idSucursalBancaria;
     
     @NotBlank
@@ -51,7 +50,6 @@ public class SucursalBancaria implements Serializable {
     public int getIdSucursalBancaria() {
         return idSucursalBancaria;
     }
-
     public void setIdSucursalBancaria(int idSucursalBancaria) {
         this.idSucursalBancaria = idSucursalBancaria;
     }
@@ -59,7 +57,6 @@ public class SucursalBancaria implements Serializable {
     public String getCodigoSucursalBancaria() {
         return codigoSucursalBancaria;
     }
-
     public void setCodigoSucursalBancaria(String codigoSucursalBancaria) {
         this.codigoSucursalBancaria = codigoSucursalBancaria;
     }
@@ -67,7 +64,6 @@ public class SucursalBancaria implements Serializable {
     public Date getFechaCreacion() {
         return fechaCreacion;
     }
-
     public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
@@ -75,7 +71,6 @@ public class SucursalBancaria implements Serializable {
     public String getDireccion() {
         return direccion;
     }
-
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
@@ -83,7 +78,6 @@ public class SucursalBancaria implements Serializable {
     public String getTelefono() {
         return telefono;
     }
-
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
@@ -91,7 +85,6 @@ public class SucursalBancaria implements Serializable {
     public EntidadBancaria getEntidadBancaria() {
         return entidadBancaria;
     }
-
     public void setEntidadBancaria(EntidadBancaria entidadBancaria) {
         this.entidadBancaria = entidadBancaria;
     }

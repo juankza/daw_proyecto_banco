@@ -8,8 +8,10 @@ import com.fpmislata.daw2.business.service.MovimientoBancarioService;
 import com.fpmislata.daw2.core.exception.BusinessException;
 import com.fpmislata.daw2.core.exception.BusinessMessage;
 import com.fpmislata.daw2.persistence.dao.CuentaBancariaDAO;
+
 import java.math.BigDecimal;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class MovimientoBancarioServiceImpl extends GenericServiceImpl<MovimientoBancario, Integer> implements MovimientoBancarioService {
@@ -17,21 +19,24 @@ public class MovimientoBancarioServiceImpl extends GenericServiceImpl<Movimiento
     CuentaBancariaDAO cuentaBancariaDAO;
     
     @Override
-    public MovimientoBancario insert(MovimientoBancario movimientoBancario) throws BusinessException{
-        if (movimientoBancario.getCantidad()==null) {
+    public MovimientoBancario insert(MovimientoBancario movimientoBancario) throws BusinessException {
+        if(movimientoBancario.getCantidad()==null) {
            throw new BusinessException(new BusinessMessage("Cantidad","No puede ser nula."));
         }
         BigDecimal saldoPosterior;
         
         CuentaBancaria cuentaBancaria = cuentaBancariaDAO.get(movimientoBancario.getCuentaBancaria().getIdCuentaBancaria());
-        if (movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.INGRESO) {
+        if(movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.HABER) {
             saldoPosterior = cuentaBancaria.getSaldo().add(movimientoBancario.getCantidad());
-        }else if(movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.DEDUCCION){
-            saldoPosterior = cuentaBancaria.getSaldo().subtract(movimientoBancario.getCantidad());
-        }else{
+        } else if(movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.DEBER) {
+            if(movimientoBancario.getCuentaBancaria().getSaldo().compareTo(movimientoBancario.getCantidad()) == -1) {
+                //BigDecimal usa compareTo. -1 cuando es menor, 0 igual 1 mayor
+                throw new BusinessException(new BusinessMessage("Cantidad", "La cuenta origen no tiene suficiente saldo."));
+            }
+            saldoPosterior = cuentaBancaria.getSaldo().subtract(movimientoBancario.getCantidad());         
+        } else {
             throw new BusinessException(new BusinessMessage("Tipo Movimiento","El tipo de movimiento es inválido"));
         }
-        
         
         cuentaBancaria.setSaldo(saldoPosterior);
         
@@ -56,4 +61,5 @@ public class MovimientoBancarioServiceImpl extends GenericServiceImpl<Movimiento
         }
         return movimientos;
     }
+    
 }
