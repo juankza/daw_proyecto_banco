@@ -1,5 +1,5 @@
-EntidadBancariaDeleteController.$inject = ['$scope','$routeParams','entidadBancariaService','$location'];
-function EntidadBancariaDeleteController($scope,$routeParams,entidadBancariaService,$location){
+EntidadBancariaDeleteController.$inject = ['$scope','$routeParams','entidadBancariaService','$location','messageService'];
+function EntidadBancariaDeleteController($scope,$routeParams,entidadBancariaService,$location,messageService) {
     
     var response = entidadBancariaService.detail($routeParams.idEntidadBancaria).success(function (data, status, headers, config) {
         $scope.entidadBancaria = data;
@@ -14,7 +14,8 @@ function EntidadBancariaDeleteController($scope,$routeParams,entidadBancariaServ
         $location.path("/entidadbancaria/list");
     }).error(function (data, status, headers, config) {
          if (status === 400) {
-                $scope.errors = data;
+                $scope.$parent.errorMessages = data;
+                messageService.showError("error");
             } else {
                 alert("Ha fallado la petición HTTP. Estado HTTP: " + status);
             }

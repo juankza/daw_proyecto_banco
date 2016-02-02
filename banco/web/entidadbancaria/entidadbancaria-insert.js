@@ -1,5 +1,5 @@
-EntidadBancariaInsertController.$inject = ['$scope', '$location', 'entidadBancariaService'];
-function EntidadBancariaInsertController($scope, $location, entidadBancariaService) {
+EntidadBancariaInsertController.$inject = ['$scope', '$location', 'entidadBancariaService','messageService'];
+function EntidadBancariaInsertController($scope, $location, entidadBancariaService,messageService) {
     $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
     $scope.entidadBancaria = {};
 
@@ -13,7 +13,8 @@ function EntidadBancariaInsertController($scope, $location, entidadBancariaServi
             
         }).error(function (data, status, headers, config) {
             if (status === 400) {
-                $scope.errors = data;
+                $scope.$parent.errorMessages = data;
+                messageService.showError("error");
             } else {
                 alert("Ha fallado la petición HTTP. Estado HTTP: " + status);
             }
