@@ -13,9 +13,9 @@ CREATE TABLE IF NOT EXISTS `movimientobancario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT IGNORE INTO `movimientobancario` (`idMovimientoBancario`, `tipo`, `concepto`, `cantidad`, `saldo`, `fecha`, `idCuentaBancaria`) VALUES
-    (3, 'INGRESO', 'Ingreso 1', 1000.00, 2000.00, '2015-09-05 12:00:00', 3),
-    (4, 'INGRESO', 'Ingreso 1', 1000.00, 3000.00, '2015-09-05 12:00:00', 4),
-    (5, 'INGRESO', 'Ingreso 1', 1000.00, 4000.00, '2015-09-05 12:00:00', 5),
-    (6, 'DEDUCCION', 'Deducción 1', 500.00, 1500.00, '2015-10-10 12:00:00', 3),
-    (7, 'DEDUCCION', 'Deducción 1', 500.00, 2500.00, '2015-10-10 12:00:00', 4),
-    (8, 'DEDUCCION', 'Deducción 1', 500.00, 3500.00, '2015-10-10 12:00:00', 5);
+    (3, 'HABER', 'Ingreso 1', 1000.00, 2000.00, '2015-09-05 12:00:00', 3),
+    (4, 'HABER', 'Ingreso 1', 1000.00, 3000.00, '2015-09-05 12:00:00', 4),
+    (5, 'HABER', 'Ingreso 1', 1000.00, 4000.00, '2015-09-05 12:00:00', 5),
+    (6, 'DEBER', 'Deducción 1', 500.00, 1500.00, '2015-10-10 12:00:00', 3),
+    (7, 'DEBER', 'Deducción 1', 500.00, 2500.00, '2015-10-10 12:00:00', 4),
+    (8, 'DEBER', 'Deducción 1', 500.00, 3500.00, '2015-10-10 12:00:00', 5);
