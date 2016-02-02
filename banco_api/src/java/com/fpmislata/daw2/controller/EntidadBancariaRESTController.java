@@ -2,7 +2,9 @@
 package com.fpmislata.daw2.controller;
 
 import com.fpmislata.daw2.business.domain.EntidadBancaria;
+import com.fpmislata.daw2.business.domain.SucursalBancaria;
 import com.fpmislata.daw2.business.service.EntidadBancariaService;
+import com.fpmislata.daw2.business.service.SucursalBancariaService;
 import com.fpmislata.daw2.core.exception.BusinessException;
 import com.fpmislata.daw2.core.exception.BusinessMessage;
 import com.fpmislata.daw2.core.json.JSONTransformer;
@@ -29,6 +31,9 @@ public class EntidadBancariaRESTController {
     JSONTransformer jsonTransformer;
     @Autowired
     EntidadBancariaService entidadBancariaService;
+    
+    @Autowired
+    SucursalBancariaService sucursalBancariaService;
     
     @RequestMapping(value = "/{idEntidadBancaria}", method = RequestMethod.GET, produces = "application/json")
     public void get(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
@@ -170,13 +175,26 @@ public class EntidadBancariaRESTController {
             Logger.getLogger(EntidadBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    // TODO UPGRADE: Double type of search by name (Equals & Like).
-    @RequestMapping(value = "/search/{nombreEntidadBancaria}", method = RequestMethod.GET, produces = "application/json")
-    public void findByName(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-    @PathVariable("nombreEntidadBancaria") String nombreEntidadBancaria) {
+    
+    @RequestMapping(value = "/search", method = RequestMethod.GET, produces = "application/json")
+    public void findByName(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         List<EntidadBancaria> entidadesBancarias;
+        String nombreEntidadBancaria;
+        String where;
         try {
-            entidadesBancarias = entidadBancariaService.findByNombreLike(nombreEntidadBancaria);
+            nombreEntidadBancaria = httpServletRequest.getParameter("nombre");
+            where = httpServletRequest.getParameter("where");
+            
+            if(where != null) {
+                if(where.trim().equals("eq")) {
+                    entidadesBancarias = entidadBancariaService.findByNombreEquals(nombreEntidadBancaria);
+                } else {
+                    entidadesBancarias = entidadBancariaService.findByNombreLike(nombreEntidadBancaria);
+                }
+            } else {
+                entidadesBancarias = entidadBancariaService.findByNombreLike(nombreEntidadBancaria);
+            }
+            
             if(entidadesBancarias != null && !entidadesBancarias.isEmpty()) {
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
                 httpServletResponse.setContentType("application/json; charset=UTF-8");
@@ -194,6 +212,34 @@ public class EntidadBancariaRESTController {
                 Logger.getLogger(EntidadBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch(IOException ex) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            Logger.getLogger(EntidadBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @RequestMapping(value = "/{idEntidadBancaria}/sucursalbancaria")
+    public void getSucursalesByEntidad(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @PathVariable int idEntidadBancaria){
+        List<SucursalBancaria> sucursalesBancarias;
+        
+        try {
+            sucursalesBancarias = sucursalBancariaService.getSucursalesByEntidad(idEntidadBancaria);
+            if (sucursalesBancarias != null && !sucursalesBancarias.isEmpty()) {
+                    httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+                httpServletResponse.setContentType("application/json; charset=UTF-8");
+                httpServletResponse.getWriter().println(jsonTransformer.toJSON(sucursalesBancarias));
+            }else{
+                httpServletResponse.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            }
+        } catch (BusinessException bex) {
+               httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                httpServletResponse.setContentType("application/json; charset=UTF-8");
+            try {
+                httpServletResponse.getWriter().println(jsonTransformer.toJSON(bex.getBusinessMessages()));
+            } catch (IOException ex) {
+                httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                Logger.getLogger(EntidadBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (IOException ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             Logger.getLogger(EntidadBancariaRESTController.class.getName()).log(Level.SEVERE, null, ex);
         }

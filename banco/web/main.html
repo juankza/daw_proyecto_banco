@@ -11,7 +11,7 @@
         <script src="lib/angular/js/angular-route.js" type="text/javascript"></script>
         <script src="app.js" type="text/javascript"></script>
         <script src="app-route.js" type="text/javascript"></script>
-        
+
         <script src="entidadbancaria/entidadbancaria-delete.js" type="text/javascript"></script>
         <script src="entidadbancaria/entidadbancaria-detail.js" type="text/javascript"></script>
         <script src="entidadbancaria/entidadbancaria-insert.js" type="text/javascript"></script>
@@ -19,7 +19,7 @@
         <script src="entidadbancaria/entidadbancaria-route.js" type="text/javascript"></script>
         <script src="entidadbancaria/entidadbancaria-service.js" type="text/javascript"></script>
         <script src="entidadbancaria/entidadbancaria-update.js" type="text/javascript"></script>
-        
+
         <script src="usuario/usuario-route.js" type="text/javascript"></script>
         <script src="usuario/usuario-service.js" type="text/javascript"></script>
         <script src="usuario/usuario-insert.js" type="text/javascript"></script>
@@ -27,18 +27,50 @@
         <script src="usuario/usuario-detail.js" type="text/javascript"></script>
         <script src="usuario/usuario-delete.js" type="text/javascript"></script>
         <script src="usuario/usuario-list.js" type="text/javascript"></script>
-        
+
+        <script src="session/session-service.js" type="text/javascript"></script>
+
+        <script src="main.js" type="text/javascript"></script>
+
+        <script src="sucursalbancaria/sucursalbancaria-service.js" type="text/javascript"></script>
+        <script src="sucursalbancaria/sucursalbancaria-list.js" type="text/javascript"></script>
+
+
+        <script src="cuentabancaria/cuentabancaria-service.js" type="text/javascript"></script>
+        <script src="cuentabancaria/cuentabancaria-route.js" type="text/javascript"></script>
+        <script src="cuentabancaria/cuentabancaria-list.js" type="text/javascript"></script>
+        <script src="cuentabancaria/cuentabancaria-detail.js" type="text/javascript"></script>
+        <script src="cuentabancaria/cuentabancaria-insert.js" type="text/javascript"></script>
+        <script src="cuentabancaria/cuentabancaria-delete.js" type="text/javascript"></script>
+        <script src="cuentabancaria/cuentabancaria-getmovimientosbycuenta.js" type="text/javascript"></script>
+
+        <script src="movimientobancario/movimientobancario-service.js" type="text/javascript"></script>
+        <script src="movimientobancario/movimientobancario-detail.js" type="text/javascript"></script>
+        <script src="movimientobancario/movimientobancario-route.js" type="text/javascript"></script>
+
+        <script src="entidadbancaria/entidadbancaria-getsucursalesbyentidad.js" type="text/javascript"></script>
+        <script src="sucursalbancaria/sucursalbancaria-route.js" type="text/javascript"></script>
+        <script src="sucursalbancaria/sucursalbancaria-detail.js" type="text/javascript"></script>
+
+        <script src="movimientobancario/movimientobancario-insert.js" type="text/javascript"></script>
+        <script src="sucursalbancaria/sucursalbancaria-insert.js" type="text/javascript"></script>
+        <script src="sucursalbancaria/sucursalbancaria-delete.js" type="text/javascript"></script>
+        <script src="sucursalbancaria/sucursalbancaria-update.js" type="text/javascript"></script>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="css/user.css" rel="stylesheet" type="text/css"/>
         <link href="lib/jquery/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
+    <body ng-controller="MainController">
         <nav class="navbar navbar-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <img class="logo" src="img/logo.png">
+                    <a href="#/"><img class="logo" src="img/logo.png"></a>
+
                 </div>
-                <!--<div class="navbar-right user-cp">Usuario</div>-->
+
+                <div> 
+                    <a class="navbar-right" id="botonLogout" ng-click="logout()"><img src="./img/logout.png"/>{{mensajeLogout}}</a>
+                </div>
             </div><!-- Container -->
         </nav>
 
@@ -50,7 +82,7 @@
                         <ul class="nav nav-sidebar">
                             <li><a class="btn" href="#/entidadbancaria/list">Entidades bancarias</a></li>
                             <li><a class="btn" href="#/usuario/list">Usuarios</a></li>
-                            <li><a class="btn">Cosas</a></li>
+                            <li><a class="btn" href="#/cuentabancaria/list">Cuentas bancarias</a></li>
                         </ul></div>
                 </div><!-- sidebar -->
                 <div class="col-md-10 col-sm-9">

@@ -6,14 +6,18 @@ function EntidadBancariaDeleteController($scope,$routeParams,entidadBancariaServ
         var fechaCreacion = new Date(data.fechaCreacion);
         $scope.entidadBancaria.fechaCreacion = fechaCreacion.getFullYear() + "-" + (fechaCreacion.getMonth()+1) + "-" + fechaCreacion.getDate();
     }).error(function (data, status, headers, config) {
-        alert("HTTP request failed. Status: " + status);
+        alert("Ha fallado la petición HTTP. Estado: " + status);
     });
     $scope.delete = function(){
         response = entidadBancariaService.delete($routeParams.idEntidadBancaria).success(function (data, status, headers, config) {
         alert("Borrado correctamente.");
         $location.path("/entidadbancaria/list");
     }).error(function (data, status, headers, config) {
-        alert("HTTP request failed. Status: " + status);
+         if (status === 400) {
+                $scope.errors = data;
+            } else {
+                alert("Ha fallado la petición HTTP. Estado HTTP: " + status);
+            }
     });
         
     }

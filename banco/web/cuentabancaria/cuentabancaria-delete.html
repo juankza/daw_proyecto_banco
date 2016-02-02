@@ -1,0 +1,38 @@
+<div ng-controller="CuentaBancariaDeleteController" ng-init="isDisabled = true">
+       <form>
+        <div class="row">
+            <div class="col-md-3"><strong>ID cuenta: </strong></div>
+            <div class="col-md-5"><input type="text" name="idEntidadBancaria" ng-disabled="{{isDisabled}}" ng-model="cuentaBancaria.idCuentaBancaria" ng-disabled="{{isDisabled}}" class="form-control"/></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>Saldo</strong></div>
+            <div class="col-md-5"><input type="text" name="nombre" ng-disabled="{{isDisabled}}" ng-model="cuentaBancaria.saldo" class="form-control"/></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>CCC: </strong></div>
+            <div class="col-md-5"><input type="text" name="codigoEntidadBancaria" ng-disabled="{{isDisabled}}" ng-model="ccc" class="form-control"/></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>Sucursal:  </strong></div>
+            <div class="col-md-5"><input type="text" id="datepicker" name="fechaCreacion" ng-disabled="{{isDisabled}}" ng-model="sucursal" class="form-control" ng-readonly="true" /></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>Usuario: </strong></div>
+            <div class="col-md-5"><input type="text" name="direccion" ng-disabled="{{isDisabled}}" ng-model="usuario" class="form-control" /></div>
+        </div>
+
+        
+        <div>
+            <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
+        </div>
+
+    </form>
+        <p> ¿Estás seguro que quieres borrar la cuenta: {{ccc}}? </p>
+        <a class="btn btn-danger" href="" ng-click="delete()">Sí</a>
+        <a class="btn btn-info" href="#/cuentabancaria/detail/{{cuentaBancaria.idCuentaBancaria}}">No</a>
+    {{message}}
+</div>

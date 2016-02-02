@@ -4,7 +4,10 @@ loginApp.config(['$routeProvider', function($routeProvider) {
         });
         $routeProvider.otherwise({
             redirectTo : "/"
-        });        
+        });
+        $routeProvider.when('/easter',{
+            templateUrl : 'register.html'
+        });    
         
     }
 ]);

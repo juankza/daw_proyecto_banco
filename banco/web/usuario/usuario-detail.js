@@ -6,7 +6,7 @@ function UsuarioDetailController(usuarioService, $scope, $routeParams) {
     response.success(function (data, status, headers, config) {
         $scope.usuario = data;
     }).error(function (data, status, headers, config) {
-        alert("Detail HTTP request failed. Status: " + status);
+        alert("4Detail HTTP request failed. Status: " + status);
         console.log(data);
     });
 }

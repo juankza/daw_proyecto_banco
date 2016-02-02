@@ -97,6 +97,7 @@ public class UsuarioRESTController {
         try {
             newUsuario = jsonTransformer.toObject(jsonRequest, Usuario.class);
             newUsuario.setIdUsuario(idUsuario);
+            //
             updatedUsuario = usuarioService.update(newUsuario);
             if(updatedUsuario != null) {
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
@@ -171,13 +172,26 @@ public class UsuarioRESTController {
             Logger.getLogger(UsuarioRESTController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    // TODO UPGRADE: Double type of search by name (Equals & Like).
-    @RequestMapping(value = "/search/{nombreUsuario}", method = RequestMethod.GET, produces = "application/json")
-    public void findByName(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
-    @PathVariable("nombreUsuario") String nombreUsuario) {
+    
+    @RequestMapping(value = "/search", method = RequestMethod.GET, produces = "application/json")
+    public void findByName(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
         List<Usuario> usuarios;
+        String nombreUsuario;
+        String where;
         try {
-            usuarios = usuarioService.findByNombreLike(nombreUsuario);
+            nombreUsuario = httpServletRequest.getParameter("nombre");
+            where = httpServletRequest.getParameter("where");
+            
+            if(where != null) {
+                if(where.trim().equals("eq")) {
+                    usuarios = usuarioService.findByNombreEquals(nombreUsuario);
+                } else {
+                    usuarios = usuarioService.findByNombreLike(nombreUsuario);
+                }
+            } else {
+                usuarios = usuarioService.findByNombreLike(nombreUsuario);
+            }
+            
             if(usuarios != null && !usuarios.isEmpty()) {
                 httpServletResponse.setStatus(HttpServletResponse.SC_OK);
                 httpServletResponse.setContentType("application/json; charset=UTF-8");
@@ -199,5 +213,4 @@ public class UsuarioRESTController {
             Logger.getLogger(UsuarioRESTController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }

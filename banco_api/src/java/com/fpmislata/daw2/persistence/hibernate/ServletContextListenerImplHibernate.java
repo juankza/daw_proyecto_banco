@@ -11,13 +11,11 @@ public class ServletContextListenerImplHibernate implements ServletContextListen
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         HibernateUtil.buildSessionFactory();
-        System.out.println("\nSESSION OPENED...\n");
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         HibernateUtil.closeSessionFactory();
-        System.out.println("\nSESSION CLOSED...\n");
     }
     
 }

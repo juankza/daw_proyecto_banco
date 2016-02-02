@@ -1,29 +1,42 @@
-<div ng-controller="EntidadBancariaDeleteController">
-        <h1>Bank Entity</h1>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                <tr>
-                    <td><strong>ID</strong></td> 
-                    <td><strong>Nombre</strong></td>
-                    <td><strong>Código bancario</strong></td>
-                    <td><strong>Fecha creación</strong></td>
-                    <td><strong>Dirección</strong></td>
-                    <td><strong>CIF</strong></td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{entidadBancaria.idEntidadBancaria}}</td>
-                    <td>{{entidadBancaria.nombre}}</td>
-                    <td>{{entidadBancaria.codigoEntidadBancaria}}</td>
-                    <td>{{entidadBancaria.fechaCreacion}}</td>
-                    <td>{{entidadBancaria.direccion}}</td>
-                    <td>{{entidadBancaria.cif}}</td>
-                </tr>
-            </tbody>
-            </table>
-        </div><!-- Tabla -->
+<div ng-controller="EntidadBancariaDeleteController" ng-init="isDisabled = true">
+     
+         <form>
+        <div class="row">
+            <div class="col-md-3"><strong>ID: </strong></div>
+            <div class="col-md-5"><input type="text" name="idEntidadBancaria" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.idEntidadBancaria" ng-disabled="{{isDisabled}}" class="form-control"/></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>Nombre: </strong></div>
+            <div class="col-md-5"><input type="text" name="nombre" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.nombre" class="form-control"/></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>Código bancario: </strong></div>
+            <div class="col-md-5"><input type="text" name="codigoEntidadBancaria" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.codigoEntidadBancaria" class="form-control"/></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>Fecha de creación: </strong></div>
+            <div class="col-md-5"><input type="text" id="datepicker" name="fechaCreacion" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.fechaCreacion" class="form-control" ng-readonly="true" /></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>Dirección: </strong></div>
+            <div class="col-md-5"><input type="text" name="direccion" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.direccion" class="form-control" /></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><strong>CIF: </strong></div>
+            <div class="col-md-5"><input type="text" name="cif" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.cif" class="form-control"/></div>
+        </div>
+        <div class="row">
+        </div>
+        <div>
+            <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
+        </div>
+
+    </form>
         <p> ¿Estás seguro que quieres borrar la entidad: {{entidadBancaria.nombre}}? </p>
         <a class="btn btn-danger" href="" ng-click="delete()">Sí</a>
         <a class="btn btn-info" href="#/entidadbancaria/detail/{{entidadBancaria.idEntidadBancaria}}">No</a>

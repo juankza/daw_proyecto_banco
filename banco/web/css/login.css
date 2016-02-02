@@ -6,3 +6,9 @@ body {
 footer p{
     color: white !important;
 }
+#rol{
+    display: none;
+}
+legend{
+    padding: 20px;
+}
