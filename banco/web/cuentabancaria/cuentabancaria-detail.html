@@ -24,21 +24,23 @@
     
     <!-- MAESTRO-DETALLE -->
     <div>
-    <h4>Movimientos de la cuenta: {{cuentaBancaria.sucursalBancaria.entidadBancaria.codigoEntidadBancaria}} {{cuentaBancaria.sucursalBancaria.codigoSucursalBancaria}} {{cuentaBancaria.digitoControl}} {{cuentaBancaria.numeroCuenta}}</h4>
+    <h4>Movimientos de la cuenta</h4>
     <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
-                    <td><strong>Fecha</strong></td>
                     <td><strong>Tipo Movimiento</strong></td>
+                    <td><strong>Cantidad</strong></td>
+                    <td><strong>Fecha</strong></td>
                     <td><strong>Acciones</strong></td>
 
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="movimientoBancario in movimientosBancarios">
-                    <td>{{movimientoBancario.fecha}}</td>
                     <td>{{movimientoBancario.tipoMovimientoBancario}}</td>
+                    <td>{{movimientoBancario.cantidad}}€</td>
+                    <td>{{movimientoBancario.fecha}}</td>
                     <td><a class="btn btn-default btn-info" href="#/movimientobancario/detail/{{movimientoBancario.idMovimientoBancario}}">Detalles</a></td>
                 </tr>
             </tbody>
