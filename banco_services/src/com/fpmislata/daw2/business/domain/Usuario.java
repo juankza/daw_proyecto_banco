@@ -13,7 +13,6 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Usuario implements Serializable{
-    
     private int idUsuario;
     
     @NotBlank
@@ -58,7 +57,6 @@ public class Usuario implements Serializable{
     public int getIdUsuario() {
         return idUsuario;
     }
-
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
@@ -66,7 +64,6 @@ public class Usuario implements Serializable{
     public String getNombre() {
         return nombre;
     }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -74,7 +71,6 @@ public class Usuario implements Serializable{
     public String getApellidos() {
         return apellidos;
     }
-
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
@@ -82,7 +78,6 @@ public class Usuario implements Serializable{
     public String getDni() {
         return dni;
     }
-
     public void setDni(String dni) {
         this.dni = dni;
     }
@@ -90,7 +85,6 @@ public class Usuario implements Serializable{
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -98,7 +92,6 @@ public class Usuario implements Serializable{
     public String getApodo() {
         return apodo;
     }
-
     public void setApodo(String apodo) {
         this.apodo = apodo;
     }
@@ -106,7 +99,6 @@ public class Usuario implements Serializable{
     public String getContrasena() {
         return contrasena;
     }
-
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
@@ -114,7 +106,6 @@ public class Usuario implements Serializable{
     public Rol getRol() {
         return rol;
     }
-
     public void setRol(Rol rol) {
         this.rol = rol;
     }
