@@ -1,5 +1,5 @@
-UsuarioDeleteController.$inject = ['usuarioService','$scope','$routeParams','$location'];
-function UsuarioDeleteController(usuarioService,$scope,$routeParams,$location){
+UsuarioDeleteController.$inject = ['usuarioService','$scope','$routeParams','$location','messageService'];
+function UsuarioDeleteController(usuarioService,$scope,$routeParams,$location,messageService){
     var response = usuarioService.detail($routeParams.idUsuario).success(function (data, status, headers, config) {
         $scope.usuario = data;
     }).error(function (data, status, headers, config) {
@@ -11,7 +11,8 @@ function UsuarioDeleteController(usuarioService,$scope,$routeParams,$location){
         $location.path("/usuario/list");
     }).error(function (data, status, headers, config) {
          if (status === 400) {
-                $scope.errors = data;
+                $scope.$parent.errorMessages = data;
+                messageService.showError("error");
             } else {
                 alert("Ha fallado la petición HTTP. Estado HTTP: " + status);
             }

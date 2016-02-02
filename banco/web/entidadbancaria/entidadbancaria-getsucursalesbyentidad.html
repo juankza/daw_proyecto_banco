@@ -1,4 +1,4 @@
-<div ng-controller="EntidadBancariaGetSucursalesByEntidadController">
+<div>
     <h2>Sucursales de {{entidadBancaria.nombre}}</h2>
     <div class="table-responsive">
         <table class="table">
@@ -16,15 +16,15 @@
                     <td>{{sucursalBancaria.idSucursalBancaria}}</td>
                     <td>{{sucursalBancaria.codigoSucursalBancaria}}</td>
                     <td>{{sucursalBancaria.direccion}}</td>
-                    
 
 
-                    <td><a class="btn btn-info" href="#/sucursalbancaria/detail/{{sucursalBancaria.idSucursalBancaria}}">Detalles</a></td>
+
+                    <td><a class="btn btn-default btn-info" href="#/sucursalbancaria/detail/{{sucursalBancaria.idSucursalBancaria}}">Detalles</a></td>
 
                 </tr>
             </tbody>
         </table>
-        <a class="btn btn-info" href="#/entidadbancaria/list">Volver</a>
+        <a class="btn btn-default btn-back" href="#/entidadbancaria/list">Volver</a>
     </div><!-- Tabla -->
 
 

@@ -1,10 +1,5 @@
-<div ng-controller="CuentaBancariaDetailController" ng-init="isDisabled = true">
+<div ng-init="isDisabled = true">
     <form>
-        <div class="row">
-            <div class="col-md-3"><strong>ID cuenta: </strong></div>
-            <div class="col-md-5"><input type="text" name="idEntidadBancaria" ng-disabled="{{isDisabled}}" ng-model="cuentaBancaria.idCuentaBancaria" ng-disabled="{{isDisabled}}" class="form-control"/></div>
-        </div>
-
         <div class="row">
             <div class="col-md-3"><strong>Saldo</strong></div>
             <div class="col-md-5"><input type="text" name="nombre" ng-disabled="{{isDisabled}}" ng-model="cuentaBancaria.saldo" class="form-control"/></div>
@@ -25,11 +20,6 @@
             <div class="col-md-5"><input type="text" name="direccion" ng-disabled="{{isDisabled}}" ng-model="usuario" class="form-control" /></div>
         </div>
 
-        
-        <div>
-            <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
-        </div>
-
     </form>
     
     <!-- MAESTRO-DETALLE -->
@@ -39,7 +29,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <td><strong>ID movimiento</strong></td>
                     <td><strong>Fecha</strong></td>
                     <td><strong>Tipo Movimiento</strong></td>
                     <td><strong>Acciones</strong></td>
@@ -48,25 +37,21 @@
             </thead>
             <tbody>
                 <tr ng-repeat="movimientoBancario in movimientosBancarios">
-                    <td>{{movimientoBancario.idMovimientoBancario}}</td>
                     <td>{{movimientoBancario.fecha}}</td>
                     <td>{{movimientoBancario.tipoMovimientoBancario}}</td>
-
-
-                    <td><a class="btn btn-info" href="#/movimientobancario/detail/{{movimientoBancario.idMovimientoBancario}}">Detalles</a></td>
-
+                    <td><a class="btn btn-default btn-info" href="#/movimientobancario/detail/{{movimientoBancario.idMovimientoBancario}}">Detalles</a></td>
                 </tr>
             </tbody>
         </table>
-        <a class="btn btn-success" href="#/movimientobancario/insert/{{cuentaBancaria.idCuentaBancaria}}">Nuevo movimiento</a>
-        <a class="btn btn-info" href="#/cuentabancaria/list">Volver</a>
+        <a class="btn btn-default btn-insert" href="#/movimientobancario/insert/{{cuentaBancaria.idCuentaBancaria}}">Nuevo movimiento</a>
+        <a class="btn btn-default btn-back" href="#/cuentabancaria/list">Volver</a>
     </div><!-- Tabla -->
 
 
 </div>
     
     
-<a class="btn btn-danger" href="#/cuentabancaria/delete/{{cuentaBancaria.idCuentaBancaria}}">Borrar Cuenta</a>
+<a class="btn btn-default btn-delete" href="#/cuentabancaria/delete/{{cuentaBancaria.idCuentaBancaria}}">Borrar Cuenta</a>
 
 
 

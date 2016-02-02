@@ -25,14 +25,9 @@
             <div class="col-md-5"><input type="text" name="direccion" ng-model="sucursalBancaria.telefono" ng-disabled="{{isDisabled}}" class="form-control" /></div>
         </div>
 
-      
-        <div>
-            <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
-        </div>
-
     </form>
     
     <p>¿Estás seguro que quieres borrar la sucursal: {{sucursalBancaria.codigoSucursalBancaria}} {{sucursalBancaria.direccion}}? </p>
-    <a class="btn btn-danger" href="" ng-click="delete()">Sí</a>
-    <a class="btn btn-info" href="#/entidadbancaria/detail/{{sucursalBancaria.entidadBancaria.idEntidadBancaria}}">No</a>
+    <a class="btn btn-default btn-delete" href="" ng-click="delete()">Sí</a>
+    <a class="btn btn-default btn-back" href="#/entidadbancaria/detail/{{sucursalBancaria.entidadBancaria.idEntidadBancaria}}">No</a>
 </div>

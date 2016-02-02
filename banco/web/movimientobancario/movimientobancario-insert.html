@@ -1,11 +1,11 @@
-<form ng-controller="MovimientoBancarioInsertController">
+<form>
 
     <div class="row">
         <div class="col-md-3"><strong>Tipo movimiento: </strong></div>
         <div class="col-md-5">
         <select ng-model="tipoMovimientoBancario" class="form-control">
-                <option selected value="INGRESO">Haber</option>
-                <option value="DEDUCCION">Debe</option>
+                <option selected value="HABER">Haber</option>
+                <option value="DEBER">Debe</option>
             
             </select>
         </div>
@@ -31,11 +31,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <input  ng-click="insert()" type="submit" value="Insertar" class="btn btn-info"/><br>
+            <input  ng-click="insert()" type="submit" value="Insertar" class="btn btn-default btn-insert"/><br>
         </div>
     </div>
-    <div>
-        <div ng-repeat="error in errors" class="alert alert-danger" role="alert"><strong>{{error.fieldName}}</strong> - {{error.message}}</div>
-    </div>
-
 </form>

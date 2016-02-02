@@ -1,22 +1,20 @@
-<div ng-controller="UsuarioListController">
+<div>
     <h1>Usuarios</h1>
     <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
-                    <td><strong>ID</strong></td>
                     <td><strong>Apodo</strong></td>
                     <td><strong>Acciones</strong></td>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="usuario in usuarios">
-                    <td>{{usuario.idUsuario}}</td>
                     <td>{{usuario.nombre}}</td>
-                    <td><a class="btn btn-info" href="#/usuario/detail/{{usuario.idUsuario}}">Detalles</a></td>
+                    <td><a class="btn btn-default btn-info" href="#/usuario/detail/{{usuario.idUsuario}}">Detalles</a></td>
                 </tr>
             </tbody>
         </table>
     </div><!-- Tabla -->
-    <a class="btn btn-success" href="#/usuario/insert">INSERTAR</a>
+    <a class="btn btn-default btn-insert" href="#/usuario/insert">Insertar</a>
 </div>

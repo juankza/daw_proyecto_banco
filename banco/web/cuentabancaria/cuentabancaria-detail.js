@@ -7,15 +7,8 @@ function CuentaBancariaDetailController(cuentaBancariaService,$scope,$routeParam
         $scope.sucursal = $scope.cuentaBancaria.sucursalBancaria.codigoSucursalBancaria + "  " + $scope.cuentaBancaria.sucursalBancaria.direccion;
         $scope.usuario = $scope.cuentaBancaria.usuario.nombre + " " + $scope.cuentaBancaria.usuario.apellidos;
     }).error(function (data, status, headers, config) {
-        alert("Ha fallado la petición HTTP. Estado: " + status);    
+        alert("Ha fallado la petición HTTP. Estado: " + status);
     });
-    
-    
-    
-    
-    
-    
-    
    
     var response = cuentaBancariaService.getMovimientosByCuenta($routeParams.idCuentaBancaria);
    response.success(function (data, status, headers, config) {
@@ -25,7 +18,7 @@ function CuentaBancariaDetailController(cuentaBancariaService,$scope,$routeParam
            $scope.movimientosBancarios[i].fecha =  fecha.getFullYear() + "-" + (fecha.getMonth()+1) + "-" + fecha.getDate();
         }
     }).error(function (data, status, headers, config) {
-        alert("Ha fallado la petición HTTP. Estado: " + status);    
+        alert("Ha fallado la petición HTTP. Estado: " + status);
     });
     
 }

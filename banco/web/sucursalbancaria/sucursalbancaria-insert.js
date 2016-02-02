@@ -1,5 +1,5 @@
-SucursalBancariaInsertController.$inject = ['$scope', 'sucursalBancariaService', '$routeParams', 'entidadBancariaService'];
-function SucursalBancariaInsertController($scope, sucursalBancariaService, $routeParams, entidadBancariaService) {
+SucursalBancariaInsertController.$inject = ['$scope', 'sucursalBancariaService', '$routeParams', 'entidadBancariaService','messageService'];
+function SucursalBancariaInsertController($scope, sucursalBancariaService, $routeParams, entidadBancariaService,messageService) {
     $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
     $scope.sucursalBancaria = {};
 
@@ -10,7 +10,8 @@ function SucursalBancariaInsertController($scope, sucursalBancariaService, $rout
         $scope.sucursalBancaria.entidadBancaria = $scope.entidadBancaria;
     }).error(function (data, status, headers, config) {
         if (status === 400) {
-                $scope.errors = data;
+                $scope.$parent.errorMessages = data;
+                messageService.showError("error");
             } else {
                 alert("Ha fallado la petición HTTP. Estado HTTP: " + status);
             }
@@ -22,7 +23,8 @@ function SucursalBancariaInsertController($scope, sucursalBancariaService, $rout
             alert("Insertado correctamente.");
         }).error(function (data, status, headers, config) {
             if (status === 400) {
-                $scope.errors = data;
+                $scope.$parent.errorMessages = data;
+                messageService.showError("error");
             } else {
                 alert("Ha fallado la petición HTTP. Estado HTTP: " + status);
             }

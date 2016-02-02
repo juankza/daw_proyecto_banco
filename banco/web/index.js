@@ -1,24 +1,36 @@
-IndexController.$inject = ['$scope', '$location', '$http'];
-function IndexController($scope, $location, $http) {
-    $scope.loginData = {};
-    $scope.login = function () {
-        var response = $http({
-            method: 'POST',
-            url: '/api/session',
-            data: $scope.loginData
-        });
-        response.success(function (data, status, headers, config) {
-            location.href = "./main.html";
-        }).error(function (data, status, headers, config) {
-            if (status === 400) {
-                $scope.errors = data;
-
-            } else {
-                alert("Ha fallado la petición HTTP. Estado: " + status);
-                console.log($scope.loginData);
-            }
+IndexController.$inject = ['$scope', '$location', 'messageService', 'sessionService'];
+function IndexController($scope, $location, messageService, sessionService) {
+    $scope.errorMessages; $scope.infoMessages;
+    $scope.session = sessionService.session;
+    $scope.isLogged;
+    
+    $scope.logout = function() {
+        $scope.isLogged = false;
+        sessionService.logout().then(function(webSession) {
+            $location.path("/login");
+        }, function(errorMessages) {
+            $scope.errorMessages = errorMessages;
+            messageService.showError("error");
         });
     };
-
+    
+    sessionService.logged().then(function(webSession) {
+        $scope.isLogged = true;
+    }, function(errorMessages) {
+        $scope.isLogged = false;
+    });
+    
+    $scope.toggleText = true;
+    $scope.$watch('toggleText', function() {
+        $scope.menuText = $scope.toggleText ? "Mi cuenta" : "Menú";
+    });
+    
+    $scope.$watch('isLogged', function() {
+        jQuery("body").css({ 'background' : $scope.isLogged ? "none" : "url('img/background.png') no-repeat" });
+    });
+    
 }
-loginApp.controller("IndexController", IndexController);
+app.controller("IndexController", IndexController);
+
+jQuery('#errorModal').modal({ show: false });
+jQuery('#infoModal').modal({ show: false });

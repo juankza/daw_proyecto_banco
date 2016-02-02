@@ -1,5 +1,5 @@
-EntidadBancariaUpdateController.$inject = ['$scope', '$location', 'entidadBancariaService', '$routeParams'];
-function EntidadBancariaUpdateController($scope, $location, entidadBancariaService, $routeParams) {
+EntidadBancariaUpdateController.$inject = ['$scope', '$location', 'entidadBancariaService', '$routeParams','messageService'];
+function EntidadBancariaUpdateController($scope, $location, entidadBancariaService, $routeParams,messageService) {
     
     $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
     var response = entidadBancariaService.detail($routeParams.idEntidadBancaria).success(function (data, status, headers, config) {
@@ -17,7 +17,8 @@ function EntidadBancariaUpdateController($scope, $location, entidadBancariaServi
             $location.path('/entidadbancaria/detail/' + $scope.entidadBancaria.idEntidadBancaria);
         }).error(function (data, status, headers, config) {
             if (status === 400) {
-                $scope.errors = data;
+                $scope.$parent.errorMessages = data;
+                messageService.showError("error");
             } else {
                 alert("HTTP request failed. Status: " + status);
             }
