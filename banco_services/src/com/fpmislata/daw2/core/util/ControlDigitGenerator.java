@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.fpmislata.daw2.core.util;
 
-/**
- *
- * @author Lliurex
- */
 public class ControlDigitGenerator {
     public static String generateControlDigit(String codigoEntidadBancaria,String codigoSucursalBancaria,String codigoCuentaBancaria) {
     int dc1=0;

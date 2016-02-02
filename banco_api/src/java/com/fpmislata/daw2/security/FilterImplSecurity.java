@@ -1,3 +1,4 @@
+
 package com.fpmislata.daw2.security;
 
 import com.fpmislata.daw2.business.domain.Usuario;
