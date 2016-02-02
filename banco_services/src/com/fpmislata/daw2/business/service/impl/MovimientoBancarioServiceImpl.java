@@ -26,9 +26,9 @@ public class MovimientoBancarioServiceImpl extends GenericServiceImpl<Movimiento
         BigDecimal saldoPosterior;
         
         CuentaBancaria cuentaBancaria = cuentaBancariaDAO.get(movimientoBancario.getCuentaBancaria().getIdCuentaBancaria());
-        if(movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.INGRESO) {
+        if(movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.HABER) {
             saldoPosterior = cuentaBancaria.getSaldo().add(movimientoBancario.getCantidad());
-        } else if(movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.DEDUCCION) {
+        } else if(movimientoBancario.getTipoMovimientoBancario() == TipoMovimientoBancario.DEBER) {
             if(movimientoBancario.getCuentaBancaria().getSaldo().compareTo(movimientoBancario.getCantidad()) == -1) {
                 //BigDecimal usa compareTo. -1 cuando es menor, 0 igual 1 mayor
                 throw new BusinessException(new BusinessMessage("Cantidad", "La cuenta origen no tiene suficiente saldo."));
