@@ -91,9 +91,9 @@
     </target>
     
     <!-- target dist-openshift depende enable-produccion y dist -->
-    <target name="-dist-openshift" depends="-enable-produccion,dist"></target>
+    <target name="dist-openshift" depends="-enable-produccion,dist"></target>
     
-    <target name="-deploy-from-jenkins" depends="-enable-produccion">
+    <target name="deploy-from-jenkins" depends="-enable-produccion">
         
         <taskdef resource="es/logongas/openshift/ant/antlib.xml" />
         <delete dir="../daw_proyecto_banco"></delete>
