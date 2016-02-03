@@ -102,7 +102,7 @@
             password="${password}" 
             domainName="vicentedaw2" 
             applicationName="ecobanco"  
-            privateKeyFile="/home/myuser/.ssh/id_rsa"
+            privateKeyFile="../id_rsa.pub"
             path="../daw_proyecto_banco"
         />
         
@@ -120,7 +120,7 @@
             password="${password}"
             domainName="vicente2daw"
             applicationName="ecobanco" 
-            privateKeyFile="/home/myuser/.ssh/id_rsa"
+            privateKeyFile="../id_rsa.pub"
             path="../daw_proyecto_banco"
         />
     </target>
