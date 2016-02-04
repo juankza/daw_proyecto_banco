@@ -19,7 +19,7 @@
         
         <property column="numeroCuenta" name="numeroCuenta" />
         
-        <many-to-one name="sucursalBancaria">
+        <many-to-one name="sucursalBancaria" fetch="join" >
             <column name="idSucursalBancaria" />
         </many-to-one>
         

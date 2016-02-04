@@ -12,18 +12,18 @@ import org.hibernate.Session;
 public class CuentaBancariaDAOImplHibernate extends GenericDAOImplHibernate<CuentaBancaria, Integer> implements CuentaBancariaDAO{
 
     @Override
-    public List<CuentaBancaria> findByNumeroCuenta(String numeroCuenta) throws BusinessException {
-        List<CuentaBancaria> cuentasBancarias;
+    public CuentaBancaria findByNumeroCuenta(String numeroCuenta) throws BusinessException {
+        CuentaBancaria cuentaBancarias;
         
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        cuentasBancarias = session.createQuery("SELECT cb FROM " + getEntityClass().getName() + " cb WHERE numeroCuenta = :numeroCuenta")
+        cuentaBancarias = (CuentaBancaria)session.createQuery("SELECT cb FROM " + getEntityClass().getName() + " cb WHERE numeroCuenta = :numeroCuenta")
                 .setString("numeroCuenta", numeroCuenta)
-                .list();
+                .uniqueResult();
         session.getTransaction().commit();
         
         
-        return cuentasBancarias;
+        return cuentaBancarias;
     }
     
 }

@@ -47,14 +47,14 @@ public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Inte
         String numCuentaBancariaDestino = transaccion.getCuentaDestino().trim().substring(10, 20);     
                 
         // Se puede optimizar guardando en un objeto para que no haya que hacer la petición dos veces
-        if(cuentaBancariaDAO.findByNumeroCuenta(numCuentaBancariaOrigen).size() == 0) {
+        if(cuentaBancariaDAO.findByNumeroCuenta(numCuentaBancariaOrigen) == null) {
            throw new BusinessException(new BusinessMessage("Cuenta Origen","Introduce los datos de la cuenta orígen corectamente"));
         }
-        if(cuentaBancariaDAO.findByNumeroCuenta(numCuentaBancariaDestino).size() == 0) {
+        if(cuentaBancariaDAO.findByNumeroCuenta(numCuentaBancariaDestino) == null) {
            throw new BusinessException(new BusinessMessage("Cuenta Destino","Introduce los datos de la cuenta orígen corectamente"));
         }
-        CuentaBancaria cuentaBancariaOrigen = cuentaBancariaDAO.findByNumeroCuenta(numCuentaBancariaOrigen).get(0);
-        CuentaBancaria cuentaBancariaDestino = cuentaBancariaDAO.findByNumeroCuenta(numCuentaBancariaDestino).get(0);
+        CuentaBancaria cuentaBancariaOrigen = cuentaBancariaDAO.get(3);
+        CuentaBancaria cuentaBancariaDestino = cuentaBancariaDAO.get(4);
         // Comprobar que los cuatro primeros digitos (cod entidad coinciden con su entidad;
         // que los cuatro segundos con la sucursal y los dos siguientes con el dígito de control.
         // ---- el código de error está bien?
