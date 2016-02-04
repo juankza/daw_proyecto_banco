@@ -9,9 +9,8 @@ input::-webkit-input-placeholder { color: rgba(192,192,192,1) !important; }
 input::-moz-placeholder { color: rgba(192,192,192,1) !important; }
 input:-ms-input-placeholder { color: rgba(192,192,192,1) !important; }
 
-
 input[type="text"], input[type="email"], input[type="password"] {
-    height: 45px;
+    height: 30px;
     font-size: 16px;
     color: #333;
     background-color: rgba(255,255,255,0.7);
@@ -142,6 +141,15 @@ img.navbar-brand { height: 100px; padding: 10px 20px; }
 /* *** BOOTSTRAP MODAL *** */
 .modal-dialog { margin-top: 125px; }
 .modal-content { box-shadow: none; border: none; border-radius: 3px; }
+
+/* *** *** *** */
+
+/* *** BOOTSTRAP TABLE *** */
+.table-striped>tbody>tr:nth-of-type(odd) { background-color: rgba(0,0,0,0.1); }
+.table-hover>tbody>tr:hover { background-color: rgba(0,0,0,0.15); }
+
+.table input { width: 100%; }
+.table select { width: 100%; }
 
 /* *** *** *** */
 

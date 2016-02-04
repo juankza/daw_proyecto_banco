@@ -1,45 +1,57 @@
-<form>
-
-    <div class="row">
-        <div class="col-md-3"><strong>Saldo: </strong></div>
-        <div class="col-md-5"><input type="text" name="saldo" ng-model="cuentaBancaria.saldo" class="form-control"/></div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+        <h2 class="text-center">Detalles de Cuenta</h2>
+        <form>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <td><strong>Saldo</strong></td>
+                        <td>
+                            <input type="text" ng-model="cuentaBancaria.saldo" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Número de Cuenta</strong></td>
+                        <td>
+                            <input type="text" ng-model="cuentaBancaria.numeroCuenta" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fecha de Creación</strong></td>
+                        <td>
+                            <input id="datepicker" type="text" ng-model="cuentaBancaria.fechaCreacion" ng-readonly="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>PIN</strong></td>
+                        <td><input type="password" ng-model="cuentaBancaria.pin" /></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sucursal</strong></td>
+                        <td>
+                            <select ng-model="cuentaBancaria.sucursalBancaria" ng-options="sucursalBancaria as sucursalBancaria.direccion for sucursalBancaria in sucursalesBancarias track by sucursalBancaria.direccion" >
+                                <option value="">--Elige opcion--</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Usuario</strong></td>
+                        <td>
+                            <select ng-model="usuario" ng-options="usuario as usuario.nombre for usuario in usuarios track by usuario.idUsuario" >
+                                <option value="">--Elige opcion--</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
     </div>
-
-    <div class="row">
-        <div class="col-md-3"><strong>Número de cuenta: </strong></div>
-        <div class="col-md-5"><input type="text" name="numeroCuenta" ng-model="cuentaBancaria.numeroCuenta" class="form-control"/></div>
+</div>
+<div class="row">
+    <div class="col-xs-9 col-sm-10 col-md-9 col-lg-9 col-md-offset-1 col-lg-offset-1">
+        <input class="btn btn-default btn-insert pull-right" type="submit" ng-click="insert()" value="Insertar" />
     </div>
-
-    <div class="row">
-        <div class="col-md-3"><strong>Fecha de creación: </strong></div>
-        <div class="col-md-5"><input id="datepicker" type="text" name="creationDate" ng-model="cuentaBancaria.fechaCreacion" class="form-control" ng-readonly="true" /></div>
+    <div class="col-xs-3 col-sm-2 col-md-1 col-lg-1">
+        <a class="btn btn-default btn-back pull-right" href="#/cuentabancaria/list">Volver</a>
     </div>
-    <div class="row">
-        <div class="col-md-3"><strong>Pin: </strong></div>
-        <div class="col-md-5"><input type="password" name="pin" ng-model="cuentaBancaria.pin" class="form-control"/></div>
-    </div>
-    <div class="row">
-        <div class="col-md-3"><strong>Sucursal Bancaria: </strong></div>
-        <div class="col-md-5">
-            <select ng-model="cuentaBancaria.sucursalBancaria" ng-options="sucursalBancaria as sucursalBancaria.direccion for sucursalBancaria in sucursalesBancarias track by sucursalBancaria.direccion" >
-                <option value="">--Elige opcion--</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3"><strong>Usuario: </strong></div>
-        <div class="col-md-5">
-        <select ng-model="usuario" ng-options="usuario as usuario.nombre for usuario in usuarios track by usuario.idUsuario" >
-            <option value="">--Elige opcion--</option>
-        </select>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="col-md-12">
-            <input  ng-click="insert()" type="submit" value="Insertar" class="btn btn-default btn-insert"/><br>
-        </div>
-    </div>
-
-</form>
+</div>
