@@ -98,7 +98,7 @@
         <delete dir="../daw_proyecto_banco"></delete>
         <gitcloneapplication     
             userName="dead421@hotmail.es" 
-            password="dead421" 
+            password="${password}" 
             domainName="vicentedaw2" 
             applicationName="ecobanco"  
             privateKeyFile="../../id_rsa"
@@ -116,7 +116,7 @@
         
         <gitpushapplication    
             userName="dead421@hotmail.es"
-            password="dead421"
+            password="${password}"
             domainName="vicente2daw"
             applicationName="ecobanco" 
             privateKeyFile="../../id_rsa"
