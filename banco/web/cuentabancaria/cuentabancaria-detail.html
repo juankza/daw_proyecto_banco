@@ -42,16 +42,18 @@
                 <thead>
                     <tr>
                         <td><strong>Tipo Movimiento</strong></td>
-                        <td><strong>Cantidad</strong></td>
                         <td><strong>Fecha</strong></td>
-                        <td><strong>Acciones</strong></td>
+                        <td><strong>Cantidad</strong></td>
+                        <td><strong>Saldo posterior</strong></td>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="movimientoBancario in movimientosBancarios">
                         <td>{{movimientoBancario.tipoMovimientoBancario}}</td>
-                        <td>{{movimientoBancario.cantidad}}€</td>
                         <td>{{movimientoBancario.fecha}}</td>
+                        <td>{{movimientoBancario.cantidad}} €</td>
+                        <td>{{movimientoBancario.saldo}} €</td>
                         <td>
                             <a class="btn btn-default btn-info" href="#/movimientobancario/detail/{{movimientoBancario.idMovimientoBancario}}">Detalles</a>
                         </td>

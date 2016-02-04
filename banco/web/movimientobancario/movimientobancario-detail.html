@@ -1,30 +1,36 @@
-<div ng-init="isDisabled = true">
-    <form>
-        <div class="row">
-            <div class="col-md-3"><strong>Tipo Movimiento: </strong></div>
-            <div class="col-md-5"><input type="text" name="nombre" ng-model="movimientoBancario.tipoMovimientoBancario" class="form-control" ng-disabled="{{isDisabled}}"/></div>
-        </div> 
-
-        <div class="row">
-            <div class="col-md-3"><strong>Concepto: </strong></div>
-            <div class="col-md-5"><input type="text" name="codigoEntidadBancaria" ng-model="movimientoBancario.concepto" ng-disabled="{{isDisabled}}" class="form-control"/></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Cantidad: </strong></div>
-            <div class="col-md-5"><input type="text"  name="fechaCreacion" ng-model="movimientoBancario.cantidad" ng-disabled="{{isDisabled}}" class="form-control" ng-readonly="true" /></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Saldo posterior al movimiento: </strong></div>
-            <div class="col-md-5"><input type="text" name="direccion" ng-model="movimientoBancario.saldo" ng-disabled="{{isDisabled}}" class="form-control" /></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Fecha: </strong></div>
-            <div class="col-md-5"><input type="text"  id="datepicker" name="fecha" ng-disabled="{{isDisabled}}" ng-model="movimientoBancario.fecha" class="form-control"/></div>
-        </div>
-
-    </form>
-    <a class="btn btn-default btn-back" href="#/cuentabancaria/detail/{{movimientoBancario.cuentaBancaria.idCuentaBancaria}}">Volver</a>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+        <h2 class="text-center">Detalles de Movimiento</h2>
+        <form>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <td><strong>Tipo</strong></td>
+                        <td>{{movimientoBancario.tipoMovimientoBancario}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Concepto</strong></td>
+                        <td>{{movimientoBancario.concepto}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fecha</strong></td>
+                        <td>{{movimientoBancario.fecha}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cantidad</strong></td>
+                        <td>{{movimientoBancario.cantidad}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Saldo posterior</strong></td>
+                        <td>{{movimientoBancario.saldo}}</td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5 col-md-offset-1 col-lg-offset-1">
+        <a class="btn btn-default btn-back pull-left" href="#/cuentabancaria/detail/{{movimientoBancario.cuentaBancaria.idCuentaBancaria}}">Volver</a>
+    </div>
 </div>

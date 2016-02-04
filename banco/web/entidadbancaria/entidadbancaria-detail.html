@@ -1,63 +1,71 @@
-<div ng-init="isDisabled = true">
-    <form>
-        <div class="row">
-            <div class="col-md-3"><strong>Nombre: </strong></div>
-            <div class="col-md-5"><input type="text" name="nombre" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.nombre" class="form-control"/></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Código bancario: </strong></div>
-            <div class="col-md-5"><input type="text" name="codigoEntidadBancaria" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.codigoEntidadBancaria" class="form-control"/></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Fecha de creación: </strong></div>
-            <div class="col-md-5"><input type="text" id="datepicker" name="fechaCreacion" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.fechaCreacion" class="form-control" ng-readonly="true" /></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Dirección: </strong></div>
-            <div class="col-md-5"><input type="text" name="direccion" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.direccion" class="form-control" /></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>CIF: </strong></div>
-            <div class="col-md-5"><input type="text" name="cif" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.cif" class="form-control"/></div>
-        </div>
-    </form>
-
-
-    <!-- Maestro - Detalle -->
-    <div>
-        <h4>Sucursales de {{entidadBancaria.nombre}}</h4>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+        <h2 class="text-center">Detalles de Entidad</h2>
+        <form>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <td><strong>Nombre</strong></td>
+                        <td>{{entidadBancaria.nombre}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Código Bancario</strong></td>
+                        <td>{{entidadBancaria.codigoEntidadBancaria}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fecha Creación</strong></td>
+                        <td>{{entidadBancaria.fechaCreacion}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dirección</strong></td>
+                        <td>{{entidadBancaria.direccion}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CIF</strong></td>
+                        <td>{{entidadBancaria.cif}}</td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5 col-md-offset-1 col-lg-offset-1">
+        <a class="btn btn-default btn-update" href="#/entidadbancaria/update/{{entidadBancaria.idEntidadBancaria}}">Actualizar Entidad</a>
+        <a class="btn btn-default btn-delete" href="#/entidadbancaria/delete/{{entidadBancaria.idEntidadBancaria}}">Borrar Entidad</a>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+        <a class="btn btn-default btn-back pull-right" href="#/entidadbancaria/list">Volver</a>
+    </div>
+</div>
+<!-- MAESTRO-DETALLE -->
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+        <h3 class="text-center">Sucursales de {{entidadBancaria.nombre}}</h3>
         <div class="table-responsive">
-            <table class="table">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <td><strong>Código Sucursal</strong></td>
                         <td><strong>Dirección</strong></td>
-                        <td><strong>Acciones</strong></td>
-
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="sucursalBancaria in sucursalesBancarias">
                         <td>{{sucursalBancaria.codigoSucursalBancaria}}</td>
                         <td>{{sucursalBancaria.direccion}}</td>
-
-
-
-                        <td><a class="btn btn-default btn-info" href="#/sucursalbancaria/detail/{{sucursalBancaria.idSucursalBancaria}}">Detalles</a></td>
-
+                        <td>
+                            <a class="btn btn-default btn-info" href="#/sucursalbancaria/detail/{{sucursalBancaria.idSucursalBancaria}}">Detalles</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-            <a class="btn btn-default btn-insert"  href="#/sucursalbancaria/insert/{{entidadBancaria.idEntidadBancaria}}">Insertar</a>
-        </div><!-- Tabla -->
-
-
+        </div>
     </div>
-    <a class="btn btn-default btn-update" href="#/entidadbancaria/update/{{entidadBancaria.idEntidadBancaria}}">Actualizar Entidad Bancaria</a>
-    <a class="btn btn-default btn-delete" href="#/entidadbancaria/delete/{{entidadBancaria.idEntidadBancaria}}">Borrar Entidad Bancaria</a>
-    <a class="btn btn-default btn-back" href="#/entidadbancaria/list">Volver</a>
+</div>
+<div class="row">
+    <div class="col-xs-3 col-sm-2 col-md-1 col-lg-1 col-md-offset-1 col-lg-offset-1">
+        <a class="btn btn-default btn-insert"  href="#/sucursalbancaria/insert/{{entidadBancaria.idEntidadBancaria}}">Nueva Sucursal</a>
+    </div>
 </div>

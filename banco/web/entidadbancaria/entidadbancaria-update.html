@@ -1,39 +1,49 @@
-<div ng-init="isDisabled = true" >
-    <form name="entidadBancariaForm" novalidate>
-        <div class="row">
-            <div class="col-md-3"><strong>Nombre: </strong></div>
-            <div class="col-md-5"><input type="text" name="nombre" ng-model="entidadBancaria.nombre" class="form-control" ng-required="isDisabled"/></div>
-            <span ng-show="entidadBancariaForm.nombre.$error.required && entidadBancariaForm.nombre.$dirty">El campo es requerido</span>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Código Bancario: </strong></div>
-            <div class="col-md-5"><input type="text" name="codigoEntidadBancaria" ng-model="entidadBancaria.codigoEntidadBancaria" class="form-control" ng-pattern="/^[0-9]{4}$/" ng-required="isDisabled"/></div>
-            <span ng-show="entidadBancariaForm.codigoEntidadBancaria.$error.required && entidadBancariaForm.codigoEntidadBancaria.$dirty">El campo es requerido</span>
-            <span ng-show="entidadBancariaForm.codigoEntidadBancaria.$error.pattern && entidadBancariaForm.codigoEntidadBancaria.$dirty">El campo tiene un formato inválido.</span>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Fecha de creación: </strong></div>
-            <div class="col-md-5"><input id="datepicker" type="text" name="fechaCreacion" ng-model="entidadBancaria.fechaCreacion" class="form-control" ng-readonly="true" ng-required="isDisabled"/></div>
-            <span ng-show="entidadBancariaForm.fechaCreacion.$error.required && entidadBancariaForm.fechaCreacion.$dirty">El campo es requerido</span>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Dirección: </strong></div>
-            <div class="col-md-5"><input type="text" name="direccion" ng-model="entidadBancaria.direccion" class="form-control" ng-required="isDisabled"/></div>
-            <span ng-show="entidadBancariaForm.direccion.$error.required && entidadBancariaForm.direccion.$dirty">El campo es requerido</span>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>CIF: </strong></div>
-            <div class="col-md-5"><input type="text" name="cif" ng-model="entidadBancaria.cif" class="form-control" ng-required="isDisabled" ng-pattern="/^[0-9]{8}[A-Z]$/"/></div>
-            <span ng-show="entidadBancariaForm.cif.$error.required && entidadBancariaForm.cif.$dirty">El campo es requerido</span>
-            <span ng-show="entidadBancariaForm.cif.$error.pattern && entidadBancariaForm.cif.$dirty">El campo tiene un formato inválido.</span>
-        </div>
-        <div class="row">
-            <div class="col-md-12"><input  ng-click="update()" type="submit" value="Actualizar" class="btn btn-default btn-update" ng-disabled="entidadBancariaForm.$invalid"/><br></div>
-        </div>
-
-    </form>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+        <h2 class="text-center">Actualizar Entidad</h2>
+        <form>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <td><strong>Nombre</strong></td>
+                        <td>
+                            <input type="text" ng-model="entidadBancaria.nombre" ng-required="required" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Código Bancario</strong></td>
+                        <td>
+                            <input type="text" ng-model="entidadBancaria.codigoEntidadBancaria" ng-pattern="/^[0-9]{4}$/" ng-required="required" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fecha de Creación</strong></td>
+                        <td>
+                            <input id="datepicker" type="text" ng-model="entidadBancaria.fechaCreacion" ng-readonly="true" ng-required="required" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dirección</strong></td>
+                        <td>
+                            <input type="text" ng-model="entidadBancaria.direccion" ng-required="required" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>CIF</strong></td>
+                        <td>
+                            <input type="text" ng-model="entidadBancaria.cif" ng-pattern="/^[0-9]{8}[A-Z]$/" ng-required="required" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5 col-md-offset-1 col-lg-offset-1">
+        <input class="btn btn-default btn-update pull-left" type="submit" ng-click="update()" value="Actualizar" />
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+        <a class="btn btn-default btn-back pull-right" href="#/entidadbancaria/detail/{{entidadBancaria.idEntidadBancaria}}">Volver</a>
+    </div>
 </div>
