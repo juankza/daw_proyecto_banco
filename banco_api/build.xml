@@ -102,7 +102,7 @@
             password="dead421" 
             domainName="vicentedaw2" 
             applicationName="ecobanco"  
-            privateKeyFile="../../id_rsa.pub"
+            privateKeyFile="../../id_rsa"
             path="../daw_proyecto_banco"
         />
         
@@ -120,7 +120,7 @@
             password="dead421"
             domainName="vicente2daw"
             applicationName="ecobanco" 
-            privateKeyFile="../../id_rsa.pub"
+            privateKeyFile="../../id_rsa"
             path="../daw_proyecto_banco"
         />
     </target>
