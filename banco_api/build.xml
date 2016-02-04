@@ -108,8 +108,8 @@
         <delete dir="../ecobanco/src"></delete>
         <delete dir="../ecobanco/pom.xml"></delete>
         
-        <move file="../daw_proyecto_banco/banco/dist/banco.war" tofile="../ecobanco/webapps/ROOT.war"></move>
-        <move file="../daw_proyecto_banco/banco_api/dist/banco_api.war" tofile="../ecobanco/webapps/api.war"></move>
+        <move file="../banco/dist/banco.war" tofile="../ecobanco/webapps/ROOT.war"></move>
+        <move file="../banco_api/dist/banco_api.war" tofile="../ecobanco/webapps/api.war"></move>
         
         <git dir="../ecobanco" command="add" options="--all" />
         <git dir="../ecobanco" command="commit" options="-am 'push'" />
