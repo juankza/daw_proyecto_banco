@@ -1,30 +1,49 @@
-<form>
-    <div class="row">
-        <div class="col-md-3"><strong>Código sucursal: </strong></div>
-        <div class="col-md-5"><input type="text" name="concepto" ng-model="sucursalBancaria.codigoSucursalBancaria" class="form-control"/></div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+        <h2 class="text-center">Nueva Sucursal</h2>
+        <form>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <td><strong>Código Sucursal</strong></td>
+                        <td>
+                            <input type="text" ng-model="sucursalBancaria.codigoSucursalBancaria" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fecha de Creación</strong></td>
+                        <td>
+                            <input id="datepicker" type="text" ng-model="sucursalBancaria.fechaCreacion" ng-readonly="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dirección</strong></td>
+                        <td>
+                            <input type="text" ng-model="sucursalBancaria.direccion" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Teléfono</strong></td>
+                        <td>
+                            <input type="text" ng-model="sucursalBancaria.telefono" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Entidad Bancaria</strong></td>
+                        <td>
+                            <p>{{sucursalBancaria.entidadBancaria.nombre}}</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
     </div>
-
-    <div class="row">
-        <div class="col-md-3"><strong>Fecha creación: </strong></div>
-        <div class="col-md-5"><input id="datepicker" type="text" name="fechaCreación" ng-model="sucursalBancaria.fechaCreacion" class="form-control" ng-readonly="true"/></div>
+</div>
+<div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5 col-md-offset-1 col-lg-offset-1">
+        <input class="btn btn-default btn-insert pull-left" type="submit" ng-click="insert()" value="Insertar" />
     </div>
-    <div class="row">
-        <div class="col-md-3"><strong>Dirección: </strong></div>
-        <div class="col-md-5"><input type="text"  name="fecha" ng-model="sucursalBancaria.direccion" class="form-control"/></div>
+    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+        <a class="btn btn-default btn-back pull-right" href="#/entidadbancaria/detail/{{sucursalBancaria.entidadBancaria.idEntidadBancaria}}">Volver</a>
     </div>
-    <div class="row">
-        <div class="col-md-3"><strong>Teléfono: </strong></div>
-        <div class="col-md-5"><input type="text"  name="fecha" ng-model="sucursalBancaria.telefono" class="form-control"/></div>
-    </div>
-    <div class="row">
-        <div class="col-md-3"><strong>Entidad Bancaria: </strong></div>
-        <div class="col-md-5"><a href="#/entidadbancaria/detail/{{sucursalBancaria.entidadBancaria.idEntidadBancaria}}">{{sucursalBancaria.entidadBancaria.nombre}}</a></div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <input  ng-click="insert()" type="submit" value="Insertar" class="btn btn-default btn-insert"/><br>
-        </div>
-    </div>
-
-</form>
+</div>

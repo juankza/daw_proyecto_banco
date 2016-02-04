@@ -1,44 +1,40 @@
-<div ng-init="isDisabled = true">
-    <form>
-        <div class="row">
-            <div class="col-md-3"><strong>Nombre: </strong></div>
-            <div class="col-md-5"><input type="text" name="name" ng-model="usuario.nombre" ng-disabled="{{isDisabled}}" class="form-control"/></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Apellidos: </strong></div>
-            <div class="col-md-5"><input type="text" name="surname" ng-model="usuario.apellidos" ng-disabled="{{isDisabled}}" class="form-control"/></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Correo: </strong></div>
-            <div class="col-md-5"><input type="text" name="email" ng-model="usuario.email" ng-disabled="{{isDisabled}}" class="form-control"/></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Apodo: </strong></div>
-            <div class="col-md-5"><input type="text" name="text" ng-model="usuario.apodo" ng-disabled="{{isDisabled}}" class="form-control"/></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Contraseña: </strong></div>
-            <div class="col-md-5"><input type="password" name="password" ng-model="usuario.contrasena" ng-disabled="{{isDisabled}}" class="form-control"/></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Rol</strong></div>
-            <div class="col-md-5">
-                <select ng-model="usuario.rol" class="form-control" ng-disabled="{{isDisabled}}">
-                    <option value="ADMIN">Administrador</option>
-                    <option value="EMPLEADO">Empleado</option>
-                    <option value="CLIENTE">Cliente</option>
-                </select>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+        <h2 class="text-center">Detalles de Usuario</h2>
+        <form>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <td><strong>Nombre</strong></td>
+                        <td>{{usuario.nombre}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apellidos</strong></td>
+                        <td>{{usuario.apellidos}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Correo</strong></td>
+                        <td>{{usuario.email}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apodo</strong></td>
+                        <td>{{usuario.apodo}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rol</strong></td>
+                        <td>{{usuario.rol}}</td>
+                    </tr>
+                </table>
             </div>
-        </div>
-
-    </form>
-
-    <a class="btn btn-default btn-update" href="#/usuario/update/{{usuario.idUsuario}}">Actualizar</a>
-    <a class="btn btn-default btn-delete" href="#/usuario/delete/{{usuario.idUsuario}}">Borrar</a>
-    <a class="btn btn-default btn-back" href="#/usuario/list">Volver</a>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5 col-md-offset-1 col-lg-offset-1">
+        <a class="btn btn-default btn-update" href="#/usuario/update/{{usuario.idUsuario}}">Actualizar Usuario</a>
+        <a class="btn btn-default btn-delete" href="#/usuario/delete/{{usuario.idUsuario}}">Borrar Usuario</a>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+        <a class="btn btn-default btn-back pull-right" href="#/usuario/list">Volver</a>
+    </div>
 </div>

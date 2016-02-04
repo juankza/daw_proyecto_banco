@@ -2,6 +2,9 @@ MovimientoBancarioInsertController.$inject = ['movimientoBancarioService', '$sco
 function MovimientoBancarioInsertController(movimientoBancarioService, $scope, $routeParams, cuentaBancariaService,messageService, $location) {
     $('#datepicker').datepicker({dateFormat: 'yy-mm-dd'});
     $scope.movimientoBancario = {};
+    
+    var fecha = new Date();
+    $scope.movimientoBancario.fecha = fecha.getFullYear() + "-" + ("0" + (fecha.getMonth() + 1)).slice(-2) + "-" + ("0" + fecha.getDate()).slice(-2);
     //Obtenemos objeto cuenta que se pasa por ruta
     var response = cuentaBancariaService.detail($routeParams.idCuentaBancaria);
     response.success(function (data, status, headers, config) {

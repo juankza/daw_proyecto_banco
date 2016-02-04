@@ -6,7 +6,7 @@ function EntidadBancariaUpdateController($scope, $location, entidadBancariaServi
       
         $scope.entidadBancaria = data;
         var fechaCreacion = new Date(data.fechaCreacion);
-        $scope.entidadBancaria.fechaCreacion = fechaCreacion.getFullYear() + "-" + (fechaCreacion.getMonth()+1) + "-" + fechaCreacion.getDate();
+        $scope.entidadBancaria.fechaCreacion = fechaCreacion.getFullYear() + "-" + ("0" + (fechaCreacion.getMonth() + 1)).slice(-2) + "-" + ("0" + fechaCreacion.getDate()).slice(-2);
     }).error(function (data, status, headers, config) {
         alert("HTTP request failed. Status: " + status);
     });
