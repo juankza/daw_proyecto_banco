@@ -90,8 +90,7 @@
         <move file="build/web/META-INF/context-openshift.xml" tofile="build/web/META-INF/context.xml" />
     </target>
     
-    <!-- target dist-openshift depende enable-produccion y dist -->
-    <target name="dist-openshift" depends="-enable-produccion,dist"></target>
+    <target name="dist-openshift" depends="-enable-produccion"></target>
     
     <target name="deploy-from-jenkins" depends="-enable-produccion,dist">
         
