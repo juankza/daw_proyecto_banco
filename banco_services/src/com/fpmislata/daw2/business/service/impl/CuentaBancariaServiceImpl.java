@@ -62,7 +62,7 @@ public class CuentaBancariaServiceImpl extends GenericServiceImpl<CuentaBancaria
 
     @Override
     public CuentaBancaria findByNumeroCuenta(String numeroCuenta) throws BusinessException {
-        return cuentaBancariaDAO.findByNumeroCuenta(numeroCuenta);
+        return cuentaBancariaDAO.getByNumeroCuenta(numeroCuenta);
     }
     
     @Override

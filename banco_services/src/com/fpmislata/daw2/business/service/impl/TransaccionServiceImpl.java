@@ -36,49 +36,52 @@ public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Inte
         if(transaccion.getCuentaDestino().length() != 20 || !transaccion.getCuentaDestino().matches("[0-9]+")) {
             throw new BusinessException(new BusinessMessage("Cuenta Destino","Introduce los datos de la cuenta destino correctamente"));
         }
+        
         String numEntidadBancariaOrigen = transaccion.getCuentaOrigen().trim().substring(0, 4);
         String numSucursalBancariaOrigen = transaccion.getCuentaOrigen().trim().substring(4, 8);
         String numDigitoControlOrigen = transaccion.getCuentaOrigen().trim().substring(8, 10);
         String numCuentaBancariaOrigen = transaccion.getCuentaOrigen().trim().substring(10, 20);
         
-        String numEntidadBancariaDestino = transaccion.getCuentaOrigen().trim().substring(0, 4);
-        String numSucursalBancariaDestino = transaccion.getCuentaOrigen().trim().substring(4, 8);
-        String numDigitoControlDestino = transaccion.getCuentaOrigen().trim().substring(8, 10);
-        String numCuentaBancariaDestino = transaccion.getCuentaDestino().trim().substring(10, 20);     
-                
+        String numEntidadBancariaDestino = transaccion.getCuentaDestino().trim().substring(0, 4);
+        String numSucursalBancariaDestino = transaccion.getCuentaDestino().trim().substring(4, 8);
+        String numDigitoControlDestino = transaccion.getCuentaDestino().trim().substring(8, 10);
+        String numCuentaBancariaDestino = transaccion.getCuentaDestino().trim().substring(10, 20);
+        
+        CuentaBancaria cuentaBancariaOrigen = cuentaBancariaDAO.getByNumeroCuenta(numCuentaBancariaOrigen);
+        CuentaBancaria cuentaBancariaDestino = cuentaBancariaDAO.getByNumeroCuenta(numCuentaBancariaDestino);
+        
         // Se puede optimizar guardando en un objeto para que no haya que hacer la petición dos veces
-        if(cuentaBancariaDAO.findByNumeroCuenta(numCuentaBancariaOrigen) == null) {
+        if(cuentaBancariaOrigen == null) {
            throw new BusinessException(new BusinessMessage("Cuenta Origen","Introduce los datos de la cuenta orígen corectamente"));
         }
-        if(cuentaBancariaDAO.findByNumeroCuenta(numCuentaBancariaDestino) == null) {
+        if(cuentaBancariaDestino == null) {
            throw new BusinessException(new BusinessMessage("Cuenta Destino","Introduce los datos de la cuenta orígen corectamente"));
         }
-        CuentaBancaria cuentaBancariaOrigen = cuentaBancariaDAO.get(3);
-        CuentaBancaria cuentaBancariaDestino = cuentaBancariaDAO.get(4);
+        
         // Comprobar que los cuatro primeros digitos (cod entidad coinciden con su entidad;
         // que los cuatro segundos con la sucursal y los dos siguientes con el dígito de control.
         // ---- el código de error está bien?
         
-        //DA ERROR PQ LA ENTIDAD ES NULL
-        if(cuentaBancariaOrigen.getSucursalBancaria().getEntidadBancaria().getCodigoEntidadBancaria() != numEntidadBancariaOrigen) {
-            throw new BusinessException(new BusinessMessage("Cuenta Origen","Introduce el código de entidad correctamente"));
-        }
-        if(cuentaBancariaOrigen.getSucursalBancaria().getCodigoSucursalBancaria() != numSucursalBancariaOrigen) {
-            throw new BusinessException(new BusinessMessage("Cuenta Origen","Introduce el código de sucursal correctamente"));
-        }
         if(!cuentaBancariaOrigen.getDigitoControl().equals(numDigitoControlOrigen)) {
             throw new BusinessException(new BusinessMessage("Cuenta Origen","Introduce el dígito de control correctamente"));
         }
+        if(!cuentaBancariaOrigen.getSucursalBancaria().getCodigoSucursalBancaria().equals(numSucursalBancariaOrigen)) {
+            throw new BusinessException(new BusinessMessage("Cuenta Origen","Introduce el código de sucursal correctamente"));
+        }
+        if(!cuentaBancariaOrigen.getSucursalBancaria().getEntidadBancaria().getCodigoEntidadBancaria().equals(numEntidadBancariaOrigen)) {
+            throw new BusinessException(new BusinessMessage("Cuenta Origen","Introduce el código de entidad correctamente"));
+        }
         
+        if(!cuentaBancariaDestino.getDigitoControl().equals(numDigitoControlDestino)) {
+            throw new BusinessException(new BusinessMessage("Cuenta Destino","Introduce el dígito de control correctamente"));
+        }
+        if(!cuentaBancariaDestino.getSucursalBancaria().getCodigoSucursalBancaria().equals(numSucursalBancariaDestino)) {
+            throw new BusinessException(new BusinessMessage("Cuenta Destino","Introduce el código de sucursal correctamente"));
+        }
+        if(!cuentaBancariaDestino.getSucursalBancaria().getEntidadBancaria().getCodigoEntidadBancaria().equals(numEntidadBancariaDestino)) {
+            throw new BusinessException(new BusinessMessage("Cuenta Destino","Introduce el código de entidad correctamente"));
+        }
         
-        
-        
-        /*BigDecimal importe;
-        try {
-            importe = transaccion.getImporte();
-        } catch(Exception ex) {
-            throw new BusinessException(new BusinessMessage("Importe","Introduce una cantidad válida"));
-        }*/
         //si el importe es negativo esto; si es positivo al contrario
         if (transaccion.getImporte().compareTo(BigDecimal.ZERO) < 0) {
             movimientoBancarioOrigen = new MovimientoBancario(TipoMovimientoBancario.HABER, transaccion.getConcepto(), transaccion.getImporte(), cuentaBancariaOrigen.getSaldo().add(transaccion.getImporte()), new Date(), cuentaBancariaOrigen);
