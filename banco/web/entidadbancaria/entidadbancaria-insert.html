@@ -1,37 +1,37 @@
-<div class="row">
+<div class="row" ng-init="required = true">
     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
         <h2 class="text-center">Nueva Entidad</h2>
-        <form>
+        <form name="entidadBancariaForm" novalidate>
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <tr>
                         <td><strong>Nombre</strong></td>
                         <td>
-                            <input type="text" ng-model="entidadBancaria.nombre" ng-required="required" />
+                            <input type="text" name="nombre" ng-model="entidadBancaria.nombre" ng-required="required" />
                         </td>
                     </tr>
                     <tr>
                         <td><strong>Código Bancario</strong></td>
                         <td>
-                            <input type="text" ng-model="entidadBancaria.codigoEntidadBancaria" ng-pattern="/^[0-9]{4}$/" ng-required="required" />
+                            <input type="text" name="codigoEntidadBancaria" ng-model="entidadBancaria.codigoEntidadBancaria" ng-pattern="/^[0-9]{4}$/" ng-required="required" />
                         </td>
                     </tr>
                     <tr>
                         <td><strong>Fecha de Creación</strong></td>
                         <td>
-                            <input id="datepicker" type="text" ng-model="entidadBancaria.fechaCreacion" ng-readonly="true" ng-required="required" />
+                            <input id="datepicker" type="text" name="fechaCreacion" ng-model="entidadBancaria.fechaCreacion" ng-readonly="true" ng-required="required" />
                         </td>
                     </tr>
                     <tr>
                         <td><strong>Dirección</strong></td>
                         <td>
-                            <input type="text" ng-model="entidadBancaria.direccion" ng-required="required" />
+                            <input type="text" name="direccion" ng-model="entidadBancaria.direccion" ng-required="required" />
                         </td>
                     </tr>
                     <tr>
                         <td><strong>CIF</strong></td>
                         <td>
-                            <input type="text" ng-model="entidadBancaria.cif" ng-pattern="/^[0-9]{8}[A-Z]$/" ng-required="required" />
+                            <input type="text" name="cif" ng-model="entidadBancaria.cif" ng-pattern="/^[0-9]{8}[a-zA-Z]$/" ng-required="required" />
                         </td>
                     </tr>
                 </table>

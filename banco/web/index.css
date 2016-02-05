@@ -27,9 +27,7 @@ input:hover {
     box-shadow: none !important;
 }
 
-.form-control[disabled] {
-    border-radius: 0px;
-}
+.form-control[disabled] { border-radius: 0px; }
 .form-control[disabled]:hover {
     outline:none !important;
     -webkit-box-shadow: none !important;

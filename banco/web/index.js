@@ -34,3 +34,7 @@ app.controller("IndexController", IndexController);
 
 jQuery('#errorModal').modal({ show: false });
 jQuery('#infoModal').modal({ show: false });
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+};
