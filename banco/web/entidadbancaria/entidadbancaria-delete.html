@@ -1,35 +1,42 @@
-<div ng-init="isDisabled = true">
-
-    <form>
-        <div class="row">
-            <div class="col-md-3"><strong>Nombre: </strong></div>
-            <div class="col-md-5"><input type="text" name="nombre" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.nombre" class="form-control"/></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Código bancario: </strong></div>
-            <div class="col-md-5"><input type="text" name="codigoEntidadBancaria" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.codigoEntidadBancaria" class="form-control"/></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Fecha de creación: </strong></div>
-            <div class="col-md-5"><input type="text" id="datepicker" name="fechaCreacion" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.fechaCreacion" class="form-control" ng-readonly="true" /></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Dirección: </strong></div>
-            <div class="col-md-5"><input type="text" name="direccion" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.direccion" class="form-control" /></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>CIF: </strong></div>
-            <div class="col-md-5"><input type="text" name="cif" ng-disabled="{{isDisabled}}" ng-model="entidadBancaria.cif" class="form-control"/></div>
-        </div>
-        <div class="row">
-        </div>
-
-    </form>
-    <p> ¿Estás seguro que quieres borrar la entidad: {{entidadBancaria.nombre}}? </p>
-    <a class="btn btn-default btn-delete" href="" ng-click="delete()">Sí</a>
-    <a class="btn btn-default btn-back" href="#/entidadbancaria/detail/{{entidadBancaria.idEntidadBancaria}}">No</a>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+        <h2 class="text-center">Detalles de Entidad</h2>
+        <form>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <td><strong>Nombre</strong></td>
+                        <td>{{entidadBancaria.nombre}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Código Bancario</strong></td>
+                        <td>{{entidadBancaria.codigoEntidadBancaria}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fecha Creación</strong></td>
+                        <td>{{entidadBancaria.fechaCreacion}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dirección</strong></td>
+                        <td>{{entidadBancaria.direccion}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CIF</strong></td>
+                        <td>{{entidadBancaria.cif}}</td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h4 class="text-center">¿Estás seguro que quieres borrar la entidad?</h4>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xs-offset-4 col-sm-offset-4 col-md-offset-4 col-lg-offset-4">
+        <a class="btn btn-default btn-delete pull-right" href="" ng-click="delete()">Sí</a>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <a class="btn btn-default btn-back pull-left" href="#/entidadbancaria/detail/{{entidadBancaria.idEntidadBancaria}}">No</a>
+    </div>
 </div>

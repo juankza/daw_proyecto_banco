@@ -1,22 +1,50 @@
-<div ng-init="isDisabled = false">
-    <form>
-        <div class="row">
-            <div class="col-md-3"><strong>Código Sucursal:  </strong></div>
-            <div class="col-md-5"><input type="text" name="nombre" ng-model="sucursalBancaria.codigoSucursalBancaria" class="form-control" ng-disabled="{{isDisabled}}"/></div>
-        </div> 
-
-        <div class="row">
-            <div class="col-md-3"><strong>Dirección: </strong></div>
-            <div class="col-md-5"><input type="text"  name="fechaCreacion" ng-model="sucursalBancaria.direccion" ng-disabled="{{isDisabled}}" class="form-control" /></div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3"><strong>Teléfono: </strong></div>
-            <div class="col-md-5"><input type="text" name="direccion" ng-model="sucursalBancaria.telefono" ng-disabled="{{isDisabled}}" class="form-control" /></div>
-        </div>
-
-    </form>
-    {{mensaje}}
-    <button class="btn btn-default btn-update" ng-click="update()">Actualizar</button>
-    <a class="btn btn-default btn-back" href="#/entidadbancaria/detail/{{sucursalBancaria.entidadBancaria.idEntidadBancaria}}">Volver</a>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+        <h2 class="text-center">Actualizar Sucursal</h2>
+        <form>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <td><strong>Código Sucursal</strong></td>
+                        <td>
+                            <input type="text" ng-model="sucursalBancaria.codigoSucursalBancaria" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fecha de Creación</strong></td>
+                        <td>
+                            <input id="datepicker" type="text" ng-model="sucursalBancaria.fechaCreacion" ng-readonly="true" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dirección</strong></td>
+                        <td>
+                            <input type="text" ng-model="sucursalBancaria.direccion" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Teléfono</strong></td>
+                        <td>
+                            <input type="text" ng-model="sucursalBancaria.telefono" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Entidad Bancaria</strong></td>
+                        <td>
+                            <p>{{sucursalBancaria.entidadBancaria.nombre}}</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
 </div>
+<div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5 col-md-offset-1 col-lg-offset-1">
+        <input class="btn btn-default btn-update pull-left" type="submit" ng-click="update()" value="Actualizar" />
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+        <a class="btn btn-default btn-back pull-right" href="#/sucursalbancaria/detail/{{sucursalBancaria.idSucursalBancaria}}">Volver</a>
+    </div>
+</div>
+
