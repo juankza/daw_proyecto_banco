@@ -15,8 +15,4 @@ app.config(['$routeProvider', function ($routeProvider) {
             templateUrl: "./cuentabancaria/cuentabancaria-delete.html",
             controller: "CuentaBancariaDeleteController"
         });
-        $routeProvider.when('/cuentabancaria/:idCuentaBancaria/movimientos', {
-            templateUrl: "./cuentabancaria/cuentabancaria-getmovimientosbycuenta.html",
-            controller: "CuentaBancariaGetMovimientosByCuentaController"
-        });
     }]);

@@ -19,7 +19,7 @@ public class SucursalBancaria implements Serializable {
     
     @NotBlank
     @Pattern(regexp = "[0-9]{4}",message="Sólo admite 4 carácteres numéricos.")
-    @Size(min = 4, max = 4, message = "Tiene que contener obligatoriamente {max} carácteres")
+    @Size(min = 4, max = 4, message = "Tiene que contener {max} carácteres")
     private String codigoSucursalBancaria;
     
     @NotNull

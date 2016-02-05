@@ -1,47 +1,66 @@
-<form>
-    <div class="row">
-        <div class="col-md-3"><strong>Nombre: </strong></div>
-        <div class="col-md-5"><input type="text" ng-model="usuario.nombre" class="form-control"/></div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 col-lg-offset-1">
+        <h2 class="text-center">Nuevo Usuario</h2>
+        <form>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <td><strong>Nombre</strong></td>
+                        <td>
+                            <input type="text" ng-model="usuario.nombre" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apellidos</strong></td>
+                        <td>
+                            <input type="text" ng-model="usuario.apellidos" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Correo</strong></td>
+                        <td>
+                            <input type="text" ng-model="usuario.email" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apodo</strong></td>
+                        <td>
+                            <input type="text" ng-model="usuario.apodo" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>DNI</strong></td>
+                        <td>
+                            <input type="text" ng-model="usuario.dni" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Contraseña</strong></td>
+                        <td>
+                            <input type="password" ng-model="usuario.contrasena" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rol</strong></td>
+                        <td>
+                            <select ng-model="usuario.rol">
+                                <option value="">--Elige opción--</option>
+                                <option selected value="ADMIN">Administrador</option>
+                                <option value="EMPLEADO">Empleado</option>
+                                <option value="CLIENTE">Cliente</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
     </div>
-
-    <div class="row">
-        <div class="col-md-3"><strong>Apellidos: </strong></div>
-        <div class="col-md-5"><input type="text" ng-model="usuario.apellidos" class="form-control"/></div>
+</div>
+<div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5 col-md-offset-1 col-lg-offset-1">
+        <input class="btn btn-default btn-insert pull-left" type="submit" ng-click="insert()" value="Insertar" />
     </div>
-
-    <div class="row">
-        <div class="col-md-3"><strong>Correo: </strong></div>
-        <div class="col-md-5"><input type="text" ng-model="usuario.email" class="form-control"/></div>
+    <div class="col-xs-6 col-sm-6 col-md-5 col-lg-5">
+        <a class="btn btn-default btn-back pull-right" href="#/usuario/list">Volver</a>
     </div>
-
-    <div class="row">
-        <div class="col-md-3"><strong>Apodo: </strong></div>
-        <div class="col-md-5"><input type="text" ng-model="usuario.apodo" class="form-control"/></div>
-    </div>
-    <div class="row">
-        <div class="col-md-3"><strong>DNI: </strong></div>
-        <div class="col-md-5"><input type="text" ng-model="usuario.dni" class="form-control"/></div>
-    </div>
-    <div class="row">
-        <div class="col-md-3"><strong>Contraseña: </strong></div>
-        <div class="col-md-5"><input type="password" ng-model="usuario.contrasena" class="form-control"/></div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3"><strong>Rol</strong></div>
-        <div class="col-md-5">
-            <select ng-model="usuario.rol" class="form-control">
-                <option selected value="ADMIN">Administrador</option>
-                <option value="EMPLEADO">Empleado</option>
-                <option value="CLIENTE">Cliente</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <input  ng-click="insert()" type="submit" value="Insertar" class="btn btn-default btn-insert"/><br>
-        </div>
-    </div>
-
-</form>
+</div>

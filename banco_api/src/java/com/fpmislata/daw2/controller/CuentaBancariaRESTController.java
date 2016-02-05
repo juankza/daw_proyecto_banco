@@ -173,7 +173,7 @@ public class CuentaBancariaRESTController {
 
     @RequestMapping(value = "/search", method = RequestMethod.GET, produces = "application/json")
     public void findBy(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
-        List<CuentaBancaria> cuentasBancarias;
+        List<CuentaBancaria> cuentasBancarias = null;
         String numeroCuentaBancaria;
         String dniUsuario;
         try {
@@ -181,7 +181,7 @@ public class CuentaBancariaRESTController {
             dniUsuario = httpServletRequest.getParameter("dni");
             
             if(numeroCuentaBancaria != null) {
-                cuentasBancarias = cuentaBancariaService.findByNumeroCuenta(numeroCuentaBancaria);
+                cuentasBancarias.add(cuentaBancariaService.findByNumeroCuenta(numeroCuentaBancaria));
             } else if(dniUsuario != null) {
                 cuentasBancarias = cuentaBancariaService.getCuentasByDNI(dniUsuario);
             } else {
