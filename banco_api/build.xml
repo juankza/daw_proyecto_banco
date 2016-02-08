@@ -98,10 +98,10 @@
         <delete dir="../daw_proyecto_banco"></delete>
         
         <gitcloneapplication     
-            userName="dead421@hotmail.es" 
+            userName="${username}" 
             password="${password}" 
-            domainName="vicentedaw2" 
-            applicationName="ecobanco"  
+            domainName="${domain}" 
+            applicationName="${application}"  
             privateKeyFile="../../id_rsa"
             path="../daw_proyecto_banco"
         />
