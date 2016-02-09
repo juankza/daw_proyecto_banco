@@ -1,4 +1,3 @@
-
 package com.fpmislata.daw2.business.service.impl;
 
 import com.fpmislata.daw2.business.domain.CuentaBancaria;
@@ -9,16 +8,17 @@ import com.fpmislata.daw2.business.service.MovimientoBancarioService;
 import com.fpmislata.daw2.business.service.TransaccionService;
 import com.fpmislata.daw2.core.exception.BusinessException;
 import com.fpmislata.daw2.core.exception.BusinessMessage;
+import com.fpmislata.daw2.core.util.ControlDigitGenerator;
 import com.fpmislata.daw2.persistence.dao.CuentaBancariaDAO;
 import com.fpmislata.daw2.persistence.dao.EntidadBancariaDAO;
 
-import java.math.BigDecimal;
 
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Integer> implements TransaccionService {
+
     @Autowired
     EntidadBancariaDAO entidadBancariaDAO;
     @Autowired
@@ -26,7 +26,7 @@ public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Inte
     @Autowired
     MovimientoBancarioService movimientoBancarioService;
 
-    @Override
+    /*  @Override
     public Transaccion insertaTransaccion(Transaccion transaccion) throws BusinessException {
         MovimientoBancario movimientoBancarioOrigen = null, movimientoBancarioDestino = null;
         
@@ -50,7 +50,7 @@ public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Inte
         CuentaBancaria cuentaBancariaOrigen = cuentaBancariaDAO.getByNumeroCuenta(numCuentaBancariaOrigen);
         CuentaBancaria cuentaBancariaDestino = cuentaBancariaDAO.getByNumeroCuenta(numCuentaBancariaDestino);
         
-        // Se puede optimizar guardando en un objeto para que no haya que hacer la petición dos veces
+       
         if(cuentaBancariaOrigen == null) {
            throw new BusinessException(new BusinessMessage("Cuenta Origen","Introduce los datos de la cuenta orígen corectamente"));
         }
@@ -99,6 +99,54 @@ public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Inte
         
         movimientoBancarioService.insert(movimientoBancarioOrigen);
         movimientoBancarioService.insert(movimientoBancarioDestino);
+        return transaccion;
+    }
+     */
+    @Override
+    public Transaccion ingresar(Transaccion transaccion) throws BusinessException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Transaccion retirar(Transaccion transaccion) throws BusinessException {
+        if (transaccion.getCuentaOrigen().length() != 20 || !transaccion.getCuentaOrigen().matches("[0-9]{20}")) {
+            throw new BusinessException(new BusinessMessage("Cuenta Origen PATTERN", "Introduce los datos de la cuenta origen correctamente."));
+        }
+        if (transaccion.getImporte() == null) {
+            throw new BusinessException(new BusinessMessage("Importe", "No puede ser nulo."));
+        }
+        if (transaccion.getConcepto() == null || transaccion.getConcepto().trim().equals("")) {
+            throw new BusinessException(new BusinessMessage("Concepto", "No puede ser nulo."));
+        }
+
+        String numEntidadBancariaOrigen = transaccion.getCuentaOrigen().trim().substring(0, 4);
+        String numSucursalBancariaOrigen = transaccion.getCuentaOrigen().trim().substring(4, 8);
+        String numDigitoControlOrigen = transaccion.getCuentaOrigen().trim().substring(8, 10);
+        String numCuentaBancariaOrigen = transaccion.getCuentaOrigen().trim().substring(10, 20);
+
+        CuentaBancaria cuentaBancaria = cuentaBancariaDAO.getByNumeroCuenta(numCuentaBancariaOrigen);
+
+        if (cuentaBancaria == null) {
+            throw new BusinessException(new BusinessMessage("Cuenta Origen NULA", "Introduce los datos de la cuenta origen correctamente."));
+        }
+        if (!cuentaBancaria.getNumeroCuenta().equals(numCuentaBancariaOrigen)) {
+            throw new BusinessException(new BusinessMessage("Cuenta Origen NUMERO CUENTA", "Introduce los datos de la cuenta origen correctamente."));
+
+        }
+        if (!cuentaBancaria.getSucursalBancaria().getCodigoSucursalBancaria().equals(numSucursalBancariaOrigen)) {
+            throw new BusinessException(new BusinessMessage("Cuenta Origen SUCURSAL", "Introduce los datos de la cuenta origen correctamente."));
+
+        }
+        if (!cuentaBancaria.getDigitoControl().equals(numDigitoControlOrigen)) {
+            throw new BusinessException(new BusinessMessage("Cuenta Origen DC", "Introduce los datos de la cuenta origen correctamente. "));
+        }
+        if (!cuentaBancaria.getSucursalBancaria().getEntidadBancaria().getCodigoEntidadBancaria().equals(numEntidadBancariaOrigen)) {
+            throw new BusinessException(new BusinessMessage("Cuenta Origen ENTIDAD", "Introduce los datos de la cuenta origen correctamente."));
+        }
+        MovimientoBancario movimientoBancario = new MovimientoBancario(TipoMovimientoBancario.DEBER,transaccion.getConcepto(),transaccion.getImporte(),cuentaBancaria.getSaldo().subtract(transaccion.getImporte()),new Date(),cuentaBancaria);
+        
+        movimientoBancarioService.insert(movimientoBancario);
+
         return transaccion;
     }
 

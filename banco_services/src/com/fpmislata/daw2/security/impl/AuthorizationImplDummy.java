@@ -11,10 +11,10 @@ public class AuthorizationImplDummy implements Authorization {
     private final String URL_API = "/api";
     private final String URL_SESSION = URL_API + "/session";
     private final String URL_TRANSACCION = URL_API + "/transaccion";
-    
+    private final String URL_RETIRAR = URL_API + "/retirar";
     @Override
     public boolean isAuthorizedURL(Usuario usuario, String url, HTTPMethod httpmethod) {
-        if(url.equals(URL_API) || url.equals(URL_API + "/") || url.equals(URL_SESSION) || url.equals(URL_SESSION + "/") || url.equals(URL_TRANSACCION)) {
+        if(url.equals(URL_API) || url.equals(URL_API + "/") || url.equals(URL_SESSION) || url.equals(URL_SESSION + "/") || url.equals(URL_TRANSACCION) || url.equals(URL_RETIRAR)) {
             return true;
         } else {
             if(usuario != null) {
