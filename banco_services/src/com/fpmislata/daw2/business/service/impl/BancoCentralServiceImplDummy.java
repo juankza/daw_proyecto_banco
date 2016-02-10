@@ -1,17 +1,19 @@
 package com.fpmislata.daw2.business.service.impl;
 
+import com.fpmislata.daw2.business.domain.CredencialBancoAjeno;
 import com.fpmislata.daw2.business.domain.CredencialBancoCentral;
 import com.fpmislata.daw2.business.domain.Transaccion;
-import com.fpmislata.daw2.business.service.UrlTransaccionProviderService;
 import com.fpmislata.daw2.core.exception.BusinessException;
 import com.fpmislata.daw2.core.exception.BusinessMessage;
+import com.fpmislata.daw2.business.service.BancoCentralService;
 
-public class UrlTransaccionProviderServiceImpl extends GenericServiceImpl<Transaccion,Integer> implements UrlTransaccionProviderService{
-    private final String URL_GRUPO_1 = "http://localhost:8084/api/transaccion1";
-    private final String URL_GRUPO_2 = "http://localhost:8084/api/transaccion2";
-    private final String URL_GRUPO_3 = "http://localhost:8084/api/transaccion3";
+public class BancoCentralServiceImplDummy extends GenericServiceImpl<Transaccion,Integer> implements BancoCentralService{
+    private final String URL_GRUPO_1 = "http://localhost:8084/api/retirar";
+    private final String URL_GRUPO_2 = "http://localhost:8084/api/retirar";
+    private final String URL_GRUPO_3 = "http://localhost:8084/api/retirar";
+    //private final String URL_GRUPO_3 = "http://banco-samuvl.rhcloud.com/banktastic-banco-api/api/retirar";
     @Override
-    public String getUrlByCodigoEntidad(CredencialBancoCentral credencialBancoCentral) throws BusinessException {
+    public CredencialBancoAjeno getUrlByNumeroCuenta(CredencialBancoCentral credencialBancoCentral) throws BusinessException {
         if(credencialBancoCentral.getCodigoCuentaCorriente().length() != 20 || !credencialBancoCentral.getCodigoCuentaCorriente().matches("[0-9]+")) {
             throw new BusinessException(new BusinessMessage("Cuenta Origen","Introduce los datos de la cuenta origen correctamente."));
         }
@@ -23,18 +25,18 @@ public class UrlTransaccionProviderServiceImpl extends GenericServiceImpl<Transa
         try {
             int codigoEntidadNumerico = Integer.parseInt(codigoEntidadBancaria);
             if (codigoEntidadNumerico > 0 && codigoEntidadNumerico < 1000) {
-                return URL_GRUPO_1;
+                return new CredencialBancoAjeno(URL_GRUPO_1,"0000");
             }else if(codigoEntidadNumerico >= 1000 && codigoEntidadNumerico <= 1999){
-                return URL_GRUPO_2;
+                return new CredencialBancoAjeno(URL_GRUPO_1,"1111");
             }else if(codigoEntidadNumerico >= 2000 && codigoEntidadNumerico <= 2999){
-                return URL_GRUPO_3;
+                return new CredencialBancoAjeno(URL_GRUPO_1,"2222");
             }else{
                 throw new BusinessException(new BusinessMessage("CodigoEntidadBancaria","El código de entidad no corresponde a un banco nacional."));
             }
         } catch (NumberFormatException ex) {
             throw new BusinessException(new BusinessMessage("CodigoEntidadBancaria","El código de la entidad bancaria es inválido."));
         }
-        
+       
         
     }
 

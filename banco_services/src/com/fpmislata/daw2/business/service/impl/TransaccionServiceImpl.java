@@ -1,153 +1,66 @@
 package com.fpmislata.daw2.business.service.impl;
 
+import com.fpmislata.daw2.business.domain.CredencialBancoAjeno;
+import com.fpmislata.daw2.business.domain.CredencialBancoCentral;
 import com.fpmislata.daw2.business.domain.CuentaBancaria;
+import com.fpmislata.daw2.business.domain.Extraccion;
 import com.fpmislata.daw2.business.domain.MovimientoBancario;
 import com.fpmislata.daw2.business.domain.TipoMovimientoBancario;
 import com.fpmislata.daw2.business.domain.Transaccion;
 import com.fpmislata.daw2.business.service.MovimientoBancarioService;
 import com.fpmislata.daw2.business.service.TransaccionService;
 import com.fpmislata.daw2.core.exception.BusinessException;
-import com.fpmislata.daw2.core.exception.BusinessMessage;
-import com.fpmislata.daw2.core.util.ControlDigitGenerator;
 import com.fpmislata.daw2.persistence.dao.CuentaBancariaDAO;
-import com.fpmislata.daw2.persistence.dao.EntidadBancariaDAO;
-
+import java.math.BigDecimal;
 
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import com.fpmislata.daw2.business.service.BancoCentralService;
 
 public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Integer> implements TransaccionService {
 
-    @Autowired
-    EntidadBancariaDAO entidadBancariaDAO;
+  
     @Autowired
     CuentaBancariaDAO cuentaBancariaDAO;
     @Autowired
     MovimientoBancarioService movimientoBancarioService;
+    @Autowired
+    BancoCentralService bancoCentralService;
 
-    /*  @Override
-    public Transaccion insertaTransaccion(Transaccion transaccion) throws BusinessException {
-        MovimientoBancario movimientoBancarioOrigen = null, movimientoBancarioDestino = null;
+    @Override
+    public Transaccion insertarTransaccion(Transaccion transaccion) throws BusinessException {
+        CredencialBancoCentral credencialBancoCentral = new CredencialBancoCentral(transaccion.getCuentaOrigen(), "0000");
+   
+        CredencialBancoAjeno credencialBancoAjeno = this.getUrlByCCC(credencialBancoCentral);
         
-        if(transaccion.getCuentaOrigen().length() != 20 || !transaccion.getCuentaOrigen().matches("[0-9]+")) {
-            throw new BusinessException(new BusinessMessage("Cuenta Origen","Introduce los datos de la cuenta origen correctamente"));
-        }
-        if(transaccion.getCuentaDestino().length() != 20 || !transaccion.getCuentaDestino().matches("[0-9]+")) {
-            throw new BusinessException(new BusinessMessage("Cuenta Destino","Introduce los datos de la cuenta destino correctamente"));
-        }
+        Extraccion extraccion = new Extraccion(transaccion.getCuentaOrigen(),transaccion.getImporte(),credencialBancoAjeno.getToken(),transaccion.getConcepto());
         
-        String numEntidadBancariaOrigen = transaccion.getCuentaOrigen().trim().substring(0, 4);
-        String numSucursalBancariaOrigen = transaccion.getCuentaOrigen().trim().substring(4, 8);
-        String numDigitoControlOrigen = transaccion.getCuentaOrigen().trim().substring(8, 10);
-        String numCuentaBancariaOrigen = transaccion.getCuentaOrigen().trim().substring(10, 20);
+        this.retirar(credencialBancoAjeno.getUrl(), extraccion);
         
-        String numEntidadBancariaDestino = transaccion.getCuentaDestino().trim().substring(0, 4);
-        String numSucursalBancariaDestino = transaccion.getCuentaDestino().trim().substring(4, 8);
-        String numDigitoControlDestino = transaccion.getCuentaDestino().trim().substring(8, 10);
-        String numCuentaBancariaDestino = transaccion.getCuentaDestino().trim().substring(10, 20);
+        this.MovimientoHaber(transaccion.getImporte(), transaccion.getConcepto(), transaccion.getCuentaDestino());
         
-        CuentaBancaria cuentaBancariaOrigen = cuentaBancariaDAO.getByNumeroCuenta(numCuentaBancariaOrigen);
-        CuentaBancaria cuentaBancariaDestino = cuentaBancariaDAO.getByNumeroCuenta(numCuentaBancariaDestino);
         
-       
-        if(cuentaBancariaOrigen == null) {
-           throw new BusinessException(new BusinessMessage("Cuenta Origen","Introduce los datos de la cuenta orígen corectamente"));
-        }
-        if(cuentaBancariaDestino == null) {
-           throw new BusinessException(new BusinessMessage("Cuenta Destino","Introduce los datos de la cuenta orígen corectamente"));
-        }
-        
-        // Comprobar que los cuatro primeros digitos (cod entidad coinciden con su entidad;
-        // que los cuatro segundos con la sucursal y los dos siguientes con el dígito de control.
-        // ---- el código de error está bien?
-        
-        if(!cuentaBancariaOrigen.getDigitoControl().equals(numDigitoControlOrigen)) {
-            throw new BusinessException(new BusinessMessage("Cuenta Origen","Introduce el dígito de control correctamente"));
-        }
-        if(!cuentaBancariaOrigen.getSucursalBancaria().getCodigoSucursalBancaria().equals(numSucursalBancariaOrigen)) {
-            throw new BusinessException(new BusinessMessage("Cuenta Origen","Introduce el código de sucursal correctamente"));
-        }
-        if(!cuentaBancariaOrigen.getSucursalBancaria().getEntidadBancaria().getCodigoEntidadBancaria().equals(numEntidadBancariaOrigen)) {
-            throw new BusinessException(new BusinessMessage("Cuenta Origen","Introduce el código de entidad correctamente"));
-        }
-        
-        if(!cuentaBancariaDestino.getDigitoControl().equals(numDigitoControlDestino)) {
-            throw new BusinessException(new BusinessMessage("Cuenta Destino","Introduce el dígito de control correctamente"));
-        }
-        if(!cuentaBancariaDestino.getSucursalBancaria().getCodigoSucursalBancaria().equals(numSucursalBancariaDestino)) {
-            throw new BusinessException(new BusinessMessage("Cuenta Destino","Introduce el código de sucursal correctamente"));
-        }
-        if(!cuentaBancariaDestino.getSucursalBancaria().getEntidadBancaria().getCodigoEntidadBancaria().equals(numEntidadBancariaDestino)) {
-            throw new BusinessException(new BusinessMessage("Cuenta Destino","Introduce el código de entidad correctamente"));
-        }
-        
-        //si el importe es negativo esto; si es positivo al contrario
-        if (transaccion.getImporte().compareTo(BigDecimal.ZERO) < 0) {
-            movimientoBancarioOrigen = new MovimientoBancario(TipoMovimientoBancario.HABER, transaccion.getConcepto(), transaccion.getImporte(), cuentaBancariaOrigen.getSaldo().add(transaccion.getImporte()), new Date(), cuentaBancariaOrigen);
-            movimientoBancarioDestino = new MovimientoBancario(TipoMovimientoBancario.DEBER, transaccion.getConcepto(), transaccion.getImporte(), cuentaBancariaDestino.getSaldo().subtract(transaccion.getImporte()), new Date(), cuentaBancariaDestino);
-        } else if (transaccion.getImporte().compareTo(BigDecimal.ZERO) > 0) {
-            movimientoBancarioOrigen = new MovimientoBancario(TipoMovimientoBancario.DEBER, transaccion.getConcepto(), transaccion.getImporte(), cuentaBancariaOrigen.getSaldo().add(transaccion.getImporte()), new Date(), cuentaBancariaOrigen);
-            movimientoBancarioDestino = new MovimientoBancario(TipoMovimientoBancario.HABER, transaccion.getConcepto(), transaccion.getImporte(), cuentaBancariaDestino.getSaldo().subtract(transaccion.getImporte()), new Date(), cuentaBancariaDestino);
-        } else {
-            throw new BusinessException(new BusinessMessage("Cantidad Transaccion","La cantidad debe ser diferente de 0"));
-        }
-        
-        if(!cuentaBancariaOrigen.getPin().equals(transaccion.getPin())) {
-            throw new BusinessException(new BusinessMessage("PIN","Pin incorrecto"));
-        }
-        
-        movimientoBancarioService.insert(movimientoBancarioOrigen);
-        movimientoBancarioService.insert(movimientoBancarioDestino);
         return transaccion;
     }
-     */
-    @Override
-    public Transaccion ingresar(Transaccion transaccion) throws BusinessException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    private CredencialBancoAjeno getUrlByCCC(CredencialBancoCentral credencialBancoCentral) throws BusinessException{
+        try {
+            return bancoCentralService.getUrlByNumeroCuenta(credencialBancoCentral);
+        } catch (BusinessException ex) {
+            throw new BusinessException(ex);
+        }
     }
-
-    @Override
-    public Transaccion retirar(Transaccion transaccion) throws BusinessException {
-        if (transaccion.getCuentaOrigen().length() != 20 || !transaccion.getCuentaOrigen().matches("[0-9]{20}")) {
-            throw new BusinessException(new BusinessMessage("Cuenta Origen PATTERN", "Introduce los datos de la cuenta origen correctamente."));
-        }
-        if (transaccion.getImporte() == null) {
-            throw new BusinessException(new BusinessMessage("Importe", "No puede ser nulo."));
-        }
-        if (transaccion.getConcepto() == null || transaccion.getConcepto().trim().equals("")) {
-            throw new BusinessException(new BusinessMessage("Concepto", "No puede ser nulo."));
-        }
-
-        String numEntidadBancariaOrigen = transaccion.getCuentaOrigen().trim().substring(0, 4);
-        String numSucursalBancariaOrigen = transaccion.getCuentaOrigen().trim().substring(4, 8);
-        String numDigitoControlOrigen = transaccion.getCuentaOrigen().trim().substring(8, 10);
-        String numCuentaBancariaOrigen = transaccion.getCuentaOrigen().trim().substring(10, 20);
-
-        CuentaBancaria cuentaBancaria = cuentaBancariaDAO.getByNumeroCuenta(numCuentaBancariaOrigen);
-
-        if (cuentaBancaria == null) {
-            throw new BusinessException(new BusinessMessage("Cuenta Origen NULA", "Introduce los datos de la cuenta origen correctamente."));
-        }
-        if (!cuentaBancaria.getNumeroCuenta().equals(numCuentaBancariaOrigen)) {
-            throw new BusinessException(new BusinessMessage("Cuenta Origen NUMERO CUENTA", "Introduce los datos de la cuenta origen correctamente."));
-
-        }
-        if (!cuentaBancaria.getSucursalBancaria().getCodigoSucursalBancaria().equals(numSucursalBancariaOrigen)) {
-            throw new BusinessException(new BusinessMessage("Cuenta Origen SUCURSAL", "Introduce los datos de la cuenta origen correctamente."));
-
-        }
-        if (!cuentaBancaria.getDigitoControl().equals(numDigitoControlOrigen)) {
-            throw new BusinessException(new BusinessMessage("Cuenta Origen DC", "Introduce los datos de la cuenta origen correctamente. "));
-        }
-        if (!cuentaBancaria.getSucursalBancaria().getEntidadBancaria().getCodigoEntidadBancaria().equals(numEntidadBancariaOrigen)) {
-            throw new BusinessException(new BusinessMessage("Cuenta Origen ENTIDAD", "Introduce los datos de la cuenta origen correctamente."));
-        }
-        MovimientoBancario movimientoBancario = new MovimientoBancario(TipoMovimientoBancario.DEBER,transaccion.getConcepto(),transaccion.getImporte(),cuentaBancaria.getSaldo().subtract(transaccion.getImporte()),new Date(),cuentaBancaria);
-        
+    
+    private void MovimientoHaber(BigDecimal importe, String concepto, String ccc) throws BusinessException{
+        CuentaBancaria cuentaBancaria = cuentaBancariaDAO.getByNumeroCuenta(ccc);
+        MovimientoBancario movimientoBancario = new MovimientoBancario(TipoMovimientoBancario.DEBER, concepto, importe, importe, new Date(), cuentaBancaria);
         movimientoBancarioService.insert(movimientoBancario);
-
-        return transaccion;
     }
+    private void retirar(String url, Extraccion extraccion){
+        
+    }
+
+   
 
 }
