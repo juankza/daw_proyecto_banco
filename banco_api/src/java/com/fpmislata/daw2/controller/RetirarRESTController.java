@@ -1,7 +1,7 @@
 package com.fpmislata.daw2.controller;
 
-import com.fpmislata.daw2.business.domain.Transaccion;
-import com.fpmislata.daw2.business.service.TransaccionService;
+import com.fpmislata.daw2.business.domain.Extraccion;
+import com.fpmislata.daw2.business.service.RetirarService;
 import com.fpmislata.daw2.core.exception.BusinessException;
 import com.fpmislata.daw2.core.json.JSONTransformer;
 import java.io.IOException;
@@ -20,20 +20,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class RetirarRESTController {
 
     @Autowired
-    TransaccionService transaccionService;
+    RetirarService retirarService;
     @Autowired
     JSONTransformer jsonTransformer;
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public void retirar(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, @RequestBody String jsonRequest) {
         try {
-            Transaccion newTransaccion = jsonTransformer.toObject(jsonRequest, Transaccion.class);
-            Transaccion insertedTransaccion = transaccionService.retirar(newTransaccion);
-            if (insertedTransaccion != null) {
-                httpServletResponse.setStatus(HttpServletResponse.SC_OK);
-                httpServletResponse.setContentType("application/json; charset=UTF-8");
-                httpServletResponse.getWriter().println(jsonTransformer.toJSON(insertedTransaccion));
-            }
+            Extraccion extraccion = jsonTransformer.toObject(jsonRequest, Extraccion.class);
+            retirarService.retirar(extraccion);
+            httpServletResponse.getWriter().println(extraccion);
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+
         } catch (BusinessException bex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             httpServletResponse.setContentType("application/json; charset=UTF-8");
@@ -43,6 +41,7 @@ public class RetirarRESTController {
                 httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 Logger.getLogger(RetirarRESTController.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         } catch (IOException ex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             Logger.getLogger(RetirarRESTController.class.getName()).log(Level.SEVERE, null, ex);
