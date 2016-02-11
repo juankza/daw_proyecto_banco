@@ -17,6 +17,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.fpmislata.daw2.business.service.BancoCentralService;
+import com.fpmislata.daw2.business.service.RetirarHttpService;
 import com.fpmislata.daw2.core.exception.BusinessMessage;
 import com.fpmislata.daw2.core.json.JSONTransformer;
 import java.io.IOException;
@@ -37,6 +38,8 @@ public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Inte
     BancoCentralService bancoCentralService;
     @Autowired
     JSONTransformer jsonTransformer;
+    @Autowired
+    RetirarHttpService retirarHttpService;
 
     @Override
     public Transaccion insertarTransaccion(Transaccion transaccion) throws BusinessException {
@@ -101,30 +104,9 @@ public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Inte
         MovimientoBancario movimientoBancario = new MovimientoBancario(TipoMovimientoBancario.HABER, concepto, importe, importe, new Date(), cuentaBancaria);
         movimientoBancarioService.insert(movimientoBancario);
     }
-    //llamarlo con interfaz -> implementación.
+    
     private void retirar(String url, Extraccion extraccion) throws BusinessException {
-
-        // StringBuilder stringBuilder = new StringBuilder();
-        String requestBody = jsonTransformer.toJSON(extraccion);
-        try {
-            URL requestedUrl = new URL(url);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) requestedUrl.openConnection();
-            httpURLConnection.setDoOutput(true);
-            httpURLConnection.setRequestMethod("POST");
-            httpURLConnection.setRequestProperty("Content-Type", "application/json");
-            httpURLConnection.setRequestProperty("charset", "utf-8");
-            OutputStream outputStream = httpURLConnection.getOutputStream();
-            outputStream.write(requestBody.getBytes("UTF-8"));
-            outputStream.close();
-            int status = httpURLConnection.getResponseCode();
-            if (status != 200) {
-                throw new BusinessException(new BusinessMessage("Petición retirada", "No se ha realizado correctamente."));
-            }
-        } catch (MalformedURLException ex) {
-            throw new BusinessException(new BusinessMessage("URL Banco Central", "Está mal formada."));
-        } catch (IOException ex) {
-
-        }
+        retirarHttpService.retirar(url, extraccion);
     }
 
 }
