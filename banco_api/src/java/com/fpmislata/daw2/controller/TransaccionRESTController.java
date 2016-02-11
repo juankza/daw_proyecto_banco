@@ -35,7 +35,7 @@ public class TransaccionRESTController {
         try {
             Transaccion newTransaccion = jsonTransformer.toObject(jsonRequest, Transaccion.class);
             Transaccion insertedTransaccion = transaccionService.insertarTransaccion(newTransaccion);
-            httpServletResponse.getWriter().println(insertedTransaccion);
+            httpServletResponse.getWriter().println(jsonTransformer.toJSON(insertedTransaccion));
         } catch (BusinessException bex) {
             httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             httpServletResponse.setContentType("application/json; charset=UTF-8");

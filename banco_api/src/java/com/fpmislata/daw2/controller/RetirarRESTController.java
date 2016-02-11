@@ -29,7 +29,7 @@ public class RetirarRESTController {
         try {
             Extraccion extraccion = jsonTransformer.toObject(jsonRequest, Extraccion.class);
             retirarService.retirar(extraccion);
-            httpServletResponse.getWriter().println(extraccion);
+            httpServletResponse.getWriter().println(jsonTransformer.toJSON(extraccion));
             httpServletResponse.setStatus(HttpServletResponse.SC_OK);
 
         } catch (BusinessException bex) {
