@@ -1,7 +1,8 @@
 
 body { overflow-x: hidden; }
+section > h1 { margin: 0px; }
 
-#main-container { height: 100%; width: 100%; }
+#main-container { height: 100%; width: 100%; margin-top: 120px }
 
 /* *** INPUT *** */
 input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 100px rgba(255,255,255,0.6) inset; border: 1px solid rgba(0,0,0,0.6) !important; }
@@ -136,6 +137,45 @@ img.navbar-brand { height: 100px; padding: 10px 20px; }
 
 /* *** *** *** */
 
+/* *** LANDING PAGE MAIN STYLES *** */
+#landing { height:100%; }
+
+#arriba { position: fixed; left: 20px; }
+#abajo { position: fixed; left: 70px; }
+
+#arriba a { display: block; height: 32px; width: 32px; }
+#abajo a { display: block; height: 32px; width: 32px; }
+
+#arriba a:hover{ background-color: #CACACA; border-radius: 50px; }
+#abajo a:hover{ background-color: #CACACA; border-radius: 50px; }
+
+#arriba span { 
+    display: block;
+    background: url("img/arriba.png") no-repeat center center;
+    width: 32px;
+    height: 32px;
+}
+#abajo span { 
+    display: block;
+    background: url("img/abajo.png") no-repeat center center;
+    width: 32px;
+    height: 32px;
+}
+
+/* *** *** *** */
+
+.slide {
+    display: block;
+    top:100px;
+    /*left:0;*/
+    height:100%;						
+    width: 100%;
+    /* this would be vendor prefixed:*/
+    transition: height 0.9s ease-in-out;
+}
+
+/* *** *** *** */
+
 /* *** BOOTSTRAP MODAL *** */
 .modal-dialog { margin-top: 125px; }
 .modal-content { box-shadow: none; border: none; border-radius: 3px; }
@@ -153,22 +193,22 @@ img.navbar-brand { height: 100px; padding: 10px 20px; }
 
 /* *** MEDIA *** */
 @media screen and (max-width: 767px) {
-    
+
     /* *** NAVBAR *** */
     .navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 15px; padding-right: 15px; } 
-    
+
     .navbar .nav-collapse { margin: 7.5px auto; padding: 0; }
     .navbar .nav-collapse .navbar-form { margin: 0; }
     .nav-collapse>li { float: none; }
-    
+
     img.navbar-brand { padding: 10px 20px; }
-    
+
     ul.nav { margin: 7.5px -15px; }
-    
+
     ul.nav li:not(#btn-menu-li):hover { -webkit-transform: none; -moz-transform: none; transform: none; font-size: 1.2em; }
-    
+
     /* *** *** *** */
-    
+
 }
 
 /* *** *** *** */
