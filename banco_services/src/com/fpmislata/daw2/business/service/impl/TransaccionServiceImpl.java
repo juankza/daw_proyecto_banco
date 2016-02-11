@@ -17,50 +17,114 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.fpmislata.daw2.business.service.BancoCentralService;
+import com.fpmislata.daw2.core.exception.BusinessMessage;
+import com.fpmislata.daw2.core.json.JSONTransformer;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Integer> implements TransaccionService {
 
-  
     @Autowired
     CuentaBancariaDAO cuentaBancariaDAO;
     @Autowired
     MovimientoBancarioService movimientoBancarioService;
     @Autowired
     BancoCentralService bancoCentralService;
+    @Autowired
+    JSONTransformer jsonTransformer;
 
     @Override
     public Transaccion insertarTransaccion(Transaccion transaccion) throws BusinessException {
-        CredencialBancoCentral credencialBancoCentral = new CredencialBancoCentral(transaccion.getCuentaOrigen(), "0000");
-   
+        String ccc = transaccion.getCuentaDestino();
+        if (ccc.length() != 20 || !ccc.matches("[0-9]+")) {
+            throw new BusinessException(new BusinessMessage("Cuenta Destino", "Introduce los datos de la cuenta correctamente."));
+        }
+
+        String codigoEntidadBancaria = ccc.substring(0, 4);
+        
+        CredencialBancoCentral credencialBancoCentral = new CredencialBancoCentral(transaccion.getCuentaOrigen(), "0000",codigoEntidadBancaria);
+
         CredencialBancoAjeno credencialBancoAjeno = this.getUrlByCCC(credencialBancoCentral);
-        
-        Extraccion extraccion = new Extraccion(transaccion.getCuentaOrigen(),transaccion.getImporte(),credencialBancoAjeno.getToken(),transaccion.getConcepto());
-        
+
+        Extraccion extraccion = new Extraccion(transaccion.getCuentaOrigen(), transaccion.getImporte(), credencialBancoAjeno.getToken(), transaccion.getConcepto());
+
         this.retirar(credencialBancoAjeno.getUrl(), extraccion);
-        
-        this.MovimientoHaber(transaccion.getImporte(), transaccion.getConcepto(), transaccion.getCuentaDestino());
-        
-        
+
+        this.movimientoHaber(transaccion.getImporte(), transaccion.getConcepto(), transaccion.getCuentaDestino(),transaccion.getPin());
+
         return transaccion;
     }
-    
-    private CredencialBancoAjeno getUrlByCCC(CredencialBancoCentral credencialBancoCentral) throws BusinessException{
-        try {
+
+    private CredencialBancoAjeno getUrlByCCC(CredencialBancoCentral credencialBancoCentral) throws BusinessException {
+        
             return bancoCentralService.getUrlByNumeroCuenta(credencialBancoCentral);
-        } catch (BusinessException ex) {
-            throw new BusinessException(ex);
-        }
-    }
-    
-    private void MovimientoHaber(BigDecimal importe, String concepto, String ccc) throws BusinessException{
-        CuentaBancaria cuentaBancaria = cuentaBancariaDAO.getByNumeroCuenta(ccc);
-        MovimientoBancario movimientoBancario = new MovimientoBancario(TipoMovimientoBancario.DEBER, concepto, importe, importe, new Date(), cuentaBancaria);
-        movimientoBancarioService.insert(movimientoBancario);
-    }
-    private void retirar(String url, Extraccion extraccion){
+        
+           
         
     }
 
-   
+    private void movimientoHaber(BigDecimal importe, String concepto, String ccc,String pin) throws BusinessException {
+        if (ccc.length() != 20 || !ccc.matches("[0-9]+")) {
+            throw new BusinessException(new BusinessMessage("Cuenta Destino", "Introduce los datos de la cuenta correctamente."));
+        }
+
+        String codigoEntidadBancaria = ccc.substring(0, 4);
+        String codigoSucursalBancaria = ccc.substring(4, 8);
+        String digitoControl = ccc.substring(8, 10);
+        String codigoCuentaBancaria = ccc.substring(10, 20);
+        
+        CuentaBancaria cuentaBancaria = cuentaBancariaDAO.getByNumeroCuenta(codigoCuentaBancaria);
+        if (cuentaBancaria == null) {
+            throw new BusinessException(new BusinessMessage("Cuenta Destino", "Introduce los datos de la cuenta correctamente."));
+        }
+        if (!cuentaBancaria.getNumeroCuenta().equals(codigoCuentaBancaria)) {
+            throw new BusinessException(new BusinessMessage("Cuenta Destino", "Introduce los datos de la cuenta correctamente."));
+        }
+        if (!cuentaBancaria.getSucursalBancaria().getCodigoSucursalBancaria().equals(codigoSucursalBancaria)) {
+            throw new BusinessException(new BusinessMessage("Cuenta Destino", "Introduce los datos de la cuenta correctamente."));
+        }
+        if (!cuentaBancaria.getSucursalBancaria().getEntidadBancaria().getCodigoEntidadBancaria().equals(codigoEntidadBancaria)) {
+            throw new BusinessException(new BusinessMessage("Cuenta Destino", "Introduce los datos de la cuenta correctamente."));
+        }
+        if (!cuentaBancaria.getDigitoControl().equals(digitoControl)) {
+            throw new BusinessException(new BusinessMessage("Cuenta Destino", "Introduce los datos de la cuenta correctamente."));
+        }
+        if (!cuentaBancaria.getPin().equals(pin)) {
+            throw new BusinessException(new BusinessMessage("Cuenta Destino", "Introduce los datos de la cuenta correctamente."));
+        }
+
+        MovimientoBancario movimientoBancario = new MovimientoBancario(TipoMovimientoBancario.HABER, concepto, importe, importe, new Date(), cuentaBancaria);
+        movimientoBancarioService.insert(movimientoBancario);
+    }
+    //llamarlo con interfaz -> implementación.
+    private void retirar(String url, Extraccion extraccion) throws BusinessException {
+
+        // StringBuilder stringBuilder = new StringBuilder();
+        String requestBody = jsonTransformer.toJSON(extraccion);
+        try {
+            URL requestedUrl = new URL(url);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) requestedUrl.openConnection();
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setRequestProperty("Content-Type", "application/json");
+            httpURLConnection.setRequestProperty("charset", "utf-8");
+            OutputStream outputStream = httpURLConnection.getOutputStream();
+            outputStream.write(requestBody.getBytes("UTF-8"));
+            outputStream.close();
+            int status = httpURLConnection.getResponseCode();
+            if (status != 200) {
+                throw new BusinessException(new BusinessMessage("Petición retirada", "No se ha realizado correctamente."));
+            }
+        } catch (MalformedURLException ex) {
+            throw new BusinessException(new BusinessMessage("URL Banco Central", "Está mal formada."));
+        } catch (IOException ex) {
+
+        }
+    }
 
 }

@@ -21,7 +21,7 @@ public class RetirarServiceImpl extends GenericServiceImpl<Extraccion,Integer> i
 
     @Override
     public void retirar(Extraccion extraccion) throws BusinessException {
-        if (!extraccion.getToken().equals("0000")) {
+        if (!extraccion.getToken().equals("1111")) {
             throw new BusinessException(new BusinessMessage("PIN", "Pin inválido."));
         }
         if (extraccion.getImporte() == null) {
