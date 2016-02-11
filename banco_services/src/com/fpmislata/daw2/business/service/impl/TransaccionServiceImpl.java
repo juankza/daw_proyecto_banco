@@ -19,14 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.fpmislata.daw2.business.service.BancoCentralService;
 import com.fpmislata.daw2.business.service.RetirarHttpService;
 import com.fpmislata.daw2.core.exception.BusinessMessage;
-import com.fpmislata.daw2.core.json.JSONTransformer;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Integer> implements TransaccionService {
 
@@ -47,8 +39,8 @@ public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Inte
         }
 
         String codigoEntidadBancaria = ccc.substring(0, 4);
-        
-        CredencialBancoCentral credencialBancoCentral = new CredencialBancoCentral(transaccion.getCuentaOrigen(), "0000",codigoEntidadBancaria);
+
+        CredencialBancoCentral credencialBancoCentral = new CredencialBancoCentral(transaccion.getCuentaOrigen(), "0000", codigoEntidadBancaria);
 
         CredencialBancoAjeno credencialBancoAjeno = this.getUrlByCCC(credencialBancoCentral);
 
@@ -56,20 +48,18 @@ public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Inte
 
         this.retirar(credencialBancoAjeno.getUrl(), extraccion);
 
-        this.movimientoHaber(transaccion.getImporte(), transaccion.getConcepto(), transaccion.getCuentaDestino(),transaccion.getPin());
+        this.movimientoHaber(transaccion.getImporte(), transaccion.getConcepto(), transaccion.getCuentaDestino(), transaccion.getPin());
 
         return transaccion;
     }
 
     private CredencialBancoAjeno getUrlByCCC(CredencialBancoCentral credencialBancoCentral) throws BusinessException {
-        
-            return bancoCentralService.getUrlByNumeroCuenta(credencialBancoCentral);
-        
-           
-        
+
+        return bancoCentralService.getUrlByNumeroCuenta(credencialBancoCentral);
+
     }
 
-    private void movimientoHaber(BigDecimal importe, String concepto, String ccc,String pin) throws BusinessException {
+    private void movimientoHaber(BigDecimal importe, String concepto, String ccc, String pin) throws BusinessException {
         if (ccc.length() != 20 || !ccc.matches("[0-9]+")) {
             throw new BusinessException(new BusinessMessage("Cuenta Destino", "Introduce los datos de la cuenta correctamente."));
         }
@@ -78,7 +68,7 @@ public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Inte
         String codigoSucursalBancaria = ccc.substring(4, 8);
         String digitoControl = ccc.substring(8, 10);
         String codigoCuentaBancaria = ccc.substring(10, 20);
-        
+
         CuentaBancaria cuentaBancaria = cuentaBancariaDAO.getByNumeroCuenta(codigoCuentaBancaria);
         if (cuentaBancaria == null) {
             throw new BusinessException(new BusinessMessage("Cuenta Destino", "Introduce los datos de la cuenta correctamente."));
@@ -102,7 +92,7 @@ public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Inte
         MovimientoBancario movimientoBancario = new MovimientoBancario(TipoMovimientoBancario.HABER, concepto, importe, importe, new Date(), cuentaBancaria);
         movimientoBancarioService.insert(movimientoBancario);
     }
-    
+
     private void retirar(String url, Extraccion extraccion) throws BusinessException {
         retirarHttpService.retirar(url, extraccion);
     }
