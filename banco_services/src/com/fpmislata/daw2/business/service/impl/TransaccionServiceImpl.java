@@ -37,8 +37,6 @@ public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Inte
     @Autowired
     BancoCentralService bancoCentralService;
     @Autowired
-    JSONTransformer jsonTransformer;
-    @Autowired
     RetirarHttpService retirarHttpService;
 
     @Override
