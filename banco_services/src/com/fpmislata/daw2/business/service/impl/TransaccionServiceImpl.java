@@ -56,6 +56,7 @@ public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Inte
     private CredencialBancoAjeno getUrlByCCC(CredencialBancoCentral credencialBancoCentral) throws BusinessException {
 
         return bancoCentralService.getUrlByNumeroCuenta(credencialBancoCentral);
+        
 
     }
 
@@ -89,7 +90,7 @@ public class TransaccionServiceImpl extends GenericServiceImpl<Transaccion, Inte
             throw new BusinessException(new BusinessMessage("Cuenta Destino", "Introduce los datos de la cuenta correctamente."));
         }
 
-        MovimientoBancario movimientoBancario = new MovimientoBancario(TipoMovimientoBancario.HABER, concepto, importe, importe, new Date(), cuentaBancaria);
+        MovimientoBancario movimientoBancario = new MovimientoBancario(TipoMovimientoBancario.HABER, concepto, importe, cuentaBancaria.getSaldo().add(importe), new Date(), cuentaBancaria);
         movimientoBancarioService.insert(movimientoBancario);
     }
 
