@@ -9,7 +9,7 @@ import com.fpmislata.daw2.business.service.BancoCentralService;
 
 public class BancoCentralServiceImplDummy extends GenericServiceImpl<Transaccion,Integer> implements BancoCentralService{
     private final String URL_GRUPO_1 = "http://localhost:8084/api/retirar";
-    private final String URL_GRUPO_2 = "http://ecobanco-vicentedaw2-rhcloud.com/api/retirar";
+    private final String URL_GRUPO_2 = "http://ecobanco-vicentedaw2.rhcloud.com/api/retirar";
    //private final String URL_GRUPO_2 = "http://localhost:8084/api/retirar";
 
    // private final String URL_GRUPO_3 = "http://172.16.205.116:8084/banktastic-banco-api/api/retirar";
