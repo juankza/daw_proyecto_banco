@@ -5,7 +5,10 @@ import com.fpmislata.daw2.business.service.RetirarHttpService;
 import com.fpmislata.daw2.core.exception.BusinessException;
 import com.fpmislata.daw2.core.exception.BusinessMessage;
 import com.fpmislata.daw2.core.json.JSONTransformer;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -20,7 +23,7 @@ public class RetirarHttpServiceImplHttpURLConnection implements RetirarHttpServi
     @Override
     public void retirar(String url, Extraccion extraccion) throws BusinessException {
 
-        // StringBuilder stringBuilder = new StringBuilder();
+         StringBuilder stringBuilder = new StringBuilder();
         String requestBody = jsonTransformer.toJSON(extraccion);
         try {
             URL requestedUrl = new URL(url);
@@ -34,7 +37,15 @@ public class RetirarHttpServiceImplHttpURLConnection implements RetirarHttpServi
             outputStream.close();
             int status = httpURLConnection.getResponseCode();
             if (status != 200) {
-                throw new BusinessException(new BusinessMessage("Petición retirada", "No se ha realizado correctamente."));
+                BufferedInputStream bis = new BufferedInputStream(httpURLConnection.getErrorStream());
+                BufferedReader br = new BufferedReader(new InputStreamReader(bis));
+                String inputLine = "";
+                while ((inputLine = br.readLine()) != null) {
+                    stringBuilder.append(inputLine);
+                }
+                String result = stringBuilder.toString();
+                
+                throw new BusinessException(new BusinessMessage("Petición retirada", "No se ha realizado correctamente." + result + " " + httpURLConnection.getResponseCode()));
             }
         } catch (MalformedURLException ex) {
             throw new BusinessException(new BusinessMessage("URL Banco Central", "Está mal formada."));

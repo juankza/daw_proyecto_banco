@@ -9,14 +9,12 @@ import com.fpmislata.daw2.business.service.BancoCentralService;
 
 public class BancoCentralServiceImplDummy extends GenericServiceImpl<Transaccion,Integer> implements BancoCentralService{
     private final String URL_GRUPO_1 = "http://localhost:8084/api/retirar";
-    private final String URL_GRUPO_2 = "http://localhost:8084/api/retirar";
-    private final String URL_GRUPO_3 = "http://localhost:8084/api/retirar";
-    //private final String URL_GRUPO_3 = "http://banco-samuvl.rhcloud.com/banktastic-banco-api/api/retirar";
+    private final String URL_GRUPO_2 = "http://ecobanco-vicentedaw2-rhcloud.com/api/retirar";
+   // private final String URL_GRUPO_3 = "http://172.16.205.116:8084/banktastic-banco-api/api/retirar";
+    private final String URL_GRUPO_3 = "http://banco-samuvl.rhcloud.com/banktastic-banco-api/api/retirar";
     @Override
     public CredencialBancoAjeno getUrlByNumeroCuenta(CredencialBancoCentral credencialBancoCentral) throws BusinessException {
-        if (!credencialBancoCentral.getCodigoEntidadBancaria().equals("0049")) {
-            throw new BusinessException(new BusinessMessage("Banco Central","La entidad bancaria no figura en este Banco Central."));
-        }
+       
         if(credencialBancoCentral.getCodigoCuentaCorriente().length() != 20 || !credencialBancoCentral.getCodigoCuentaCorriente().matches("[0-9]+")) {
             throw new BusinessException(new BusinessMessage("Cuenta Origen","Introduce los datos de la cuenta origen correctamente."));
         }
@@ -32,7 +30,7 @@ public class BancoCentralServiceImplDummy extends GenericServiceImpl<Transaccion
             }else if(codigoEntidadNumerico >= 1000 && codigoEntidadNumerico <= 1999){
                 return new CredencialBancoAjeno(URL_GRUPO_2,"1111");
             }else if(codigoEntidadNumerico >= 2000 && codigoEntidadNumerico <= 2999){
-                return new CredencialBancoAjeno(URL_GRUPO_3,"1111");
+                return new CredencialBancoAjeno(URL_GRUPO_3,"2045");
             }else{
                 throw new BusinessException(new BusinessMessage("CodigoEntidadBancaria","El código de entidad no corresponde a un banco nacional."));
             }

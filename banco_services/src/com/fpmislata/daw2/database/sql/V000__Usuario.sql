@@ -17,4 +17,6 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 INSERT IGNORE INTO `usuario` (`idUsuario`, `nombre`, `apellidos`, `dni`, `email`, `apodo`, `contrasena`, `rol`) VALUES
     (3, 'admin', 'admin', '23824980Q', 'admin@domain.com', 'admin', 'p8GAoFkhecQKX8c2YhysR+zInVWkkOZN', 'ADMIN'),
     (4, 'empleado', 'empleado', '73557374Q', 'empleado@domain.com', 'empleado', 'gTs5Pef8K6jEcDQeGEm7oFdJjbw9LZhc', 'EMPLEADO'),
-    (5, 'cliente', 'cliente', '48689633J', 'cliente@domain.com', 'cliente', '4T5qxwjLwQcN2cVeDoMeK35r6XwEhjjL', 'CLIENTE');
+    (5, 'cliente', 'cliente', '48689633J', 'cliente@domain.com', 'cliente', '4T5qxwjLwQcN2cVeDoMeK35r6XwEhjjL', 'CLIENTE'),
+(6, 'EcoRecipes', 'Store', '74632305L', 'ecorecipes@domain.com', 'ecorecipes', 'HO/NBukJyf0dTsCDP1mMK0JFF3drszEt', 'ADMIN');
+
