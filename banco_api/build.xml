@@ -116,10 +116,10 @@
         <git dir="../ecobanco" command="commit" options="-am 'push'" />
         
         <gitpushapplication    
-            userName="dead421@hotmail.es"
+            userName="${username}"
             password="${password}"
-            domainName="vicente2daw"
-            applicationName="ecobanco" 
+            domainName="${domain}"
+            applicationName="${application}" 
             privateKeyFile="../../id_rsa"
             path="../daw_proyecto_banco"
         />
