@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface SucursalBancariaDAO extends GenericDAO<SucursalBancaria, Integer> {
     
-//    public List<SucursalBancaria> getSucursalesByEntidad(int idEntidadBancaria) throws BusinessException;
+    public List<SucursalBancaria> getSucursalesByEntidad(int idEntidadBancaria) throws BusinessException;
 }
